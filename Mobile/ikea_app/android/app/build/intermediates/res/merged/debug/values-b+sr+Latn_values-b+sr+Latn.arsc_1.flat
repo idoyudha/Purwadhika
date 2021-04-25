@@ -1,0 +1,12 @@
+p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">_g</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">_b</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">_a</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="s2">&quot;progid:DXImageTransform.Microsoft.gradient(&quot;</span><span class="o">+</span><span class="nx">gradientType</span><span class="o">+</span><span class="s2">&quot;startColorstr=&quot;</span><span class="o">+</span><span class="nx">hex8String</span><span class="o">+</span><span class="s2">&quot;,endColorstr=&quot;</span><span class="o">+</span><span class="nx">secondHex8String</span><span class="o">+</span><span class="s2">&quot;)&quot;</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="nx">toString</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">format</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">formatSet</span> <span class="o">=</span> <span class="o">!!</span><span class="nx">format</span><span class="p">;</span>
+        <span class="nx">format</span> <span class="o">=</span> <span class="nx">format</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">_format</span><span class="p">;</span>
+
+        <span class="kd">var</span> <span class="nx">formattedString</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">hasAlpha</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_a</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">_a</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">needsAlphaFormat</span> <span class="o">=</span> <span class="o">!</span><span class="nx">formatSet</span> <span class="o">&amp;&amp;</span> <span class="nx">hasAlpha</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">format</span> <span class="o">===</span> <span class="s2">&quot;hex&quot;</span> <span class="o">||</span> <span class="nx">format</span> <span 

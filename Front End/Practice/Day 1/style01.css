@@ -1,0 +1,36 @@
+/* CSS Variable */
+:root {
+    --merah: rgba(255,0,0,0.4);
+    --lebar: 780px;
+}
+
+/* Tag Selector */
+h2 {
+    color: var(--merah);
+} 
+
+p {
+    width: var(--lebar);
+}
+
+/* Child Selector */
+div>p {
+    background-color: var(--merah);
+}
+
+/* ID Selector */
+#header {
+    margin: auto;
+}
+
+/* Class Selector */
+.content {
+    margin: auto;
+    padding: 3px;
+    text-align: center;
+}
+
+/* Pseudo-class */
+#header:hover {
+    text-align: center;
+}

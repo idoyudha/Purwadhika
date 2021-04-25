@@ -1,0 +1,23 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f8f9fa;
+}
+
+.head {
+    padding: 30px 0;
+    text-align: center;
+}
+
+.head > img {
+    margin-bottom: 30px;
+}
+
+.head > p {
+    font-size: 1.25rem;
+    font-weight: 300;
+}

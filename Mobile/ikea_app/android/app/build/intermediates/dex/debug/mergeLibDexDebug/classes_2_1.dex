@@ -1,0 +1,680 @@
+ shared extractAssignedNames from rollup-pluginutils (@lukastaegert)
+* [#2792](https://github.com/rollup/rollup/pull/2792): Test that rollup-plugin-commonjs works with preserveModules (@lukastaegert)
+
+## 1.8.0
+*2019-04-02*
+
+### Features
+* Support `module` as alias for `esm` and `commonjs` for `cjs` to match Node (#2783)
+
+### Pull Requests
+* [#2782](https://github.com/rollup/rollup/pull/2782): Inline interopDefault in config loading (@guybedford)
+* [#2783](https://github.com/rollup/rollup/pull/2783): Support Node-style format aliases (@guybedford)
+
+## 1.7.4
+*2019-03-28*
+
+### Bug Fixes
+* Improve TypeScript type of the treeshaking options (#2779)
+
+### Pull Requests
+* [#2779](https://github.com/rollup/rollup/pull/2779): Make all properties in TreeshakingOptions optional (@ndelangen)
+
+## 1.7.3
+*2019-03-24*
+
+### Bug Fixes
+* Use getters when re-exporting live-bindings (#2765)
+
+### Pull Requests
+* [#2765](https://github.com/rollup/rollup/pull/2765): Support exporting live-bindings from other chunks or external dependencies (@lukastaegert)
+
+## 1.7.2
+*2019-03-24*
+
+### Bug Fixes
+* Make sure relative external ids are resolved correctly (#2774)
+
+### Pull Requests
+* [#2774](https://github.com/rollup/rollup/pull/2774): Resolve relative external ids (@lukastaegert)
+
+## 1.7.1
+*2019-03-24*
+
+### Bug Fixes
+* Prevent invalid code when exporting several hundred identifiers from a chunk (#2768)
+* Do not wrongly deconflict labels (#2776)
+
+### Pull Requests
+* [#2768](https://github.com/rollup/rollup/pull/2768): Sanitize shortened internal export names (@lukastaegert)
+* [#2769](https://github.com/rollup/rollup/pull/2769): Update dependencies and fix security issue (@lukastaegert)
+* [#2776](https://github.com/rollup/rollup/pull/2776): Do not treat break labels as identifiers (@lukastaegert)
+
+## 1.7.0
+*2019-03-20*
+
+### Features
+* Sort chunk exports by name for greater consistency (#2757)
+
+### Bug Fixes
+* Fix a situation where tree-shakeable code would not be removed in an indeterminate manner (#2757)
+
+### Pull Requests
+* [#2757](https://github.com/rollup/rollup/pull/2757): Sort modules before binding, sort exports (@lukastaegert)
+
+## 1.6.1
+*2019-03-20*
+
+### Bug Fixes
+* Avoid name clashes of unused default exports when tree-shaking is false (#2758)
+* Do not crash when generating SystemJS bundles containing array patterns with member expressions (#2760)
+
+### Pull Requests
+* [#2758](https://github.com/rollup/rollup/pull/2758): Make sure unused default exports are deconflicted when tree-shaking is false (@lukastaegert)
+* [#2760](https://github.com/rollup/rollup/pull/2760): Handle member expressions in array patterns (@lukastaegert)
+
+## 1.6.0
+*2019-03-08*
+
+### Features
+* Add plugin hook to modify output options (#2736)
+
+### Pull Requests
+* [#2736](https://github.com/rollup/rollup/pull/2736): Add hook for modifying OutputOptions (@Comandeer)
+
+## 1.5.0
+*2019-03-07*
+
+### Features
+* Allow resolving to a different id while marking it as external at the same time (#2734)
+
+### Pull Requests
+* [#2734](https://github.com/rollup/rollup/pull/2734): Allow resolveId to return an object (@lukastaegert)
+
+## 1.4.2
+*2019-03-07*
+
+### Bug Fixes
+* Respect variable identity of exports when hashing (#2741)
+* Resolve a situations where a variable was imported twice with the same name (#2737)
+
+### Pull Requests
+* [#2741](https://github.com/rollup/rollup/pull/2741): Fix hashing when different variable are exported using the same name (@lukastaegert)
+* [#2737](https://github.com/rollup/rollup/pull/2737): Fix duplicate imports with conflicting names (@lukastaegert)
+
+## 1.4.1
+*2019-03-04*
+
+### Bug Fixes
+* Do not treat the import target "" as external by default (#2733)
+
+### Pull Requests
+* [#2733](https://github.com/rollup/rollup/pull/2733): Do not treat the import target "" as external by default (@LongTengDao)
+
+## 1.4.0
+*2019-03-01*
+
+### Features
+* Add option to change the name of the dynamic import function to allow polyfilling it (#2723)
+
+### Pull Requests
+* [#2723](https://github.com/rollup/rollup/pull/2723): Add dynamicImportFunction option (@keithamus)
+
+## 1.3.3
+*2019-03-01*
+
+### Bug Fixes
+* Fix performance regression when handling long chains of calls to property methods (#2732)
+
+### Pull Requests
+* [#2730](https://github.com/rollup/rollup/pull/2730): Order types, interfaces, classes, and object members (@lukastaegert)
+* [#2732](https://github.com/rollup/rollup/pull/2732): Take chunk export mode into account when reexporting default (@lukastaegert)
+
+## 1.3.2
+*2019-02-27*
+
+### Bug Fixes
+* Allow ids of default exported classes to be exported separately (#2728)
+
+### Pull Requests
+* [#2728](https://github.com/rollup/rollup/pull/2728): Update dependencies (@lukastaegert)
+
+## 1.3.1
+*2019-02-27*
+
+### Bug Fixes
+* Correctly reexport the default export from entry chunks (#2727)
+
+### Pull Requests
+* [#2727](https://github.com/rollup/rollup/pull/2727): Take chunk export mode into account when reexporting default (@lukastaegert)
+
+## 1.3.0
+*2019-02-26*
+
+### Features
+* Treeshake call expressions prefixed with UglifyJS style `@__PURE__` annotations (#2429)
+
+### Pull Requests
+* [#2429](https://github.com/rollup/rollup/pull/2429): Add support for /*#__PURE__*/ comments (@conartist6 and @lukastaegert)
+
+## 1.2.5
+*2019-02-26*
+
+### Bug Fixes
+* Store external ids reported by plugins in watch mode (#2718)
+
+### Pull Requests
+* [#2718](https://github.com/rollup/rollup/pull/2718): Incremental external (@andreas-karlsson)
+
+## 1.2.4
+*2019-02-26*
+
+### Bug Fixes
+* Fix an issue where a variable was imported twice under the same name (#2715)
+
+### Pull Requests
+* [#2715](https://github.com/rollup/rollup/pull/2715): Deduplicate imports referencing default exports and their original variables (@lukastaegert)
+
+## 1.2.3
+*2019-02-23*
+
+### Bug Fixes
+* Use correct path when rendering dynamic imports where the entry module is empty (#2714)
+
+### Pull Requests
+* [#2714](https://github.com/rollup/rollup/pull/2714): Properly render dynamic imports when imported module is empty (@lukastaegert)
+
+## 1.2.2
+*2019-02-19*
+
+### Bug Fixes
+* Fix wrong external imports when using the `paths` options only for some outputs (#2706)
+
+### Pull Requests
+* [#2706](https://github.com/rollup/rollup/pull/2706): Always recreate paths for external modules (@lukastaegert)
+
+## 1.2.1
+*2019-02-17*
+
+### Bug Fixes
+* Fix ESM version of Rollup (#2705)
+
+### Pull Requests
+* [#2705](https://github.com/rollup/rollup/pull/2705): Fix ESM version of Rollup (@lukastaegert)
+
+## 1.2.0
+*2019-02-17*
+
+### Features
+* Fewer renamed variables due to a completely reimplemented deconflicting logic (#2689)
+
+### Bug Fixes
+* Respect rendered and tree-shaken exports when determining chunk hashes (#2695)
+* Fix an error when dynamic imports end up in the same chunk as one of their importees (#2677)
+* Do not generate invalid code when expressions containing IIFEs are simplified (#2696)
+* Do not throw an error when more than ten bundles are watched (#2700)
+* Treat re-exported globals in a spec-compliant way (#2691)
+* Fix issues related to wrongly renamed variables (#2689)
+* Do not throw an error if config files contain non-default exports (#2673)
+* Improve type of `RollupOutput.output` to guarantee at least one chunk (#2679)
+
+### Pull Requests
+* [#2673](https://github.com/rollup/rollup/pull/2673): Allow config files to have non-default exports (@swansontec)
+* [#2677](https://github.com/rollup/rollup/pull/2677): Prevent final resolution and facade creation for inlined dynamic imports (@Rich-Harris and @lukastaegert)
+* [#2679](https://github.com/rollup/rollup/pull/2679): Improve type of `RollupOutput.output` (@MattiasBuelens)
+* [#2689](https://github.com/rollup/rollup/pull/2689): Reimplement variable deconflicting logic (@lukastaegert)
+* [#2691](https://github.com/rollup/rollup/pull/2691): Fix CI issues and update acorn dependency (@lukastaegert)
+* [#2693](https://github.com/rollup/rollup/pull/2693): Fix typo in export-globals test (@MattiasBuelens)
+* [#2695](https://github.com/rollup/rollup/pull/2695): Respect rendered exports when generating chunk hashes (@lukastaegert)
+* [#2696](https://github.com/rollup/rollup/pull/2696): Correctly render function expression inside simplified expression /*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+"use strict";
+
+const { RawSource } = require("webpack-sources");
+const ModuleFilenameHelpers = require("./ModuleFilenameHelpers");
+const { absolutify } = require("./util/identifier");
+
+const cache = new WeakMap();
+
+class EvalSourceMapDevToolModuleTemplatePlugin {
+	constructor(compilation, options) {
+		this.compilation = compilation;
+		this.sourceMapComment =
+			options.append || "//# sourceURL=[module]\n//# sourceMappingURL=[url]";
+		this.moduleFilenameTemplate =
+			options.moduleFilenameTemplate ||
+			"webpack://[namespace]/[resource-path]?[hash]";
+		this.namespace = options.namespace || "";
+		this.options = options;
+	}
+
+	apply(moduleTemplate) {
+		const self = this;
+		const options = this.options;
+		const matchModule = ModuleFilenameHelpers.matchObject.bind(
+			ModuleFilenameHelpers,
+			options
+		);
+		moduleTemplate.hooks.module.tap(
+			"EvalSourceMapDevToolModuleTemplatePlugin",
+			(source, module) => {
+				const cachedSource = cache.get(source);
+				if (cachedSource !== undefined) {
+					return cachedSource;
+				}
+
+				if (!matchModule(module.resource)) {
+					return source;
+				}
+
+				/** @type {{ [key: string]: TODO; }} */
+				let sourceMap;
+				let content;
+				if (source.sourceAndMap) {
+					const sourceAndMap = source.sourceAndMap(options);
+					sourceMap = sourceAndMap.map;
+					content = sourceAndMap.source;
+				} else {
+					sourceMap = source.map(options);
+					content = source.source();
+				}
+				if (!sourceMap) {
+					return source;
+				}
+
+				// Clone (flat) the sourcemap to ensure that the mutations below do not persist.
+				sourceMap = Object.keys(sourceMap).reduce((obj, key) => {
+					obj[key] = sourceMap[key];
+					return obj;
+				}, {});
+				const context = this.compilation.compiler.options.context;
+				const modules = sourceMap.sources.map(source => {
+					if (source.startsWith("webpack://")) {
+						source = absolutify(context, source.slice(10));
+					}
+					const module = self.compilation.findModule(source);
+					return module || source;
+				});
+				let moduleFilenames = modules.map(module => {
+					return ModuleFilenameHelpers.createFilename(
+						module,
+						{
+							moduleFilenameTemplate: self.moduleFilenameTemplate,
+							namespace: self.namespace
+						},
+						moduleTemplate.runtimeTemplate.requestShortener
+					);
+				});
+				moduleFilenames = ModuleFilenameHelpers.replaceDuplicates(
+					moduleFilenames,
+					(filename, i, n) => {
+						for (let j = 0; j < n; j++) filename += "*";
+						return filename;
+					}
+				);
+				sourceMap.sources = moduleFilenames;
+				sourceMap.sourceRoot = options.sourceRoot || "";
+				sourceMap.file = `${module.id}.js`;
+
+				const footer =
+					self.sourceMapComment.replace(
+						/\[url\]/g,
+						`data:application/json;charset=utf-8;base64,${Buffer.from(
+							JSON.stringify(sourceMap),
+							"utf8"
+						).toString("base64")}`
+					) + `\n//# sourceURL=webpack-internal:///${module.id}\n`; // workaround for chrome bug
+
+				const evalSource = new RawSource(
+					`eval(${JSON.stringify(content + footer)});`
+				);
+
+				cache.set(source, evalSource);
+
+				return evalSource;
+			}
+		);
+		moduleTemplate.hooks.hash.tap(
+			"EvalSourceMapDevToolModuleTemplatePlugin",
+			hash => {
+				hash.update("eval-source-map");
+				hash.update("2");
+			}
+		);
+	}
+}
+module.exports = EvalSourceMapDevToolModuleTemplatePlugin;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            add(node.key);
+        } else if (node instanceof AST_ObjectProperty && node.quote) {
+            add(node.key.name);
+        } else if (node instanceof AST_Sub) {
+            addStrings(node.property, add);
+        }
+    }));
+}
+
+function addStrings(node, add) {
+    node.walk(new TreeWalker(function(node) {
+        if (node instanceof AST_Sequence) {
+            addStrings(node.tail_node(), add);
+        } else if (node instanceof AST_String) {
+            add(node.value);
+        } else if (node instanceof AST_Conditional) {
+            addStrings(node.consequent, add);
+            addStrings(node.alternative, add);
+        }
+        return true;
+    }));
+}
+
+function mangle_properties(ast, options) {
+    options = defaults(options, {
+        builtins: false,
+        cache: null,
+        debug: false,
+        keep_quoted: false,
+        only_cache: false,
+        regex: null,
+        reserved: null,
+        undeclared: false,
+    }, true);
+
+    var reserved_option = options.reserved;
+    if (!Array.isArray(reserved_option)) reserved_option = [reserved_option];
+    var reserved = new Set(reserved_option);
+    if (!options.builtins) find_builtins(reserved);
+
+    var cname = -1;
+    var cprivate = -1;
+
+    var cache;
+    var private_cache = new Map();
+    if (options.cache) {
+        cache = options.cache.props;
+        cache.forEach(function(mangled_name) {
+            reserved.add(mangled_name);
+        });
+    } else {
+        cache = new Map();
+    }
+
+    var regex = options.regex && new RegExp(options.regex);
+
+    // note debug is either false (disabled), or a string of the debug suffix to use (enabled).
+    // note debug may be enabled as an empty string, which is falsey. Also treat passing 'true'
+    // the same as passing an empty string.
+    var debug = options.debug !== false;
+    var debug_name_suffix;
+    if (debug) {
+        debug_name_suffix = (options.debug === true ? "" : options.debug);
+    }
+
+    var names_to_mangle = new Set();
+    var unmangleable = new Set();
+    var private_properties = new Set();
+
+    var keep_quoted_strict = options.keep_quoted === "strict";
+
+    // step 1: find candidates to mangle
+    ast.walk(new TreeWalker(function(node) {
+        if (
+            node instanceof AST_ClassPrivateProperty
+            || node instanceof AST_PrivateMethod
+        ) {
+            private_properties.add(node.key.name);
+        } else if (node instanceof AST_DotHash) {
+            private_properties.add(node.property);
+        } else if (node instanceof AST_ObjectKeyVal) {
+            if (typeof node.key == "string" &&
+                (!keep_quoted_strict || !node.quote)) {
+                add(node.key);
+            }
+        } else if (node instanceof AST_ObjectProperty) {
+            // setter or getter, since KeyVal is handled above
+            if (!keep_quoted_strict || !node.key.end.quote) {
+                add(node.key.name);
+            }
+        } else if (node instanceof AST_Dot) {
+            var declared = !!options.undeclared;
+            if (!declared) {
+                var root = node;
+                while (root.expression) {
+                    root = root.expression;
+                }
+                declared = !(root.thedef && root.thedef.undeclared);
+            }
+            if (declared &&
+                (!keep_quoted_strict || !node.quote)) {
+                add(node.property);
+            }
+        } else if (node instanceof AST_Sub) {
+            if (!keep_quoted_strict) {
+                addStrings(node.property, add);
+            }
+        } else if (node instanceof AST_Call
+            && node.expression.print_to_string() == "Object.defineProperty") {
+            addStrings(node.args[1], add);
+        } else if (node instanceof AST_Binary && node.operator === "in") {
+            addStrings(node.left, add);
+        }
+    }));
+
+    // step 2: transform the tree, renaming properties
+    return ast.transform(new TreeTransformer(function(node) {
+        if (
+            node instanceof AST_ClassPrivateProperty
+            || node instanceof AST_PrivateMethod
+        ) {
+            node.key.name = mangle_private(node.key.name);
+        } else if (node instanceof AST_DotHash) {
+            node.property = mangle_private(node.property);
+        } else if (node instanceof AST_ObjectKeyVal) {
+            if (typeof node.key == "string" &&
+                (!keep_quoted_strict || !node.quote)) {
+                node.key = mangle(node.key);
+            }
+        } else if (node instanceof AST_ObjectProperty) {
+            // setter, getter, method or class field
+            if (!keep_quoted_strict || !node.key.end.quote) {
+                node.key.name = mangle(node.key.name);
+            }
+        } else if (node instanceof AST_Dot) {
+            if (!keep_quoted_strict || !node.quote) {
+                node.property = mangle(node.property);
+            }
+        } else if (!options.keep_quoted && node instanceof AST_Sub) {
+            node.property = mangleStrings(node.property);
+        } else if (node instanceof AST_Call
+            && node.expression.print_to_string() == "Object.defineProperty") {
+            node.args[1] = mangleStrings(node.args[1]);
+        } else if (node instanceof AST_Binary && node.operator === "in") {
+            node.left = mangleStrings(node.left);
+        }
+    }));
+
+    // only function declarations after this line
+
+    function can_mangle(name) {
+        if (unmangleable.has(name)) return false;
+        if (reserved.has(name)) return false;
+        if (options.only_cache) {
+            return cache.has(name);
+        }
+        if (/^-?[0-9]+(\.[0-9]+)?(e[+-][0-9]+)?$/.test(name)) return false;
+        return true;
+    }
+
+    function should_mangle(name) {
+        if (regex && !regex.test(name)) return false;
+        if (reserved.has(name)) return false;
+        return cache.has(name)
+            || names_to_mangle.has(name);
+    }
+
+    function add(name) {
+        if (can_mangle(name))
+            names_to_mangle.add(name);
+
+        if (!should_mangle(name)) {
+            unmangleable.add(name);
+        }
+    }
+
+    function mangle(name) {
+        if (!should_mangle(name)) {
+            return name;
+        }
+
+        var mangled = cache.get(name);
+        if (!mangled) {
+            if (debug) {
+                // debug mode: use a prefix and suffix to preserve readability, e.g. o.foo -> o._$foo$NNN_.
+                var debug_mangled = "_$" + name + "$" + debug_name_suffix + "_";
+
+                if (can_mangle(debug_mangled)) {
+                    mangled = debug_mangled;
+                }
+            }
+
+            // either debug mode is off, or it is on and we could not use the mangled name
+            if (!mangled) {
+                do {
+                    mangled = base54(++cname);
+                } while (!can_mangle(mangled));
+            }
+
+            cache.set(name, mangled);
+        }
+        return mangled;
+    }
+
+    function mangle_private(name) {
+        let mangled = private_cache.get(name);
+        if (!mangled) {
+            mangled = base54(++cprivate);
+            private_cache.set(name, mangled);
+        }
+
+        return mangled;
+    }
+
+    function mangleStrings(node) {
+        return node.transform(new TreeTransformer(function(node) {
+            if (node instanceof AST_Sequence) {
+                var last = node.expressions.length - 1;
+                node.expressions[last] = mangleStrings(node.expressions[last]);
+            } else if (node instanceof AST_String) {
+                node.value = mangle(node.value);
+            } else if (node instanceof AST_Conditional) {
+                node.consequent = mangleStrings(node.consequent);
+                node.alternative = mangleStrings(node.alternative);
+            }
+            return node;
+        }));
+    }
+}
+
+export {
+    reserve_quoted_keys,
+    mangle_properties,
+};
+                                                                                                                                                                                                                                                                                                                                  /**
+ * @fileoverview require default case in switch statements
+ * @author Aliaksei Shytkin
+ */
+"use strict";
+
+const DEFAULT_COMMENT_PATTERN = /^no default$/iu;
+
+//------------------------------------------------------------------------------
+// Rule Definition
+//------------------------------------------------------------------------------
+
+module.exports = {
+    meta: {
+        type: "suggestion",
+
+        docs: {
+            description: "require `default` cases in `switch` statements",
+            category: "Best Practices",
+            recommended: false,
+            url: "https://eslint.org/docs/rules/default-case"
+        },
+
+        schema: [{
+            type: "object",
+            properties: {
+                commentPattern: {
+                    type: "string"
+                }
+            },
+            additionalProperties: false
+        }],
+
+        messages: {
+            missingDefaultCase: "Expected a default case."
+        }
+    },
+
+    create(context) {
+        const options = context.options[0] || {};
+        const commentPattern = options.commentPattern
+            ? new RegExp(options.commentPattern, "u")
+            : DEFAULT_COMMENT_PATTERN;
+
+        const sourceCode = context.getSourceCode();
+
+        //--------------------------------------------------------------------------
+        // Helpers
+        //--------------------------------------------------------------------------
+
+        /**
+         * Shortcut to get last element of array
+         * @param  {*[]} collection Array
+         * @returns {*} Last element
+         */
+        function last(collection) {
+            return collection[collection.length - 1];
+        }
+
+        //--------------------------------------------------------------------------
+        // Public
+        //--------------------------------------------------------------------------
+
+        return {
+
+            SwitchStatement(node) {
+
+                if (!node.cases.length) {
+
+                    /*
+                     * skip check of empty switch because there is no easy way
+                     * to extract comments inside it now
+                     */
+                    return;
+                }
+
+                const hasDefault = node.cases.some(v => v.test === null);
+
+                if (!hasDefault) {
+
+                    let comment;
+
+                    const lastCase = last(node.cases);
+                    const comments = sourceCode.getCommentsAfter(lastCase);
+
+                    if (comments.length) {
+                        comment = last(comments);
+                    }
+
+                    if (!comment || !commentPattern.test(comment.value.trim())) {
+                        context.report({ node, messageId: "missingDefaultCase" });
+                    }
+                }
+            }
+        };
+    }
+};
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  {"ast":null,"code":"var _jsxFileName = \"D:\\\\Course\\\\P\\\\Code\\\\Exam\\\\ujian-frontend-JCWM0506\\\\src\\\\pages\\\\homePage.js\";\nimport React, { Component } from 'react';\nimport { URL_API } from '../helper';\nimport axios from 'axios';\nimport { connect } from 'react-redux';\nimport { getProductAction } from '../action/productAction';\nimport { Link, Redirect } from 'react-router-dom';\nimport { Card, CardImg, CardText, CardBody, Modal, Input, Toast, ToastBody, ToastHeader, CardTitle, CardSubtitle, Button, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';\nimport { jsxDEV as _jsxDEV } from \"react/jsx-dev-runtime\";\n\nclass HomePage extends Component {\n  constructor(props) {\n    super(props);\n\n    this.toggle = index => {\n      if (this.props.id === null) {\n        alert('Login first');\n        this.setState({\n          redirect: true\n        });\n      } else {\n        this.setState({\n          modal: !this.state.modal\n        });\n        this.setState;\n      }\n    };\n\n    this.add = index => {\n      if (this.state.count < this.props.product_list[index].stock) {\n        this.setState(state => ({\n          count: state.count + 1\n        }));\n      } else {\n        alert('Stock not enough');\n      }\n    };\n\n    this.remove = () => {\n      if (this.state.count > 1) {\n        this.setState({\n          count: this.state.count - 1\n        });\n      }\n    };\n\n    this.addtoCart = (name, img, price) => {\n      let userID = this.props.id;\n      let qty = this.state.count;\n      let subtotal = qty * price;\n      console.log('Add to Cart', userID, name, img, qty, subtotal);\n      let cart = this.props.cart;\n      let index = cart.findIndex(item => item.name === name);\n      console.log('Findindex', index);\n\n      if (index > -1) {\n        cart[index].qty += qty;\n      } else {\n        cart.push({\n          userID,\n          name,\n          img,\n          qty,\n          subtotal\n        });\n      }\n\n      axios.patch(URL_API + `/users/${userID}`, {\n        cart: this.props.cart\n      }).then(response => {\n        console.log(response.data);\n      }).catch(error => {\n        console.log(\"Error\", error);\n      }); // this.handleToast()\n    };\n\n    this.handleToast = () => {\n      this.toast.style.display = 'block';\n    };\n\n    this.state = {\n      modal: false,\n      count: 1,\n      redirect: false,\n      indexProd: -1\n    };\n  }\n\n  componentDidMount() {\n    this.getProducts();\n  }\n\n  getProducts() {\n    axios.get(URL_API + `/products`).then(response => {\n      console.log(\"product list\", response.data);\n      this.props.getProductAction(response.data);\n    }).catch(error => {\n      console.log(error);\n    });\n  }\n\n  printCard() {\n    return this.props.product_list.map((item, index) => {\n      return /*#__PURE__*/_jsxDEV(\"div\", {\n        className: \"col-md-3 col-6\",\n        children: /*#__PURE__*/_jsxDEV(Card, {\n          children: [/*#__PURE__*/_jsxDEV(CardImg, {\n            width: \"100\",\n            src: item.img,\n            alt: \"Card image cap\"\n          }, void 0, false, {\n            fileName: _jsxFileName,\n            lineNumber: 103,\n            columnNumber: 25\n          }, this), /*#__PURE__*/_jsxDEV(CardBody, {\n            children: [/*#__PURE__*/_jsxDEV(CardTitle, {\n              tag: \"h5\",\n              children: item.name\n            }, void 0, false, {\n              fileName: _jsxFileName,\n              lineNumber: 105,\n              columnNumber: 25\n            }, this), /*#__PURE__*/_jsxDEV(CardSubtitle, {\n              tag: \"h6\",\n              className: \"mb-2 text-muted\",\n              children: [\"Price: IDR \", item.price]\n            }, void 0, true, {\n              fileName: _jsxFileName,\n              lineNumber: 106,\n              columnNumber: 25\n            }, this), /*#__PURE__*/_jsxDEV(CardSubtitle, {\n              tag: \"h6\",\n              className: \"mb-2 text-muted\",\n              children: [\"Stock: \", item.stock]\n            }, void 0, true, {\n              fileName: _jsxFileName,\n              lineNumber: 107,\n              columnNumber: 25\n            }, this), /*#__PURE__*/_jsxDEV(Button, {\n              color: \"warning\",\n              block: true,\n              onClick: () => this.toggle(index),\n              children: \"Add to cart\"\n            }, void 0, false, {\n              fileName: _jsxFileName,\n              lineNumber: 108,\n              columnNumber: 29\n            }, this), /*#__PURE__*/_jsxDEV(Modal, {\n              size: \"lg\",\n              isOpen: this.state.modal,\n              toggle: () => this.toggle(index),\n              style: {\n                width: '70%'\n              },\n              children: [/*#__PURE__*/_jsxDEV(ModalHeader, {\n                toggle: () => this.toggle(index),\n                charCode: \"x\",\n                children: [\"Add \", item.name, \" to cart, define quantity\"]\n              }, void 0, true, {\n                fileName: _jsxFileName,\n                lineNumber: 110,\n                columnNumber: 29\n              }, this), /*#__PURE__*/_jsxDEV(ModalBody, {\n                children: /*#__PURE__*/_jsxDEV(\"div\", {\n                  className: \"d-flex justify-content-between align-items-center\",\n                  children: [/*#__PURE__*/_jsxDEV(\"img\", {\n                    src: item.img,\n                    style: {\n                      maxWidth: '100px'\n                    }\n                  }, void 0, false, {\n                    fileName: _jsxFileName,\n                    lineNumber: 113,\n                    columnNumber: 29\n                  }, this), /*#__PURE__*/_jsxDEV(\"span\", {\n                    children: \"Total qty:\"\n                  }, void 0, false, {\n                    fileName: _jsxFileName,\n                    lineNumber: 114,\n                    columnNumber: 29\n                  }, this), /*#__PURE__*/_jsxDEV(\"span\", {\n                    style: {\n                      width: '30%',\n                      display: 'flex',\n                      alignItems: 'center'\n                    },\n                    children: [/*#__PURE__*/_jsxDEV(Button, {\n                      outline: true,\n                      size: \"sm\",\n                      onClick: () => this.remove(index),\n                      children: \"remove\"\n                    }, void 0, false, {\n                      fileName: _jsxFileName,\n                      lineNumber: 116,\n                      columnNumber: 37\n                    }, this), /*#__PURE__*/_jsxDEV(Input, {\n                      className: \"text-center\",\n                      placeholder: \"qty\",\n                      value: this.state.count,\n                      style: {\n                        width: '50%',\n                        display: 'inline-block'\n                      }\n                    }, void 0, false, {\n                      fileName: _jsxFileName,\n                      lineNumber: 117,\n                      columnNumber: 37\n                    }, this), /*#__PURE__*/_jsxDEV(Button, {\n                      outline: true,\n                      size: \"sm\",\n                      color: \"primary\",\n                      onClick: () => this.add(index),\n                      children: \"add\"\n                    }, void 0, false, {\n                      fileName: _jsxFileName,\n                      lineNumber: 118,\n                      columnNumber: 37\n                    }, this)]\n                  }, void 0, true, {\n                    fileName: _jsxFileName,\n                    lineNumber: 115,\n                    columnNumber: 33\n                  }, this)]\n                }, void 0, true, {\n                  fileName: _jsxFileName,\n                  lineNumber: 112,\n                  columnNumber: 29\n                }, this)\n              }, void 0, false, {\n                fileName: _jsxFileName,\n                lineNumber: 111,\n                columnNumber: 29\n              }, this), /*#__PURE__*/_jsxDEV(ModalFooter, {\n                className: \"d-flex justify-content-between\",\n                children: [/*#__PURE__*/_jsxDEV(Button, {\n                  className: \"d-flex justify-content-center\",\n                  outline: true,\n                  color: \"secondary\",\n                  onClick: () => this.toggle(index),\n                  children: \"Continue Shopping\"\n                }, void 0, false, {\n                  fileName: _jsxFileName,\n                  lineNumber: 123,\n                  columnNumber: 33\n                }, this), /*#__PURE__*/_jsxDEV(Link, {\n                  to: \"/cart\",\n                  style: {\n                    textDecoration: 'none'\n                  },\n                  children: [/*#__PURE__*/_jsxDEV(Button, {\n                    className: \"d-flex justify-content-center\",\n                    color: \"warning\",\n                    onClick: () => this.addtoCart(item.name, item.img, item.price),\n                    children: \"Go to shopping cart\"\n                  }, void 0, false, {\n                    fileName: _jsxFileName,\n                    lineNumber: 125,\n                    columnNumber: 37\n                  }, this), ' ']\n                }, void 0, true, {\n                  fileName: _jsxFileName,\n                  lineNumber: 124,\n                  columnNumber: 33\n                }, this)]\n              }, void 0, true, {\n                fileName: _jsxFileName,\n                lineNumber: 122,\n                columnNumber: 29\n              }, this)]\n            }, void 0, true, {\n              fileName: _jsxFileName,\n              lineNumber: 109,\n              columnNumber: 29\n            }, this)]\n          }, void 0, true, {\n            fileName: _jsxFileName,\n            lineNumber: 104,\n            columnNumber: 25\n          }, this)]\n        }, void 0, true, {\n          fileName: _jsxFileName,\n          lineNumber: 102,\n          columnNumber: 21\n        }, this)\n      }, void 0, false, {\n        fileName: _jsxFileName,\n        lineNumber: 101,\n        columnNumber: 21\n      }, this);\n    });\n  }\n\n  render() {\n    console.log(\"props\", this.props);\n\n    if (this.state.redirect == true) {\n      return /*#__PURE__*/_jsxDEV(Redirect, {\n        to: \"/login\"\n      }, void 0, false, {\n        fileName: _jsxFileName,\n        lineNumber: 138,\n        columnNumber: 20\n      }, this);\n    }\n\n    return /*#__PURE__*/_jsxDEV(\"div\", {\n      className: \"container-fluid\",\n      children: [/*#__PURE__*/_jsxDEV(\"h1\", {\n        children: \"Homepage\"\n      }, void 0, false, {\n        fileName: _jsxFileName,\n        lineNumber: 142,\n        columnNumber: 17\n      }, this), /*#__PURE__*/_jsxDEV(\"div\", {\n        children: /*#__PURE__*/_jsxDEV(\"div\", {\n          style: {\n            display: 'none'\n          },\n          innerRef: el => this.toast = el,\n          children: /*#__PURE__*/_jsxDEV(Toast, {\n            children: [/*#__PURE__*/_jsxDEV(ToastHeader, {\n              children: \"Successfully adding to cart\"\n            }, void 0, false, {\n              fileName: _jsxFileName,\n              lineNumber: 146,\n              columnNumber: 21\n            }, this), /*#__PURE__*/_jsxDEV(ToastBody, {\n              children: \"Just one step closer!\"\n            }, void 0, false, {\n              fileName: _jsxFileName,\n              lineNumber: 149,\n              columnNumber: 21\n            }, this)]\n          }, void 0, true, {\n            fileName: _jsxFileName,\n            lineNumber: 145,\n            columnNumber: 21\n          }, this)\n        }, void 0, false, {\n          fileName: _jsxFileName,\n          lineNumber: 144,\n          columnNumber: 17\n        }, this)\n      }, void 0, false, {\n        fileName: _jsxFileName,\n        lineNumber: 143,\n        columnNumber: 17\n      }, this), /*#__PURE__*/_jsxDEV(\"div\", {\n        className: \"row\",\n        children: this.printCard()\n      }, void 0, false, {\n        fileName: _jsxFileName,\n        lineNumber: 155,\n        columnNumber: 17\n      }, this)]\n    }, void 0, true, {\n      fileName: _jsxFileName,\n      lineNumber: 141,\n      columnNumber: 13\n    }, this);\n  }\n\n}\n\nconst mapStateToProps = ({\n  productReducers,\n  authReducer\n}) => {\n  return { ...productReducers,\n    ...authReducer\n  };\n};\n\nexport default connect(mapStateToProps, {\n  getProductAction\n})(HomePage);","map":{"version":3,"sources":["D:/Course/P/Code/Exam/ujian-frontend-JCWM0506/src/pages/homePage.js"],"names":["React","Component","URL_API","axios","connect","getProductAction","Link","Redirect","Card","CardImg","CardText","CardBody","Modal","Input","Toast","ToastBody","ToastHeader","CardTitle","CardSubtitle","Button","ModalHeader","ModalBody","ModalFooter","HomePage","constructor","props","toggle","index","id","alert","setState","redirect","modal","state","add","count","product_list","stock","remove","addtoCart","name","img","price","userID","qty","subtotal","console","log","cart","findIndex","item","push","patch","then","response","data","catch","error","handleToast","toast","style","display","indexProd","componentDidMount","getProducts","get","printCard","map","width","maxWidth","alignItems","textDecoration","render","el","mapStateToProps","productReducers","authReducer"],"mappings":"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","sourcesContent":["import React, { Component } from 'react';\r\nimport { URL_API } from '../helper';\r\nimport axios from 'axios';\r\nimport { connect } from 'react-redux';\r\nimport { getProductAction } from '../action/productAction'\r\nimport { Link, Redirect } from 'react-router-dom';\r\nimport {\r\n    Card, CardImg, CardText, CardBody, Modal, Input, Toast, ToastBody, ToastHeader,\r\n    CardTitle, CardSubtitle, Button, ModalHeader, ModalBody, ModalFooter\r\n  } from 'reactstrap';\r\n\r\n\r\nclass HomePage extends Component {\r\n    constructor(props) {\r\n        super(props);\r\n        this.state = {  \r\n            modal: false,\r\n            count: 1,\r\n            redirect: false,\r\n            indexProd: -1\r\n        }\r\n    }\r\n\r\n    componentDidMount() {\r\n        this.getProducts()\r\n    }\r\n\r\n    getProducts() {\r\n        axios.get(URL_API+`/products`)\r\n        .then(response => {\r\n            console.log(\"product list\", response.data)\r\n            this.props.getProductAction(response.data)\r\n        })\r\n        .catch(error => {\r\n            console.log(error)\r\n        })\r\n    }\r\n\r\n    toggle = (index) => {\r\n        if (this.props.id === null) {\r\n            alert('Login first')\r\n            this.setState({redirect: true})\r\n        }\r\n        else {\r\n            this.setState({ modal: !this.state.modal })\r\n            this.setState\r\n        }\r\n    }\r\n\r\n    add = (index) => {\r\n        if (this.state.count < this.props.product_list[index].stock) {\r\n            this.setState(state => ({\r\n                count: state.count + 1\r\n            }))\r\n        }\r\n        else {\r\n            alert('Stock not enough')\r\n        }\r\n    }\r\n\r\n    remove = () => {\r\n        if (this.state.count > 1 ) {\r\n            this.setState({count: this.state.count - 1})\r\n        }\r\n    }\r\n\r\n    addtoCart = (name, img, price) => {\r\n        let userID = this.props.id\r\n        let qty = this.state.count\r\n        let subtotal = qty * price\r\n        console.log('Add to Cart', userID, name, img, qty, subtotal)\r\n        let cart = this.props.cart\r\n        let index = cart.findIndex(item => item.name === name)\r\n        console.log('Findindex', index)\r\n        if (index > -1) {\r\n            cart[index].qty += qty\r\n        }\r\n        else {\r\n            cart.push({\r\n                userID, name, img, qty, subtotal\r\n            })\r\n        }\r\n        axios.patch(URL_API+`/users/${userID}`, {\r\n            cart: this.props.cart\r\n        })\r\n        .then(response => {\r\n            console.log(response.data)\r\n        })\r\n        .catch(error => {\r\n            console.log(\"Error\", error)\r\n        })\r\n        // this.handleToast()\r\n    }\r\n\r\n    handleToast = () => {\r\n        this.toast.style.display = 'block'\r\n    }\r\n\r\n    printCard() {\r\n        return this.props.product_list.map((item, index) => {\r\n            return  <div className=\"col-md-3 col-6\">\r\n                    <Card>\r\n                        <CardImg width=\"100\" src={item.img} alt=\"Card image cap\" />\r\n                        <CardBody>\r\n                        <CardTitle tag=\"h5\">{item.name}</CardTitle>\r\n                        <CardSubtitle tag=\"h6\" className=\"mb-2 text-muted\">Price: IDR {item.price}</CardSubtitle>\r\n                        <CardSubtitle tag=\"h6\" className=\"mb-2 text-muted\">Stock: {item.stock}</CardSubtitle>\r\n                            <Button color=\"warning\" block onClick={() => this.toggle(index)}>Add to cart</Button>\r\n                            <Modal size=\"lg\" isOpen={this.state.modal} toggle={() => this.toggle(index)} style={{width: '70%'}}>\r\n                            <ModalHeader toggle={() => this.toggle(index)} charCode=\"x\">Add {item.name} to cart, define quantity</ModalHeader>\r\n                            <ModalBody>\r\n                            <div className=\"d-flex justify-content-between align-items-center\">\r\n                            <img src={item.img} style={{maxWidth: '100px'}}></img>\r\n                            <span>Total qty:</span>\r\n                                <span style={{width: '30%', display: 'flex', alignItems:'center'}}>\r\n                                    <Button outline size=\"sm\" onClick={() => this.remove(index)}>remove</Button>\r\n                                    <Input className=\"text-center\" placeholder='qty' value={this.state.count} style={{width: '50%', display:'inline-block'}} />\r\n                                    <Button outline size=\"sm\" color=\"primary\" onClick={() => this.add(index)}>add</Button>\r\n                                </span>\r\n                            </div>\r\n                            </ModalBody>\r\n                            <ModalFooter className=\"d-flex justify-content-between\">\r\n                                <Button className=\"d-flex justify-content-center\" outline color=\"secondary\" onClick={() => this.toggle(index)}>Continue Shopping</Button>\r\n                                <Link to=\"/cart\" style={{textDecoration: 'none'}}>\r\n                                    <Button className=\"d-flex justify-content-center\" color=\"warning\" onClick={() => this.addtoCart(item.name, item.img, item.price)}>Go to shopping cart</Button>{' '}\r\n                                </Link>\r\n                            </ModalFooter>\r\n                            </Modal>\r\n                        </CardBody>\r\n                    </Card>\r\n                    </div>\r\n        })\r\n    }\r\n\r\n    render() { \r\n        console.log(\"props\", this.props)\r\n        if (this.state.redirect == true) {\r\n            return <Redirect to=\"/login\" />\r\n        }\r\n        return (  \r\n            <div className=\"container-fluid\">\r\n                <h1>Homepage</h1>\r\n                <div>\r\n                <div style={{display: 'none'}} innerRef={el => this.toast = el}>\r\n                    <Toast>\r\n                    <ToastHeader>\r\n                        Successfully adding to cart\r\n                    </ToastHeader>\r\n                    <ToastBody>\r\n                        Just one step closer!\r\n                    </ToastBody>\r\n                    </Toast>\r\n                </div>\r\n                </div>\r\n                <div className=\"row\">\r\n                    {this.printCard()}\r\n                </div>\r\n                \r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nconst mapStateToProps = ({ productReducers, authReducer }) => {\r\n    return {\r\n        ...productReducers,\r\n        ...authReducer\r\n    }\r\n} \r\n\r\nexport default connect(mapStateToProps, {getProductAction})(HomePage);"]},"metadata":{},"sourceType":"module"}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  {"ast":null,"code":"var _jsxFileName = \"D:\\\\Course\\\\P\\\\Code\\\\Exam\\\\ujian-frontend-JCWM0506\\\\src\\\\components\\\\navbar.js\";\nimport React, { Component } from 'react';\nimport { Link } from 'react-router-dom';\nimport { Badge, Button, Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, NavbarText } from 'reactstrap';\nimport { connect } from 'react-redux';\nimport { authLogout } from '../action';\nimport { jsxDEV as _jsxDEV } from \"react/jsx-dev-runtime\";\n\nclass NambarComp extends Component {\n  constructor(props) {\n    super(props);\n\n    this.toggle = () => {\n      this.setState({\n        isOpen: !this.state.open\n      });\n    };\n\n    this.countCart = () => {\n      console.log('cart navbar', this.props.cart);\n    };\n\n    this.state = {\n      isOpen: false,\n      cart: this.props.cart\n    };\n  }\n\n  componentDidMount() {\n    this.countCart();\n  }\n\n  render() {\n    console.log('email navbar', this.props.id);\n    return /*#__PURE__*/_jsxDEV(\"div\", {\n      children: /*#__PURE__*/_jsxDEV(Navbar, {\n        color: \"light\",\n        light: true,\n        expand: \"md\",\n        children: [/*#__PURE__*/_jsxDEV(NavbarBrand, {\n          children: /*#__PURE__*/_jsxDEV(Link, {\n            to: \"/\",\n            children: \"Home\"\n          }, void 0, false, {\n            fileName: _jsxFileName,\n            lineNumber: 43,\n            columnNumber: 34\n          }, this)\n        }, void 0, false, {\n          fileName: _jsxFileName,\n          lineNumber: 43,\n          columnNumber: 21\n        }, this), /*#__PURE__*/_jsxDEV(NavbarToggler, {\n          onClick: this.toggle\n        }, void 0, false, {\n          fileName: _jsxFileName,\n          lineNumber: 44,\n          columnNumber: 21\n        }, this), /*#__PURE__*/_jsxDEV(Collapse, {\n          isOpen: this.state.isOpen,\n          navbar: true,\n          children: [/*#__PURE__*/_jsxDEV(Nav, {\n            className: \"mr-auto\",\n            navbar: true,\n            children: [/*#__PURE__*/_jsxDEV(NavItem, {\n              children: /*#__PURE__*/_jsxDEV(NavLink, {\n                children: /*#__PURE__*/_jsxDEV(Link, {\n                  to: \"/login\",\n                  children: \"Login\"\n                }, void 0, false, {\n                  fileName: _jsxFileName,\n                  lineNumber: 48,\n                  columnNumber: 38\n                }, this)\n              }, void 0, false, {\n                fileName: _jsxFileName,\n                lineNumber: 48,\n                columnNumber: 29\n              }, this)\n            }, void 0, false, {\n              fileName: _jsxFileName,\n              lineNumber: 47,\n              columnNumber: 25\n            }, this), /*#__PURE__*/_jsxDEV(NavItem, {\n              children: /*#__PURE__*/_jsxDEV(NavLink, {\n                children: /*#__PURE__*/_jsxDEV(Link, {\n                  to: \"/login\",\n                  onClick: this.props.authLogout,\n                  children: \"Logout\"\n                }, void 0, false, {\n                  fileName: _jsxFileName,\n                  lineNumber: 51,\n                  columnNumber: 38\n                }, this)\n              }, void 0, false, {\n                fileName: _jsxFileName,\n                lineNumber: 51,\n                columnNumber: 29\n              }, this)\n            }, void 0, false, {\n              fileName: _jsxFileName,\n              lineNumber: 50,\n              columnNumber: 25\n            }, this), /*#__PURE__*/_jsxDEV(NavItem, {\n              children: /*#__PURE__*/_jsxDEV(NavLink, {\n                children: /*#__PURE__*/_jsxDEV(Link, {\n                  to: \"/cart\",\n                  children: \"Cart\"\n                }, void 0, false, {\n                  fileName: _jsxFileName,\n                  lineNumber: 54,\n                  columnNumber: 38\n                }, this)\n              }, void 0, false, {\n                fileName: _jsxFileName,\n                lineNumber: 54,\n                columnNumber: 29\n              }, this)\n            }, void 0, false, {\n              fileName: _jsxFileName,\n              lineNumber: 53,\n              columnNumber: 25\n            }, this), /*#__PURE__*/_jsxDEV(NavItem, {\n              children: /*#__PURE__*/_jsxDEV(NavLink, {\n                children: /*#__PURE__*/_jsxDEV(Link, {\n                  to: \"/checkout\",\n                  children: \"Checkout\"\n                }, void 0, false, {\n                  fileName: _jsxFileName,\n                  lineNumber: 57,\n                  columnNumber: 38\n                }, this)\n              }, void 0, false, {\n                fileName: _jsxFileName,\n                lineNumber: 57,\n                columnNumber: 29\n              }, this)\n            }, void 0, false, {\n              fileName: _jsxFileName,\n              lineNumber: 56,\n              columnNumber: 25\n            }, this)]\n          }, void 0, true, {\n            fileName: _jsxFileName,\n            lineNumber: 46,\n            columnNumber: 21\n          }, this), /*#__PURE__*/_jsxDEV(NavbarText, {\n            children: /*#__PURE__*/_jsxDEV(Button, {\n              color: \"primary\",\n              outline: true,\n              children: [this.props.email, \" \", /*#__PURE__*/_jsxDEV(Badge, {\n                color: \"secondary\",\n                children: this.props.cart.length\n              }, void 0, false, {\n                fileName: _jsxFileName,\n                lineNumber: 62,\n                columnNumber: 48\n              }, this)]\n            }, void 0, true, {\n              fileName: _jsxFileName,\n              lineNumber: 61,\n              columnNumber: 25\n            }, this)\n          }, void 0, false, {\n            fileName: _jsxFileName,\n            lineNumber: 60,\n            columnNumber: 21\n          }, this)]\n        }, void 0, true, {\n          fileName: _jsxFileName,\n          lineNumber: 45,\n          columnNumber: 21\n        }, this)]\n      }, void 0, true, {\n        fileName: _jsxFileName,\n        lineNumber: 42,\n        columnNumber: 17\n      }, this)\n    }, void 0, false, {\n      fileName: _jsxFileName,\n      lineNumber: 41,\n      columnNumber: 13\n    }, this);\n  }\n\n} // function to take data from reducer/store\n\n\nconst mapStateToProps = ({\n  authReducer\n}) => {\n  return { ...authReducer\n  };\n};\n\nexport default connect(mapStateToProps, {\n  authLogout\n})(NambarComp);","map":{"version":3,"sources":["D:/Course/P/Code/Exam/ujian-frontend-JCWM0506/src/components/navbar.js"],"names":["React","Component","Link","Badge","Button","Collapse","Navbar","NavbarToggler","NavbarBrand","Nav","NavItem","NavLink","NavbarText","connect","authLogout","NambarComp","constructor","props","toggle","setState","isOpen","state","open","countCart","console","log","cart","componentDidMount","render","id","email","length","mapStateToProps","authReducer"],"mappings":"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","sourcesContent":["import React, { Component } from 'react';\r\nimport { Link } from 'react-router-dom';\r\nimport {\r\n    Badge, Button,\r\n    Collapse,\r\n    Navbar,\r\n    NavbarToggler,\r\n    NavbarBrand,\r\n    Nav,\r\n    NavItem,\r\n    NavLink,\r\n    NavbarText\r\n  } from 'reactstrap';\r\nimport { connect } from 'react-redux';\r\nimport { authLogout } from '../action';\r\n\r\nclass NambarComp extends Component {\r\n    constructor(props) {\r\n        super(props);\r\n        this.state = {  \r\n            isOpen: false,\r\n            cart: this.props.cart\r\n        }\r\n    }\r\n\r\n    componentDidMount() {\r\n        this.countCart()\r\n    }\r\n\r\n    toggle = () => {\r\n        this.setState({ isOpen: !this.state.open })\r\n    }\r\n\r\n    countCart = () => {\r\n        console.log('cart navbar', this.props.cart)\r\n    }\r\n\r\n    render() { \r\n        console.log('email navbar', this.props.id)\r\n        return (  \r\n            <div>\r\n                <Navbar color=\"light\" light expand=\"md\">\r\n                    <NavbarBrand><Link to=\"/\">Home</Link></NavbarBrand>\r\n                    <NavbarToggler onClick={this.toggle} />\r\n                    <Collapse isOpen={this.state.isOpen} navbar>\r\n                    <Nav className=\"mr-auto\" navbar>\r\n                        <NavItem>\r\n                            <NavLink><Link to=\"/login\">Login</Link></NavLink>\r\n                        </NavItem>\r\n                        <NavItem>\r\n                            <NavLink><Link to=\"/login\" onClick={this.props.authLogout}>Logout</Link></NavLink>\r\n                        </NavItem>\r\n                        <NavItem>\r\n                            <NavLink><Link to=\"/cart\">Cart</Link></NavLink>\r\n                        </NavItem>\r\n                        <NavItem>\r\n                            <NavLink><Link to=\"/checkout\">Checkout</Link></NavLink>\r\n                        </NavItem>\r\n                    </Nav>\r\n                    <NavbarText>\r\n                        <Button color=\"primary\" outline>\r\n                            {this.props.email} <Badge color=\"secondary\">{this.props.cart.length}</Badge>\r\n                        </Button>\r\n                    </NavbarText>\r\n                    </Collapse>\r\n                </Navbar>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\n// function to take data from reducer/store\r\nconst mapStateToProps = ({ authReducer }) => {\r\n    return {\r\n        ...authReducer\r\n    }\r\n}\r\n\r\nexport default connect(mapStateToProps, {authLogout})(NambarComp);"]},"metadata":{},"sourceType":"module"}               {"ast":null,"code":"var _jsxFileName = \"D:\\\\Course\\\\P\\\\Code\\\\Exam\\\\ujian-frontend-JCWM0506\\\\src\\\\pages\\\\homePage.js\";\nimport React, { Component } from 'react';\nimport { URL_API } from '../helper';\nimport axios from 'axios';\nimport { connect } from 'react-redux';\nimport { getProductAction } from '../action/productAction';\nimport { Link, Redirect } from 'react-router-dom';\nimport { Card, CardImg, CardText, CardBody, Modal, Input, Toast, ToastBody, ToastHeader, CardTitle, CardSubtitle, Button, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';\nimport { jsxDEV as _jsxDEV } from \"react/jsx-dev-runtime\";\n\nclass HomePage extends Component {\n  constructor(props) {\n    super(props);\n\n    this.toggle = () => {\n      if (this.props.id === null) {\n        alert('Login first');\n        this.setState({\n          redirect: true\n        });\n      } else {\n        this.setState({\n          modal: !this.state.modal\n        });\n        this.setState({\n          indexProd: !this.state.modal\n        });\n      }\n    };\n\n    this.add = index => {\n      if (this.state.count < this.props.product_list[index].stock) {\n        this.setState(state => ({\n          count: state.count + 1\n        }));\n      } else {\n        alert('Stock not enough');\n      }\n    };\n\n    this.remove = () => {\n      if (this.state.count > 1) {\n        this.setState({\n          count: this.state.count - 1\n        });\n      }\n    };\n\n    this.addtoCart = (name, img, price) => {\n      let userID = this.props.id;\n      let qty = this.state.count;\n      let subtotal = qty * price;\n      console.log('Add to Cart', userID, name, img, qty, subtotal);\n      let cart = this.props.cart;\n      let index = cart.findIndex(item => item.name === name);\n      console.log('Findindex', index);\n\n      if (index > -1) {\n        cart[index].qty += qty;\n      } else {\n        cart.push({\n          userID,\n          name,\n          img,\n          qty,\n          subtotal\n        });\n      }\n\n      axios.patch(URL_API + `/users/${userID}`, {\n        cart: this.props.cart\n      }).then(response => {\n        console.log(response.data);\n      }).catch(error => {\n        console.log(\"Error\", error);\n      }); // this.handleToast()\n    };\n\n    this.handleToast = () => {\n      this.toast.style.display = 'block';\n    };\n\n    this.state = {\n      modal: false,\n      count: 1,\n      redirect: false,\n      indexProd: -1\n    };\n  }\n\n  componentDidMount() {\n    this.getProducts();\n  }\n\n  getProducts() {\n    axios.get(URL_API + `/products`).then(response => {\n      console.log(\"product list\", response.data);\n      this.props.getProductAction(response.data);\n    }).catch(error => {\n      console.log(error);\n    });\n  }\n\n  printCard() {\n    return this.props.product_list.map((item, index) => {\n      return /*#__PURE__*/_jsxDEV(\"div\", {\n        className: \"col-md-3 col-6\",\n        children: /*#__PURE__*/_jsxDEV(Card, {\n          children: [/*#__PURE__*/_jsxDEV(CardImg, {\n            width: \"100\",\n            src: item.img,\n            alt: \"Card image cap\"\n          }, void 0, false, {\n            fileName: _jsxFileName,\n            lineNumber: 103,\n            columnNumber: 25\n          }, this), /*#__PURE__*/_jsxDEV(CardBody, {\n            children: [/*#__PURE__*/_jsxDEV(CardTitle, {\n              tag: \"h5\",\n              children: item.name\n            }, void 0, false, {\n              fileName: _jsxFileName,\n              lineNumber: 105,\n              columnNumber: 25\n            }, this), /*#__PURE__*/_jsxDEV(CardSubtitle, {\n              tag: \"h6\",\n              className: \"mb-2 text-muted\",\n              children: [\"Price: IDR \", item.price]\n            }, void 0, true, {\n              fileName: _jsxFileName,\n              lineNumber: 106,\n              columnNumber: 25\n            }, this), /*#__PURE__*/_jsxDEV(CardSubtitle, {\n              tag: \"h6\",\n              className: \"mb-2 text-muted\",\n              children: [\"Stock: \", item.stock]\n            }, void 0, true, {\n              fileName: _jsxFileName,\n              lineNumber: 107,\n              columnNumber: 25\n            }, this), /*#__PURE__*/_jsxDEV(Button, {\n              color: \"warning\",\n              block: true,\n              onClick: this.toggle,\n              children: \"Add to cart\"\n            }, void 0, false, {\n              fileName: _jsxFileName,\n              lineNumber: 108,\n              columnNumber: 29\n            }, this), /*#__PURE__*/_jsxDEV(Modal, {\n              size: \"lg\",\n              isOpen: this.state.modal,\n              toggle: this.toggle,\n              style: {\n                width: '70%'\n              },\n              children: [/*#__PURE__*/_jsxDEV(ModalHeader, {\n                toggle: this.toggle,\n                charCode: \"x\",\n                children: [\"Add \", item.name, \" to cart, define quantity\"]\n              }, void 0, true, {\n                fileName: _jsxFileName,\n                lineNumber: 110,\n                columnNumber: 29\n              }, this), /*#__PURE__*/_jsxDEV(ModalBody, {\n                children: /*#__PURE__*/_jsxDEV(\"div\", {\n                  className: \"d-flex justify-content-between align-items-center\",\n                  children: [/*#__PURE__*/_jsxDEV(\"img\", {\n                    src: item.img,\n                    style: {\n                      maxWidth: '100px'\n                    }\n                  }, void 0, false, {\n                    fileName: _jsxFileName,\n                    lineNumber: 113,\n                    columnNumber: 29\n                  }, this), /*#__PURE__*/_jsxDEV(\"span\", {\n                    children: \"Total qty:\"\n                  }, void 0, false, {\n                    fileName: _jsxFileName,\n                    lineNumber: 114,\n                    columnNumber: 29\n                  }, this), /*#__PURE__*/_jsxDEV(\"span\", {\n                    style: {\n                      width: '30%',\n                      display: 'flex',\n                      alignItems: 'center'\n                    },\n                    children: [/*#__PURE__*/_jsxDEV(Button, {\n                      outline: true,\n                      size: \"sm\",\n                      onClick: () => this.remove(index),\n                      children: \"remove\"\n                    }, void 0, false, {\n                      fileName: _jsxFileName,\n                      lineNumber: 116,\n                      columnNumber: 37\n                    }, this), /*#__PURE__*/_jsxDEV(Input, {\n                      className: \"text-center\",\n                      placeholder: \"qty\",\n                      value: this.state.count,\n                      style: {\n                        width: '50%',\n                        display: 'inline-block'\n                      }\n                    }, void 0, false, {\n                      fileName: _jsxFileName,\n                      lineNumber: 117,\n                      columnNumber: 37\n                    }, this), /*#__PURE__*/_jsxDEV(Button, {\n                      outline: true,\n                      size: \"sm\",\n                      color: \"primary\",\n                      onClick: () => this.add(index),\n                      children: \"add\"\n                    }, void 0, false, {\n                      fileName: _jsxFileName,\n                      lineNumber: 118,\n                      columnNumber: 37\n                    }, this)]\n                  }, void 0, true, {\n                    fileName: _jsxFileName,\n                    lineNumber: 115,\n                    columnNumber: 33\n                  }, this)]\n                }, void 0, true, {\n                  fileName: _jsxFileName,\n                  lineNumber: 112,\n                  columnNumber: 29\n                }, this)\n              }, void 0, false, {\n                fileName: _jsxFileName,\n                lineNumber: 111,\n                columnNumber: 29\n              }, this), /*#__PURE__*/_jsxDEV(ModalFooter, {\n                className: \"d-flex justify-content-between\",\n                children: [/*#__PURE__*/_jsxDEV(Button, {\n                  className: \"d-flex justify-content-center\",\n                  outline: true,\n                  color: \"secondary\",\n                  onClick: this.toggle,\n                  children: \"Continue Shopping\"\n                }, void 0, false, {\n                  fileName: _jsxFileName,\n                  lineNumber: 123,\n                  columnNumber: 33\n                }, this), /*#__PURE__*/_jsxDEV(Link, {\n                  to: \"/cart\",\n                  style: {\n                    textDecoration: 'none'\n                  },\n                  children: [/*#__PURE__*/_jsxDEV(Button, {\n                    className: \"d-flex justify-content-center\",\n                    color: \"warning\",\n                    onClick: () => this.addtoCart(item.name, item.img, item.price),\n                    children: \"Go to shopping cart\"\n                  }, void 0, false, {\n                    fileName: _jsxFileName,\n                    lineNumber: 125,\n                    columnNumber: 37\n                  }, this), ' ']\n                }, void 0, true, {\n                  fileName: _jsxFileName,\n                  lineNumber: 124,\n                  columnNumber: 33\n                }, this)]\n              }, void 0, true, {\n                fileName: _jsxFileName,\n                lineNumber: 122,\n                columnNumber: 29\n              }, this)]\n            }, void 0, true, {\n              fileName: _jsxFileName,\n              lineNumber: 109,\n              columnNumber: 29\n            }, this)]\n          }, void 0, true, {\n            fileName: _jsxFileName,\n            lineNumber: 104,\n            columnNumber: 25\n          }, this)]\n        }, void 0, true, {\n          fileName: _jsxFileName,\n          lineNumber: 102,\n          columnNumber: 21\n        }, this)\n      }, void 0, false, {\n        fileName: _jsxFileName,\n        lineNumber: 101,\n        columnNumber: 21\n      }, this);\n    });\n  }\n\n  render() {\n    console.log(\"props\", this.props);\n\n    if (this.state.redirect == true) {\n      return /*#__PURE__*/_jsxDEV(Redirect, {\n        to: \"/login\"\n      }, void 0, false, {\n        fileName: _jsxFileName,\n        lineNumber: 138,\n        columnNumber: 20\n      }, this);\n    }\n\n    return /*#__PURE__*/_jsxDEV(\"div\", {\n      className: \"container-fluid\",\n      children: [/*#__PURE__*/_jsxDEV(\"h1\", {\n        children: \"Homepage\"\n      }, void 0, false, {\n        fileName: _jsxFileName,\n        lineNumber: 142,\n        columnNumber: 17\n      }, this), /*#__PURE__*/_jsxDEV(\"div\", {\n        children: /*#__PURE__*/_jsxDEV(\"div\", {\n          style: {\n            display: 'none'\n          },\n          innerRef: el => this.toast = el,\n          children: /*#__PURE__*/_jsxDEV(Toast, {\n            children: [/*#__PURE__*/_jsxDEV(ToastHeader, {\n              children: \"Successfully adding to cart\"\n            }, void 0, false, {\n              fileName: _jsxFileName,\n              lineNumber: 146,\n              columnNumber: 21\n            }, this), /*#__PURE__*/_jsxDEV(ToastBody, {\n              children: \"Just one step closer!\"\n            }, void 0, false, {\n              fileName: _jsxFileName,\n              lineNumber: 149,\n              columnNumber: 21\n            }, this)]\n          }, void 0, true, {\n            fileName: _jsxFileName,\n            lineNumber: 145,\n            columnNumber: 21\n          }, this)\n        }, void 0, false, {\n          fileName: _jsxFileName,\n          lineNumber: 144,\n          columnNumber: 17\n        }, this)\n      }, void 0, false, {\n        fileName: _jsxFileName,\n        lineNumber: 143,\n        columnNumber: 17\n      }, this), /*#__PURE__*/_jsxDEV(\"div\", {\n        className: \"row\",\n        children: this.printCard()\n      }, void 0, false, {\n        fileName: _jsxFileName,\n        lineNumber: 155,\n        columnNumber: 17\n      }, this)]\n    }, void 0, true, {\n      fileName: _jsxFileName,\n      lineNumber: 141,\n      columnNumber: 13\n    }, this);\n  }\n\n}\n\nconst mapStateToProps = ({\n  productReducers,\n  authReducer\n}) => {\n  return { ...productReducers,\n    ...authReducer\n  };\n};\n\nexport default connect(mapStateToProps, {\n  getProductAction\n})(HomePage);","map":{"version":3,"sources":["D:/Course/P/Code/Exam/ujian-frontend-JCWM0506/src/pages/homePage.js"],"names":["React","Component","URL_API","axios","connect","getProductAction","Link","Redirect","Card","CardImg","CardText","CardBody","Modal","Input","Toast","ToastBody","ToastHeader","CardTitle","CardSubtitle","Button","ModalHeader","ModalBody","ModalFooter","HomePage","constructor","props","toggle","id","alert","setState","redirect","modal","state","indexProd","add","index","count","product_list","stock","remove","addtoCart","name","img","price","userID","qty","subtotal","console","log","cart","findIndex","item","push","patch","then","response","data","catch","error","handleToast","toast","style","display","componentDidMount","getProducts","get","printCard","map","width","maxWidth","alignItems","textDecoration","render","el","mapStateToProps","productReducers","authReducer"],"mappings":";AAAA,OAAOA,KAAP,IAAgBC,SAAhB,QAAiC,OAAjC;AACA,SAASC,OAAT,QAAwB,WAAxB;AACA,OAAOC,KAAP,MAAkB,OAAlB;AACA,SAASC,OAAT,QAAwB,aAAxB;AACA,SAASC,gBAAT,QAAiC,yBAAjC;AACA,SAASC,IAAT,EAAeC,QAAf,QAA+B,kBAA/B;AACA,SACIC,IADJ,EACUC,OADV,EACmBC,QADnB,EAC6BC,QAD7B,EACuCC,KADvC,EAC8CC,KAD9C,EACqDC,KADrD,EAC4DC,SAD5D,EACuEC,WADvE,EAEIC,SAFJ,EAEeC,YAFf,EAE6BC,MAF7B,EAEqCC,WAFrC,EAEkDC,SAFlD,EAE6DC,WAF7D,QAGS,YAHT;;;AAMA,MAAMC,QAAN,SAAuBtB,SAAvB,CAAiC;AAC7BuB,EAAAA,WAAW,CAACC,KAAD,EAAQ;AACf,UAAMA,KAAN;;AADe,SAyBnBC,MAzBmB,GAyBV,MAAM;AACX,UAAI,KAAKD,KAAL,CAAWE,EAAX,KAAkB,IAAtB,EAA4B;AACxBC,QAAAA,KAAK,CAAC,aAAD,CAAL;AACA,aAAKC,QAAL,CAAc;AAACC,UAAAA,QAAQ,EAAE;AAAX,SAAd;AACH,OAHD,MAIK;AACD,aAAKD,QAAL,CAAc;AAAEE,UAAAA,KAAK,EAAE,CAAC,KAAKC,KAAL,CAAWD;AAArB,SAAd;AACA,aAAKF,QAAL,CAAc;AAAEI,UAAAA,SAAS,EAAE,CAAC,KAAKD,KAAL,CAAWD;AAAzB,SAAd;AACH;AACJ,KAlCkB;;AAAA,SAoCnBG,GApCmB,GAoCZC,KAAD,IAAW;AACb,UAAI,KAAKH,KAAL,CAAWI,KAAX,GAAmB,KAAKX,KAAL,CAAWY,YAAX,CAAwBF,KAAxB,EAA+BG,KAAtD,EAA6D;AACzD,aAAKT,QAAL,CAAcG,KAAK,KAAK;AACpBI,UAAAA,KAAK,EAAEJ,KAAK,CAACI,KAAN,GAAc;AADD,SAAL,CAAnB;AAGH,OAJD,MAKK;AACDR,QAAAA,KAAK,CAAC,kBAAD,CAAL;AACH;AACJ,KA7CkB;;AAAA,SA+CnBW,MA/CmB,GA+CV,MAAM;AACX,UAAI,KAAKP,KAAL,CAAWI,KAAX,GAAmB,CAAvB,EAA2B;AACvB,aAAKP,QAAL,CAAc;AAACO,UAAAA,KAAK,EAAE,KAAKJ,KAAL,CAAWI,KAAX,GAAmB;AAA3B,SAAd;AACH;AACJ,KAnDkB;;AAAA,SAqDnBI,SArDmB,GAqDP,CAACC,IAAD,EAAOC,GAAP,EAAYC,KAAZ,KAAsB;AAC9B,UAAIC,MAAM,GAAG,KAAKnB,KAAL,CAAWE,EAAxB;AACA,UAAIkB,GAAG,GAAG,KAAKb,KAAL,CAAWI,KAArB;AACA,UAAIU,QAAQ,GAAGD,GAAG,GAAGF,KAArB;AACAI,MAAAA,OAAO,CAACC,GAAR,CAAY,aAAZ,EAA2BJ,MAA3B,EAAmCH,IAAnC,EAAyCC,GAAzC,EAA8CG,GAA9C,EAAmDC,QAAnD;AACA,UAAIG,IAAI,GAAG,KAAKxB,KAAL,CAAWwB,IAAtB;AACA,UAAId,KAAK,GAAGc,IAAI,CAACC,SAAL,CAAeC,IAAI,IAAIA,IAAI,CAACV,IAAL,KAAcA,IAArC,CAAZ;AACAM,MAAAA,OAAO,CAACC,GAAR,CAAY,WAAZ,EAAyBb,KAAzB;;AACA,UAAIA,KAAK,GAAG,CAAC,CAAb,EAAgB;AACZc,QAAAA,IAAI,CAACd,KAAD,CAAJ,CAAYU,GAAZ,IAAmBA,GAAnB;AACH,OAFD,MAGK;AACDI,QAAAA,IAAI,CAACG,IAAL,CAAU;AACNR,UAAAA,MADM;AACEH,UAAAA,IADF;AACQC,UAAAA,GADR;AACaG,UAAAA,GADb;AACkBC,UAAAA;AADlB,SAAV;AAGH;;AACD3C,MAAAA,KAAK,CAACkD,KAAN,CAAYnD,OAAO,GAAE,UAAS0C,MAAO,EAArC,EAAwC;AACpCK,QAAAA,IAAI,EAAE,KAAKxB,KAAL,CAAWwB;AADmB,OAAxC,EAGCK,IAHD,CAGMC,QAAQ,IAAI;AACdR,QAAAA,OAAO,CAACC,GAAR,CAAYO,QAAQ,CAACC,IAArB;AACH,OALD,EAMCC,KAND,CAMOC,KAAK,IAAI;AACZX,QAAAA,OAAO,CAACC,GAAR,CAAY,OAAZ,EAAqBU,KAArB;AACH,OARD,EAhB8B,CAyB9B;AACH,KA/EkB;;AAAA,SAiFnBC,WAjFmB,GAiFL,MAAM;AAChB,WAAKC,KAAL,CAAWC,KAAX,CAAiBC,OAAjB,GAA2B,OAA3B;AACH,KAnFkB;;AAEf,SAAK9B,KAAL,GAAa;AACTD,MAAAA,KAAK,EAAE,KADE;AAETK,MAAAA,KAAK,EAAE,CAFE;AAGTN,MAAAA,QAAQ,EAAE,KAHD;AAITG,MAAAA,SAAS,EAAE,CAAC;AAJH,KAAb;AAMH;;AAED8B,EAAAA,iBAAiB,GAAG;AAChB,SAAKC,WAAL;AACH;;AAEDA,EAAAA,WAAW,GAAG;AACV7D,IAAAA,KAAK,CAAC8D,GAAN,CAAU/D,OAAO,GAAE,WAAnB,EACCoD,IADD,CACMC,QAAQ,IAAI;AACdR,MAAAA,OAAO,CAACC,GAAR,CAAY,cAAZ,EAA4BO,QAAQ,CAACC,IAArC;AACA,WAAK/B,KAAL,CAAWpB,gBAAX,CAA4BkD,QAAQ,CAACC,IAArC;AACH,KAJD,EAKCC,KALD,CAKOC,KAAK,IAAI;AACZX,MAAAA,OAAO,CAACC,GAAR,CAAYU,KAAZ;AACH,KAPD;AAQH;;AA8DDQ,EAAAA,SAAS,GAAG;AACR,WAAO,KAAKzC,KAAL,CAAWY,YAAX,CAAwB8B,GAAxB,CAA4B,CAAChB,IAAD,EAAOhB,KAAP,KAAiB;AAChD,0BAAQ;AAAK,QAAA,SAAS,EAAC,gBAAf;AAAA,+BACA,QAAC,IAAD;AAAA,kCACI,QAAC,OAAD;AAAS,YAAA,KAAK,EAAC,KAAf;AAAqB,YAAA,GAAG,EAAEgB,IAAI,CAACT,GAA/B;AAAoC,YAAA,GAAG,EAAC;AAAxC;AAAA;AAAA;AAAA;AAAA,kBADJ,eAEI,QAAC,QAAD;AAAA,oCACA,QAAC,SAAD;AAAW,cAAA,GAAG,EAAC,IAAf;AAAA,wBAAqBS,IAAI,CAACV;AAA1B;AAAA;AAAA;AAAA;AAAA,oBADA,eAEA,QAAC,YAAD;AAAc,cAAA,GAAG,EAAC,IAAlB;AAAuB,cAAA,SAAS,EAAC,iBAAjC;AAAA,wCAA+DU,IAAI,CAACR,KAApE;AAAA;AAAA;AAAA;AAAA;AAAA,oBAFA,eAGA,QAAC,YAAD;AAAc,cAAA,GAAG,EAAC,IAAlB;AAAuB,cAAA,SAAS,EAAC,iBAAjC;AAAA,oCAA2DQ,IAAI,CAACb,KAAhE;AAAA;AAAA;AAAA;AAAA;AAAA,oBAHA,eAII,QAAC,MAAD;AAAQ,cAAA,KAAK,EAAC,SAAd;AAAwB,cAAA,KAAK,MAA7B;AAA8B,cAAA,OAAO,EAAE,KAAKZ,MAA5C;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,oBAJJ,eAKI,QAAC,KAAD;AAAO,cAAA,IAAI,EAAC,IAAZ;AAAiB,cAAA,MAAM,EAAE,KAAKM,KAAL,CAAWD,KAApC;AAA2C,cAAA,MAAM,EAAE,KAAKL,MAAxD;AAAgE,cAAA,KAAK,EAAE;AAAC0C,gBAAAA,KAAK,EAAE;AAAR,eAAvE;AAAA,sCACA,QAAC,WAAD;AAAa,gBAAA,MAAM,EAAE,KAAK1C,MAA1B;AAAkC,gBAAA,QAAQ,EAAC,GAA3C;AAAA,mCAAoDyB,IAAI,CAACV,IAAzD;AAAA;AAAA;AAAA;AAAA;AAAA,sBADA,eAEA,QAAC,SAAD;AAAA,uCACA;AAAK,kBAAA,SAAS,EAAC,mDAAf;AAAA,0CACA;AAAK,oBAAA,GAAG,EAAEU,IAAI,CAACT,GAAf;AAAoB,oBAAA,KAAK,EAAE;AAAC2B,sBAAAA,QAAQ,EAAE;AAAX;AAA3B;AAAA;AAAA;AAAA;AAAA,0BADA,eAEA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,0BAFA,eAGI;AAAM,oBAAA,KAAK,EAAE;AAACD,sBAAAA,KAAK,EAAE,KAAR;AAAeN,sBAAAA,OAAO,EAAE,MAAxB;AAAgCQ,sBAAAA,UAAU,EAAC;AAA3C,qBAAb;AAAA,4CACI,QAAC,MAAD;AAAQ,sBAAA,OAAO,MAAf;AAAgB,sBAAA,IAAI,EAAC,IAArB;AAA0B,sBAAA,OAAO,EAAE,MAAM,KAAK/B,MAAL,CAAYJ,KAAZ,CAAzC;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,4BADJ,eAEI,QAAC,KAAD;AAAO,sBAAA,SAAS,EAAC,aAAjB;AAA+B,sBAAA,WAAW,EAAC,KAA3C;AAAiD,sBAAA,KAAK,EAAE,KAAKH,KAAL,CAAWI,KAAnE;AAA0E,sBAAA,KAAK,EAAE;AAACgC,wBAAAA,KAAK,EAAE,KAAR;AAAeN,wBAAAA,OAAO,EAAC;AAAvB;AAAjF;AAAA;AAAA;AAAA;AAAA,4BAFJ,eAGI,QAAC,MAAD;AAAQ,sBAAA,OAAO,MAAf;AAAgB,sBAAA,IAAI,EAAC,IAArB;AAA0B,sBAAA,KAAK,EAAC,SAAhC;AAA0C,sBAAA,OAAO,EAAE,MAAM,KAAK5B,GAAL,CAASC,KAAT,CAAzD;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,4BAHJ;AAAA;AAAA;AAAA;AAAA;AAAA,0BAHJ;AAAA;AAAA;AAAA;AAAA;AAAA;AADA;AAAA;AAAA;AAAA;AAAA,sBAFA,eAaA,QAAC,WAAD;AAAa,gBAAA,SAAS,EAAC,gCAAvB;AAAA,wCACI,QAAC,MAAD;AAAQ,kBAAA,SAAS,EAAC,+BAAlB;AAAkD,kBAAA,OAAO,MAAzD;AAA0D,kBAAA,KAAK,EAAC,WAAhE;AAA4E,kBAAA,OAAO,EAAE,KAAKT,MAA1F;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,wBADJ,eAEI,QAAC,IAAD;AAAM,kBAAA,EAAE,EAAC,OAAT;AAAiB,kBAAA,KAAK,EAAE;AAAC6C,oBAAAA,cAAc,EAAE;AAAjB,mBAAxB;AAAA,0CACI,QAAC,MAAD;AAAQ,oBAAA,SAAS,EAAC,+BAAlB;AAAkD,oBAAA,KAAK,EAAC,SAAxD;AAAkE,oBAAA,OAAO,EAAE,MAAM,KAAK/B,SAAL,CAAeW,IAAI,CAACV,IAApB,EAA0BU,IAAI,CAACT,GAA/B,EAAoCS,IAAI,CAACR,KAAzC,CAAjF;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,0BADJ,EACmK,GADnK;AAAA;AAAA;AAAA;AAAA;AAAA,wBAFJ;AAAA;AAAA;AAAA;AAAA;AAAA,sBAbA;AAAA;AAAA;AAAA;AAAA;AAAA,oBALJ;AAAA;AAAA;AAAA;AAAA;AAAA,kBAFJ;AAAA;AAAA;AAAA;AAAA;AAAA;AADA;AAAA;AAAA;AAAA;AAAA,cAAR;AA+BH,KAhCM,CAAP;AAiCH;;AAED6B,EAAAA,MAAM,GAAG;AACLzB,IAAAA,OAAO,CAACC,GAAR,CAAY,OAAZ,EAAqB,KAAKvB,KAA1B;;AACA,QAAI,KAAKO,KAAL,CAAWF,QAAX,IAAuB,IAA3B,EAAiC;AAC7B,0BAAO,QAAC,QAAD;AAAU,QAAA,EAAE,EAAC;AAAb;AAAA;AAAA;AAAA;AAAA,cAAP;AACH;;AACD,wBACI;AAAK,MAAA,SAAS,EAAC,iBAAf;AAAA,8BACI;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,cADJ,eAEI;AAAA,+BACA;AAAK,UAAA,KAAK,EAAE;AAACgC,YAAAA,OAAO,EAAE;AAAV,WAAZ;AAA+B,UAAA,QAAQ,EAAEW,EAAE,IAAI,KAAKb,KAAL,GAAaa,EAA5D;AAAA,iCACI,QAAC,KAAD;AAAA,oCACA,QAAC,WAAD;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,oBADA,eAIA,QAAC,SAAD;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,oBAJA;AAAA;AAAA;AAAA;AAAA;AAAA;AADJ;AAAA;AAAA;AAAA;AAAA;AADA;AAAA;AAAA;AAAA;AAAA,cAFJ,eAcI;AAAK,QAAA,SAAS,EAAC,KAAf;AAAA,kBACK,KAAKP,SAAL;AADL;AAAA;AAAA;AAAA;AAAA,cAdJ;AAAA;AAAA;AAAA;AAAA;AAAA,YADJ;AAqBH;;AApJ4B;;AAuJjC,MAAMQ,eAAe,GAAG,CAAC;AAAEC,EAAAA,eAAF;AAAmBC,EAAAA;AAAnB,CAAD,KAAsC;AAC1D,SAAO,EACH,GAAGD,eADA;AAEH,OAAGC;AAFA,GAAP;AAIH,CALD;;AAOA,eAAexE,OAAO,CAACsE,eAAD,EAAkB;AAACrE,EAAAA;AAAD,CAAlB,CAAP,CAA6CkB,QAA7C,CAAf","sourcesContent":["import React, { Component } from 'react';\r\nimport { URL_API } from '../helper';\r\nimport axios from 'axios';\r\nimport { connect } from 'react-redux';\r\nimport { getProductAction } from '../action/productAction'\r\nimport { Link, Redirect } from 'react-router-dom';\r\nimport {\r\n    Card, CardImg, CardText, CardBody, Modal, Input, Toast, ToastBody, ToastHeader,\r\n    CardTitle, CardSubtitle, Button, ModalHeader, ModalBody, ModalFooter\r\n  } from 'reactstrap';\r\n\r\n\r\nclass HomePage extends Component {\r\n    constructor(props) {\r\n        super(props);\r\n        this.state = {  \r\n            modal: false,\r\n            count: 1,\r\n            redirect: false,\r\n            indexProd: -1\r\n        }\r\n    }\r\n\r\n    componentDidMount() {\r\n        this.getProducts()\r\n    }\r\n\r\n    getProducts() {\r\n        axios.get(URL_API+`/products`)\r\n        .then(response => {\r\n            console.log(\"product list\", response.data)\r\n            this.props.getProductAction(response.data)\r\n        })\r\n        .catch(error => {\r\n            console.log(error)\r\n        })\r\n    }\r\n\r\n    toggle = () => {\r\n        if (this.props.id === null) {\r\n            alert('Login first')\r\n            this.setState({redirect: true})\r\n        }\r\n        else {\r\n            this.setState({ modal: !this.state.modal })\r\n            this.setState({ indexProd: !this.state.modal })\r\n        }\r\n    }\r\n\r\n    add = (index) => {\r\n        if (this.state.count < this.props.product_list[index].stock) {\r\n            this.setState(state => ({\r\n                count: state.count + 1\r\n            }))\r\n        }\r\n        else {\r\n            alert('Stock not enough')\r\n        }\r\n    }\r\n\r\n    remove = () => {\r\n        if (this.state.count > 1 ) {\r\n            this.setState({count: this.state.count - 1})\r\n        }\r\n    }\r\n\r\n    addtoCart = (name, img, price) => {\r\n        let userID = this.props.id\r\n        let qty = this.state.count\r\n        let subtotal = qty * price\r\n        console.log('Add to Cart', userID, name, img, qty, subtotal)\r\n        let cart = this.props.cart\r\n        let index = cart.findIndex(item => item.name === name)\r\n        console.log('Findindex', index)\r\n        if (index > -1) {\r\n            cart[index].qty += qty\r\n        }\r\n        else {\r\n            cart.push({\r\n                userID, name, img, qty, subtotal\r\n            })\r\n        }\r\n        axios.patch(URL_API+`/users/${userID}`, {\r\n            cart: this.props.cart\r\n        })\r\n        .then(response => {\r\n            console.log(response.data)\r\n        })\r\n        .catch(error => {\r\n            console.log(\"Error\", error)\r\n        })\r\n        // this.handleToast()\r\n    }\r\n\r\n    handleToast = () => {\r\n        this.toast.style.display = 'block'\r\n    }\r\n\r\n    printCard() {\r\n        return this.props.product_list.map((item, index) => {\r\n            return  <div className=\"col-md-3 col-6\">\r\n                    <Card>\r\n                        <CardImg width=\"100\" src={item.img} alt=\"Card image cap\" />\r\n                        <CardBody>\r\n                        <CardTitle tag=\"h5\">{item.name}</CardTitle>\r\n                        <CardSubtitle tag=\"h6\" className=\"mb-2 text-muted\">Price: IDR {item.price}</CardSubtitle>\r\n                        <CardSubtitle tag=\"h6\" className=\"mb-2 text-muted\">Stock: {item.stock}</CardSubtitle>\r\n                            <Button color=\"warning\" block onClick={this.toggle}>Add to cart</Button>\r\n                            <Modal size=\"lg\" isOpen={this.state.modal} toggle={this.toggle} style={{width: '70%'}}>\r\n                            <ModalHeader toggle={this.toggle} charCode=\"x\">Add {item.name} to cart, define quantity</ModalHeader>\r\n                            <ModalBody>\r\n                            <div className=\"d-flex justify-content-between align-items-center\">\r\n                            <img src={item.img} style={{maxWidth: '100px'}}></img>\r\n                            <span>Total qty:</span>

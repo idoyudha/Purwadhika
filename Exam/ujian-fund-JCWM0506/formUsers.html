@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORM USERS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1>FORM USERS</h1>
+        <form>
+            <input type="text" placeholder="username" id="username">
+            <input type="email" placeholder="email" id="email">
+            <label for="role">role</label>
+            <select name="role" id="role">
+                <option value="-1">select role</option>
+                <option value="user">user</option>
+                <option value="admin">admin</option>
+            </select>
+        </form><br>
+        <input type="button" value="ADD USER" onclick="addData()"><br><br>
+        <h1>USERS DATA</h1>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="result">
+
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    user = []
+
+    class userData {
+        constructor(_username,_email,_role,) {
+            this.username = _username
+            this.email = _email
+            this.role = _role
+        }
+    }
+
+    function addData() {
+        let username = document.getElementById('username').value 
+        let email = document.getElementById('email').value
+        let role = document.getElementById('role').value 
+        
+        user.push(new userData(username, email, role))
+        console.log(user)
+
+        document.getElementById('username').value = null
+        document.getElementById('email').value = null
+        document.getElementById('role').value = -1
+
+        printUser()
+    }
+
+    function printUser(id, dataoutput = user) {
+        let data = user.map((item, index) => {
+            if (id == index) {
+                return `<tr>
+                        <td>#</td>
+                        <td><input id="newUsername" type="text" value="${item.username}"></td>
+                        <td><input id="newEmail" type="text" value="${item.email}"></td>
+                        <td><select name="role" id="newRole">
+                            <option value="-1">select role</option>
+                            <option value="user" ${GenerateOption(item.role, 'user')} >user</option>
+                            <option value="admin" ${GenerateOption(item.role, 'admin')}>admin</option>
+                        </select></td>
+                        <td><input type="button" value="Save" onclick="saveData(${index})"><input type="button" value="Cancel" onclick="cancelData()"></td>
+                    </tr>`
+            }
+            else {
+                return `<tr>
+                        <td>${index + 1}</td>
+                        <td>${item.username}</td>
+                        <td>${item.email}</td>
+                        <td>${item.role}</td>
+                        <td><input type="button" value="Edit" onclick="editData(${index})"><input type="button" value="Delete" onclick="deleteData(${index})"></td>
+                    </tr>`
+            }
+        })
+        document.getElementById('result').innerHTML = data.join('')
+    }
+
+    function deleteData (id) {
+        let conf = confirm("User data will be edited after this confirmation")
+
+        if (conf == true) {
+            user.splice(id,1)
+        }
+        
+        printUser()
+    }
+
+    function editData(id) {
+        printUser(id)
+    }
+
+    function cancelData() {
+        printUser()
+    }
+
+    function saveData(id) {
+        let newUsername = document.getElementById('newUsername').value 
+        let newEmail = document.getElementById('newEmail').value 
+        let newRole = document.getElementById('newRole').value
+
+        let conf = confirm("User data will be edited after this confirmation")
+
+        if (conf == true) {
+            user[id].username = newUsername
+            user[id].email = newEmail
+            user[id].role = newRole
+
+            console.log(user)
+            printUser()
+        }
+    }
+
+    function GenerateOption(item, valHTML) {
+        if (item === valHTML) {
+            return `selected`
+        }
+        else {
+            return ``
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,36 @@
+header {
+    border-bottom: 1px solid grey;
+}
+
+.col-4 > a {
+    color: gray;
+}
+
+.py-1 > nav {
+    overflow: auto;
+}
+
+.carousel-item > img {
+    height: 500px;
+    object-fit: cover;
+}
+
+.jumbotron {
+    background: transparent;
+}
+
+.pagination { 
+    margin-bottom: 2rem;
+}
+.pagination > .btn {
+    border-radius: 2rem;
+    margin-right: 10px;
+}
+
+footer {
+    text-align: center;
+    width: 100%;
+    color: #999;
+    background-color: #f9f9f9;
+    padding: 20px 0;
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIBONACCI</title>
+</head>
+<body>
+    <h1>DERET FIBONACCI</h1>
+    <label for="fibo">Masukkan Angka:</label>
+    <input type="number" name="fibo" id="fibo" placeholder="masukkan angka"><br><br>
+    <input type="button" value="SHOW" onclick="show()"><input type="button" value="GANJIL" onclick="ganjil()"><input type="button" value="GENAP" onclick="genap()"><br><br>
+
+    <h1>RESULT:</h1>
+    <div id="result">
+
+    </div>
+</body>
+<script>
+    let n1 = 0
+    let n2 = 1
+    let fibonacci = [n1, n2]
+    function show() {
+        let num = document.getElementById('fibo').value 
+        console.log(num)
+        for (i=0; i<num-2; i++) {
+            let n3 = fibonacci[i] + fibonacci[i+1]
+            fibonacci.push(n3)
+
+        }
+        let newFibonacci = fibonacci
+        var index = newFibonacci.findIndex(function (element) { 
+            return element > num; 
+        });
+
+        let fibonacciFinal = fibonacci.slice(0, index)
+        console.log(fibonacciFinal)
+        
+        document.getElementById('result').innerHTML = fibonacciFinal
+        document.getElementById('fibo').value = null
+        fibonacci = fibonacciFinal
+    }
+
+    function ganjil() {
+        let listGanjil = fibonacci.filter(num => num % 2 == 1)
+        console.log(listGanjil)
+        const reducer = (a, b) => a + b 
+        let totalGanjil = listGanjil.reduce(reducer)
+        document.getElementById('result').innerHTML = `${listGanjil.join('+')} = ${totalGanjil}`
+    }
+
+    function genap() {
+        let listGenap = fibonacci.filter(num => num % 2 == 0)
+        console.log(listGenap)
+        const reducer = (a, b) => a + b 
+        let totalGenap = listGenap.reduce(reducer)
+        document.getElementById('result').innerHTML = `${listGenap.join('+')} = ${totalGenap}`
+    }
+</script>
+</html>

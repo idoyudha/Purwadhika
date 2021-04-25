@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patter</title>
+</head>
+<body>
+    <h1>PATTERN</h1>
+    <input type="number" id="input" min=0 max=4 placeholder="masukkan angka" style="width: 200px;"><br><br>
+    <input type="button" value="GANJIL" onclick="ganjil()"><input type="button" value="HURUF" onclick="huruf()"><br><br>
+
+    <div id="result">
+
+    </div>
+</body>
+<script>
+    function ganjil() {
+        let num = document.getElementById('input').value
+        console.log(num)
+        str = ''
+        count = 1
+        for (i=0; i<num; i++) {
+            for (j=0; j<=i; j++) {
+                str += count.toString() + ' '
+                count += 2
+            }
+            str += '<br>'
+        }
+        console.log(str)
+        document.getElementById('result').innerHTML = str
+
+    }
+    
+    function huruf() {
+        let num = document.getElementById('input').value
+        console.log(num)
+        str = ''
+        charCode = 66
+        for (i=0; i<num; i++) {
+            for (j=0; j<=i; j++) {
+                str += String.fromCharCode(charCode) + ' '
+                charCode += 2
+            }
+            str += '<br>'
+        }
+        console.log(str)
+        document.getElementById('result').innerHTML = str
+
+    }
+</script>
+</html>

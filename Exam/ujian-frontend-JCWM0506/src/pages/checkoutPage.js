@@ -46,7 +46,7 @@ class CheckoutPage extends Component {
 
     payOrder = () => {
         let id = localStorage.getItem('tkn_id')
-        if (this.pay.textContent == "PAY!") {
+        if (this.pay.textContent == "PAID") {
             this.pay.textContent = "UNPAID"
             this.pay.style.backgroundColor = "red"
             this.props.order_summary.status = "PAID"
@@ -121,7 +121,7 @@ class CheckoutPage extends Component {
                                     </tr>
                                 </thead>
                                 <tbody> 
-                                    {this.printModal()}
+                                    {/* {this.printModal()} */}
                                 </tbody>
                             </Table>
                             </ModalBody>

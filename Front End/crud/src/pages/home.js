@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import TableComponent from '../components/table';
-import { Button } from 'reactstrap';
+import { Button, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import ModalProductComp from '../components/modalProduct';
 import axios from 'axios';
 import { URL_API } from '../url';
-import { getDataProduct, getProductAction } from '../actions/productAction';
+import { getDataProduct, getProductAction, sortByStatus } from '../actions/productAction';
 import { useDispatch } from 'react-redux';
 
 const HomePage = () => {
@@ -15,6 +15,9 @@ const HomePage = () => {
     const toggle = () => {
         setModal(!modal)
     }
+    
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const toggleDropdow = () => setDropdownOpen(prevState => !prevState);
     
     const dispatch = useDispatch()
 
@@ -35,9 +38,28 @@ const HomePage = () => {
       })
     }
 
+    const sortAsc = () => {
+      dispatch(sortByStatus("asc"))
+    }
+
+    const sortDesc = () => {
+      dispatch(sortByStatus("desc"))
+    }
+
     return (
         <div className="container-fluid">
+          <div className="row">
             <Button color="primary" onClick={toggle}>Add Product</Button>
+            <Dropdown isOpen={dropdownOpen} toggle={toggleDropdow}>
+            <DropdownToggle caret>
+              Sort Status
+            </DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem onClick={sortAsc}>Ascending</DropdownItem>
+              <DropdownItem onClick={sortDesc}>Descending</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+          </div>
             <ModalProductComp toggle={toggle} modal={modal} />
             <TableComponent/>
         </div>

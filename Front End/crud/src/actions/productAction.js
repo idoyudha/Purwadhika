@@ -16,6 +16,22 @@ export const getProductAction = () => {
     }
 }
 
+export const sortByStatus = (parameter) => {
+    return (dispatch) => {
+        axios.get(`http://localhost:2020/products?_sort=status&_order=${parameter}`)
+        .then(response => {
+            console.log('Data product', response.data)
+            dispatch({
+                type: "GET_PRODUCTS",
+                payload: response.data
+            })
+        })
+        .catch(error => {
+            console.log('Error get product',error)
+        })
+    }
+}
+
 export const getDataProduct = (data) => {
     console.log('Product Data goto Action from component', data)
     return {

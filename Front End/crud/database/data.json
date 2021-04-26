@@ -6,7 +6,8 @@
       "price": "4000000",
       "stock": "4",
       "images": "https://ae01.alicdn.com/kf/HTB1MaYFXBSD3KVjSZFqq6A4bpXal/Digunakan-asli-Sony-Alpha-A5000-Mirrorless-Kamera-16-50-Mm-OSS-Lensa-Opsional-Tidak-Penuh-Baru.jpg_Q90.jpg_.webp",
-      "id": 2
+      "id": 2,
+      "status": "Almost running out"
     },
     {
       "name": "iPhone",
@@ -14,7 +15,8 @@
       "price": "4000000",
       "stock": "12",
       "images": "https://www.zistore.id/wp-content/uploads/2020/12/iphone-12-blue-select-2020.png",
-      "id": 3
+      "id": 3,
+      "status": "Available"
     },
     {
       "name": "Macbook oraPro",
@@ -22,7 +24,26 @@
       "price": "35000000",
       "stock": "5",
       "images": "https://photos5.appleinsider.com/gallery/26909-39215-macbook-pro-13-inch-touch-bar-review00017-xl.jpg",
-      "id": 4
+      "id": 4,
+      "status": "Almost running out"
+    },
+    {
+      "name": "Headlamp",
+      "category": "Fashion",
+      "price": "500",
+      "stock": "10",
+      "images": "https://unclewiener.com/wp-content/uploads/2017/08/1-13.jpg",
+      "id": 5,
+      "status": "Almost running out"
+    },
+    {
+      "name": "Pfizer Vaccine",
+      "category": "Cure",
+      "price": "900",
+      "stock": "0",
+      "images": "https://images.hindustantimes.com/img/2021/04/25/550x309/coronavirus-illustration-displayed-sticker-medical-labeled-syringe_7707d2f2-440d-11eb-821f-5ee837a10748_1619309542589.jpg",
+      "status": "Not available",
+      "id": 6
     }
   ]
 }

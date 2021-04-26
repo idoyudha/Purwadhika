@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
-import { updateProductAction } from '../actions/productAction';
+import { updateProductAction, getProductAction } from '../actions/productAction';
 
 
 const ModalProductComp = ({ toggle, modal }) => {
@@ -18,6 +18,7 @@ const ModalProductComp = ({ toggle, modal }) => {
   const [category, setCategory] = useState("Fashion")
   const [stock, setStock] = useState(null)
   const [price, setPrice] = useState(null)
+  const [status, setStatus] = useState("")
 
   // Alert
   const [alertFail, setAlertFail] = useState(false)
@@ -25,19 +26,14 @@ const ModalProductComp = ({ toggle, modal }) => {
 
   const dispatch = useDispatch()
 
-  const inputProduct = () => {
-    console.log('select value'. category)
-    // console.log(inputPict.current.focus())
-    // console.log(inputName.current.focus())
-    // console.log(inputCat.current.focus())
-    // console.log(inputStock.current.focus())
-    if (name !== null && images !== null && category !== null && stock !== null && price !== null) {
+  const postProduct = () => {
+    if (name !== null && images !== null && category !== null && stock !== null && price !== null && status !== "") {
       axios.post(`http://localhost:2020/products`, {
-          name, category, price, stock, images
+          name, category, price, stock, images, status
       })
       .then(response => {
-        console.log(response.data)
-        dispatch(updateProductAction(response.data))
+        console.log('response post', response.data)
+        dispatch(getProductAction())
         setAlertPost(true)
         setTimeout(() => {
           setAlertPost(false)
@@ -54,7 +50,26 @@ const ModalProductComp = ({ toggle, modal }) => {
         setAlertFail(false)
       }, 2000);
     }
-    
+  }
+
+  const inputProduct = () => {
+    console.log('select value'. category)
+    // console.log(inputPict.current.focus())
+    // console.log(inputName.current.focus())
+    // console.log(inputCat.current.focus())
+    // console.log(inputStock.current.focus())
+    if (stock > 10) {
+      setStatus('Available')
+      postProduct()
+    }
+    else if (stock < 10 && stock > 0) {
+      setStatus('Almost running out') 
+      postProduct()
+    } 
+    else {
+      setStatus('Not available')
+      postProduct()
+    }    
   }
 
   return (

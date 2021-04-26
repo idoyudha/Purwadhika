@@ -24,18 +24,18 @@ const TableComponent = () => {
     }
 
     const printProduct = () => {
-        return product_data.map((item, index) => {
+        console.log(product_data)
+        if (product_data !== []) return product_data.map((item, index) => {
             return <tr>
                         <th>{item.id}</th>
                         <td><img width="170" src={item.images}/></td>
                         <td>{item.name}</td>
                         <td>{item.category}</td>
                         <td>{item.stock}</td>
+                        <td>{item.status}</td>
                         <td>
-                            {item.stock > 10 ? 'Available'
-                            : 0 < item.stock < 10 ? 'Almost': 'Not Available'}
-                        </td>
-                        <td>
+                            <Button color="info">Detail</Button>
+                            <Button color="warning">Update</Button>
                             <Button color="danger" onClick={() => toggle(item.id)}>Delete</Button>
                         </td>
                     </tr>

@@ -1,20 +1,28 @@
 {
   "products": [
     {
-      "name": "Sony Headphone",
-      "id": 1,
-      "category": "Electronics",
-      "price": 7900000,
-      "stock": 12,
-      "images": "https://www.bhphotovideo.com/images/images2500x2500/sony_mdr100abn_p_h_ear_on_wireless_nc_1220500.jpg"
-    },
-    {
       "name": "Sony Alpha A5000",
       "category": "Electronics",
       "price": "4000000",
       "stock": "4",
       "images": "https://ae01.alicdn.com/kf/HTB1MaYFXBSD3KVjSZFqq6A4bpXal/Digunakan-asli-Sony-Alpha-A5000-Mirrorless-Kamera-16-50-Mm-OSS-Lensa-Opsional-Tidak-Penuh-Baru.jpg_Q90.jpg_.webp",
       "id": 2
+    },
+    {
+      "name": "iPhone",
+      "category": "Fashion",
+      "price": "4000000",
+      "stock": "12",
+      "images": "https://www.zistore.id/wp-content/uploads/2020/12/iphone-12-blue-select-2020.png",
+      "id": 3
+    },
+    {
+      "name": "Macbook oraPro",
+      "category": "Electronics",
+      "price": "35000000",
+      "stock": "5",
+      "images": "https://photos5.appleinsider.com/gallery/26909-39215-macbook-pro-13-inch-touch-bar-review00017-xl.jpg",
+      "id": 4
     }
   ]
 }

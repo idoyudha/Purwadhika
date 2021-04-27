@@ -1,5 +1,0 @@
-an class="p">.</span><span class="nx">_g</span><span class="p">);</span> <span class="p">}</span>
-    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_b</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">_b</span> <span class="o">=</span> <span class="nx">mathRound</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_b</span><span class="p">);</span> <span class="p">}</span>
-
-    <span class="k">this</span><span class="p">.</span><span class="nx">_ok</span> <span class="o">=</span> <span class="nx">rgb</span><span class="p">.</span><span class="nx">ok</span><span class="p">;</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">_tc_id</span> <span class="o">=</span> <span cla

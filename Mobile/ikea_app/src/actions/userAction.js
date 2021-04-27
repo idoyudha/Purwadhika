@@ -95,8 +95,10 @@ export const updateCart = (data) => {
 
 export const authLogout = () => {
     console.log('Logout Action')
-    AsyncStorage.localStorage.removaItem("id_tkn")
-    return {
-        type: 'LOGOUT',
+    return (dispatch) => {
+        AsyncStorage.removeItem("id_tkn")
+        dispatch({
+            type: "LOGOUT"
+        })
     }
 }

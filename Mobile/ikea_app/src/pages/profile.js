@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Image, SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Icon } from 'react-native-elements';
 import { authLogout } from '../actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { CommonActions, useNavigation  } from '@react-navigation/native';
 
 
 const DATA = [
@@ -26,7 +27,7 @@ const DATA = [
       title: 'Logout',
       icon: 'log-out',
       page: 'Login',
-      action: {authLogout},
+      action: authLogout(),
     },
 ];
 
@@ -61,6 +62,12 @@ const Item = ({ title, icon, action }) => (
 const ProfilePage = (props) => {
     const dispatch = useDispatch()
 
+    const { iduser } = useSelector(({ userReducer }) => {
+        return {
+            iduser: userReducer.id
+        }
+    })
+
     const redirect = (page, action) => {
         dispatch(action)
         props.navigation.navigate(page)
@@ -69,6 +76,10 @@ const ProfilePage = (props) => {
     const renderItem = ({ item }) => (
         <Item title={item.title} icon={item.icon} action={() => redirect(item.page, item.action)}/>
     );
+
+    useEffect(() => {
+        console.log(iduser)
+    })
 
     return (
         <SafeAreaView style={styles.container}>

@@ -42,12 +42,12 @@ const HomePage = (props) => {
 
     const getProducts = () => {
         axios.get(URL_API + `/products`)
-            .then(res => {
-                console.log("products ==>", res.data)
-                setProducts(res.data)
-            }).catch(err => {
-                console.log(err)
-            })
+        .then(res => {
+            console.log("products ==>", res.data)
+            setProducts(res.data)
+        }).catch(err => {
+            console.log(err)
+        })
     }
 
     const renderProducts = () => {

@@ -13,13 +13,6 @@ export const getUsers = () => {
     }
 }
 
-// fungsi login algorithm
-/**
- * 1. menerima parameter username dan password
- * 2. Jika user ada maka simpan datanya ke reducer dan disimpan di asyncstorage
- * 3. console.log('userNotFOund')
- */
-
 export const onLogin = (username, password) => {
     return (dispatch) => {
         console.log('Data action :', username, password)

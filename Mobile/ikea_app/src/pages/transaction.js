@@ -11,7 +11,7 @@ const TransactionPage = () => {
 
     const [total, setTotal] = useState('') 
     const [date, setDate] = useState('') 
-    const [data, setData] = useState(null) 
+    const [status, setStatus] = useState('') 
     const [cart, setCart] = useState(undefined) 
 
     const { username } = useSelector(({ userReducer }) => {
@@ -35,7 +35,7 @@ const TransactionPage = () => {
       axios.get(URL_API + `/userTransaction?username=${username}`)
       .then(response => {
         console.log('Get cart transaction', response.data[0].cart)
-        setData(response.data[0])
+        setStatus(response.data[0].status)
         setTotal(response.data[0].total)
         setDate(response.data[0].date_transaction)
         setCart(response.data[0].cart)
@@ -57,17 +57,12 @@ const TransactionPage = () => {
                       <Text h4 style={{ marginHorizontal: 10 }}>{item.qty}</Text>
                     </CardItem>
                   </Card>
-
           })
       }
     }
 
     const pay = () => {
-      console.log('bayar')
-    }
-
-    const detail = () => {
-      console.log('detail')
+      console.log('bayar', cart)
     }
 
     return (
@@ -80,6 +75,7 @@ const TransactionPage = () => {
                       <Body>
                           <Text>Total Payment</Text>
                           <Text>IDR. {total}</Text>
+                          <Text>{status}</Text>
                       </Body>
                   </Left>
                   <Right style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>

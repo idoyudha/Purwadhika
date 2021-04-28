@@ -79,6 +79,12 @@ const ProfilePage = (props) => {
 
     useEffect(() => {
         console.log(iduser)
+        if (!iduser) {
+          props.navigation.reset({
+              index: 0,
+              routes: [{ name: 'Login' }],
+          })
+        }
     })
 
     return (

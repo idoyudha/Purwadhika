@@ -1,68 +1,64 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, ImageBackground } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Icon, Avatar, Accessory } from 'react-native-elements';
 import { authLogout } from '../actions';
 import { useDispatch, useSelector } from 'react-redux';
 
-const DATA = [
-    {
-      id: '1',
-      title: 'Change Profile',
-      icon: 'user',
-      page: 'Profile',
-      action: [],
-    },
-    {
-      id: '2',
-      title: 'Transaction',
-      icon: 'shopping-cart',
-      page: 'Transaction',
-      action: [],
-    },
-    {
-      id: '3',
-      title: 'Logout',
-      icon: 'log-out',
-      page: 'Login',
-      action: authLogout(),
-    },
-];
-
-const ABOUT = [
-    {
-      id: '1',
-      title: 'Settings',
-      icon: 'settings',
-      page: 'Settings',
-      action: [],
-    },
-    {
-      id: '2',
-      title: 'Privacy and Policy',
-      icon: 'key',
-      page: 'Privacy',
-      action: [],
-    }
-];
-
-
-const Item = ({ title, icon, action }) => (
-  <View style={styles.item}>
-    <Icon name={icon} type="feather" size={24} iconStyle={{ color: '#000080' }} />
-    <Text style={styles.title}>{title}</Text>
-    <Icon name="arrow-right" type="feather" 
-    style={{ height: hp(5), justifyContent: 'flex-end', marginTop: hp(-2) }}
-    size={20} onPress={action}/>
-  </View>
-);
 
 const ProfilePage = (props) => {
-    const dispatch = useDispatch()
-
-    const { iduser } = useSelector(({ userReducer }) => {
+  const DATA = [
+      {
+        id: '1',
+        title: 'Change Profile',
+        icon: 'user',
+        action: [],
+      },
+      {
+        id: '2',
+        title: 'Transaction',
+        icon: 'shopping-cart',
+        action: () => props.navigation.navigate("Transaction"),
+      },
+      {
+        id: '3',
+        title: 'Logout',
+        icon: 'log-out',
+        action: () => dispatch(authLogout()),
+      },
+  ];
+  
+  const ABOUT = [
+      {
+        id: '1',
+        title: 'Settings',
+        icon: 'settings',
+        action: [],
+      },
+      {
+        id: '2',
+        title: 'Privacy and Policy',
+        icon: 'key',
+        action: [],
+      }
+  ];
+  
+  
+  const Item = ({ title, icon, action }) => (
+    <View style={styles.item}>
+      <Icon name={icon} type="feather" size={24} iconStyle={{ color: '#000080' }} />
+      <Text style={styles.title}>{title}</Text>
+      <Icon name="arrow-right" type="feather" 
+      style={{ height: hp(5), justifyContent: 'flex-end', marginTop: hp(-2) }}
+      size={20} onPress={action}/>
+    </View>
+  );
+  const dispatch = useDispatch()
+    const [picture, setPicture] = useState("https://ohmy.disney.com/wp-content/uploads/2014/10/Q3-Jack-Sparrow.png")
+    const { iduser, username } = useSelector(({ userReducer }) => {
         return {
-            iduser: userReducer.id
+            iduser: userReducer.id,
+            username: userReducer.username
         }
     })
 
@@ -72,7 +68,7 @@ const ProfilePage = (props) => {
     }
 
     const renderItem = ({ item }) => (
-        <Item title={item.title} icon={item.icon} action={() => redirect(item.page, item.action)}/>
+        <Item title={item.title} icon={item.icon} action={item.action}/>
     );
 
     useEffect(() => {
@@ -94,8 +90,7 @@ const ProfilePage = (props) => {
                   containerStyle={{ alignSelf: 'center', marginTop: "25%" }}
                   size={80}
                   source={{
-                    uri:
-                      'https://ohmy.disney.com/wp-content/uploads/2014/10/Q3-Jack-Sparrow.png',
+                    uri: picture,
                   }}
                 >
                   <Avatar.Accessory name="edit"
@@ -103,6 +98,7 @@ const ProfilePage = (props) => {
                     size={25}
                   />
                 </Avatar>
+                <Text style={{ fontSize: 25, marginTop: 10, alignSelf: 'center', color: 'white' }}>{username}</Text>
                 </ImageBackground>
             </View>
         <View>

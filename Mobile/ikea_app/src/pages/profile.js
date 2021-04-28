@@ -53,6 +53,7 @@ const ProfilePage = (props) => {
       size={20} onPress={action}/>
     </View>
   );
+  
   const dispatch = useDispatch()
     const [picture, setPicture] = useState("https://ohmy.disney.com/wp-content/uploads/2014/10/Q3-Jack-Sparrow.png")
     const { iduser, username } = useSelector(({ userReducer }) => {

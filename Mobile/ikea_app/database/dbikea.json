@@ -10,7 +10,16 @@
       "username": "Admin",
       "email": "admin@mail.com",
       "password": "1234",
-      "cart": [],
+      "cart": [
+        {
+          "nama": "LINNEBÄCK",
+          "type": "White",
+          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/334/0933452_PE791908_S4.jpg",
+          "qty": 1,
+          "harga": 995000,
+          "subTotal": 995000
+        }
+      ],
       "role": "admin"
     },
     {
@@ -266,7 +275,7 @@
     {
       "idUser": 1,
       "username": "Admin",
-      "data_transaction": "26/4/2021",
+      "date_transaction": "26/4/2021",
       "cart": [
         {
           "qty": 2,
@@ -285,14 +294,6 @@
           "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/334/0933452_PE791908_S4.jpg"
         },
         {
-          "qty": 3,
-          "nama": "HAUGA V.2",
-          "type": "Black",
-          "harga": 1599000,
-          "subTotal": 4797000,
-          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/557/0955765_PE804101_S4.jpg"
-        },
-        {
           "nama": "IDALINNEA D",
           "type": "L",
           "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/107/0810720_PE771385_S4.jpg",
@@ -304,186 +305,6 @@
       "total": 11138000,
       "status": "unpaid",
       "id": 1
-    },
-    {
-      "idUser": 1,
-      "username": "Admin",
-      "date_transaction": "27/4/2021",
-      "cart": [
-        {
-          "nama": "VARDAGEN",
-          "type": "R25",
-          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/771/0677106_PE718920_S4.jpg",
-          "qty": 1,
-          "harga": 599000,
-          "subTotal": 599000
-        }
-      ],
-      "total": 599000,
-      "status": "unpaid",
-      "id": 2
-    },
-    {
-      "idUser": 1,
-      "username": "Admin",
-      "date_transaction": "27/4/2021",
-      "cart": [
-        {
-          "nama": "LINNEBÄCK",
-          "type": "White",
-          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/334/0933452_PE791908_S4.jpg",
-          "qty": 2,
-          "harga": 995000,
-          "subTotal": 1990000
-        }
-      ],
-      "total": 1990000,
-      "status": "unpaid",
-      "id": 3
-    },
-    {
-      "idUser": 1,
-      "username": "Admin",
-      "date_transaction": "27/4/2021",
-      "cart": [
-        {
-          "nama": "LINNEBÄCK",
-          "type": "White",
-          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/334/0933452_PE791908_S4.jpg",
-          "qty": 2,
-          "harga": 995000,
-          "subTotal": 1990000
-        }
-      ],
-      "total": 1990000,
-      "status": "unpaid",
-      "id": 4
-    },
-    {
-      "idUser": 1,
-      "username": "Admin",
-      "date_transaction": "27/4/2021",
-      "cart": [
-        {
-          "nama": "LINNEBÄCK",
-          "type": "Black",
-          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/334/0933452_PE791908_S4.jpg",
-          "qty": 2,
-          "harga": 995000,
-          "subTotal": 1990000
-        }
-      ],
-      "total": 1990000,
-      "status": "unpaid",
-      "id": 5
-    },
-    {
-      "idUser": 1,
-      "username": "Admin",
-      "date_transaction": "27/4/2021",
-      "cart": [
-        {
-          "nama": "LINNEBÄCK",
-          "type": "White",
-          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/334/0933452_PE791908_S4.jpg",
-          "qty": 1,
-          "harga": 995000,
-          "subTotal": 995000
-        }
-      ],
-      "total": 995000,
-      "status": "unpaid",
-      "id": 6
-    },
-    {
-      "idUser": 1,
-      "username": "Admin",
-      "date_transaction": "27/4/2021",
-      "cart": [
-        {
-          "nama": "IDALINNEA D",
-          "type": "M",
-          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/107/0810720_PE771385_S4.jpg",
-          "qty": 2,
-          "harga": 79000,
-          "subTotal": 158000
-        }
-      ],
-      "total": 158000,
-      "status": "unpaid",
-      "id": 7
-    },
-    {
-      "idUser": 1,
-      "username": "Admin",
-      "date_transaction": "27/4/2021",
-      "cart": [
-        {
-          "nama": "LINNEBÄCK",
-          "type": "Black",
-          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/334/0933452_PE791908_S4.jpg",
-          "qty": 2,
-          "harga": 995000,
-          "subTotal": 1990000
-        }
-      ],
-      "total": 1990000,
-      "status": "unpaid",
-      "id": 8
-    },
-    {
-      "idUser": 1,
-      "username": "Admin",
-      "date_transaction": "27/4/2021",
-      "cart": [
-        {
-          "nama": "RUDSTA",
-          "type": "Black",
-          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/390/0939002_PE794384_S4.jpg",
-          "qty": 2,
-          "harga": 2499000,
-          "subTotal": 4998000
-        }
-      ],
-      "total": 4998000,
-      "status": "unpaid",
-      "id": 9
-    },
-    {
-      "idUser": 1,
-      "username": "Admin",
-      "date_transaction": "27/4/2021",
-      "cart": [
-        {
-          "nama": "IDALINNEA D",
-          "type": "L",
-          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/107/0810720_PE771385_S4.jpg",
-          "qty": 2,
-          "harga": 79000,
-          "subTotal": 158000
-        }
-      ],
-      "total": 158000,
-      "status": "unpaid",
-      "id": 10
-    },
-    {
-      "idUser": 1,
-      "username": "Admin",
-      "date_transaction": "27/4/2021",
-      "cart": [
-        {
-          "nama": "VITLÖK",
-          "type": "Type",
-          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/541/0954177_PE804200_S4.jpg",
-          "qty": 1,
-          "harga": 299000,
-          "subTotal": 299000
-        }
-      ],
-      "total": 299000,
-      "status": "unpaid",
-      "id": 11
     }
   ]
 }

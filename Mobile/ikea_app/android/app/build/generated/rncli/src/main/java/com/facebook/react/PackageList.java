@@ -19,6 +19,8 @@ import org.reactnative.maskedview.RNCMaskedViewPackage;
 import com.reactnativecommunity.picker.RNCPickerPackage;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+// react-native-image-crop-picker
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
 // react-native-push-notification
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 // react-native-reanimated
@@ -78,6 +80,7 @@ public class PackageList {
       new RNCMaskedViewPackage(),
       new RNCPickerPackage(),
       new RNGestureHandlerPackage(),
+      new PickerPackage(),
       new ReactNativePushNotificationPackage(),
       new ReanimatedPackage(),
       new SafeAreaContextPackage(),

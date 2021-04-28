@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
-import { Image, SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
+import { Image, SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, ImageBackground } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { Icon } from 'react-native-elements';
+import { Icon, Avatar, Accessory } from 'react-native-elements';
 import { authLogout } from '../actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { CommonActions, useNavigation  } from '@react-navigation/native';
-
 
 const DATA = [
     {
@@ -90,7 +88,22 @@ const ProfilePage = (props) => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={{ height: hp("40%"), width: wp("100%") }}>
-                <Image source={{ uri: "https://gizmologi.id/wp-content/uploads/2021/01/Ethereum-123rf-rclassenlayouts.jpg" }} style={{ height: hp(40), width: wp(100) }} />
+                <ImageBackground source={{ uri: "https://gizmologi.id/wp-content/uploads/2021/01/Ethereum-123rf-rclassenlayouts.jpg" }} style={{ height: hp(40), width: wp(100) }}>
+                <Avatar
+                  rounded
+                  containerStyle={{ alignSelf: 'center', marginTop: "25%" }}
+                  size={80}
+                  source={{
+                    uri:
+                      'https://ohmy.disney.com/wp-content/uploads/2014/10/Q3-Jack-Sparrow.png',
+                  }}
+                >
+                  <Avatar.Accessory name="edit"
+                    type="feather"
+                    size={25}
+                  />
+                </Avatar>
+                </ImageBackground>
             </View>
         <View>
             <Text style={{marginLeft: wp(5), fontWeight: '700', color: '#000080', fontSize: 18}}>Account</Text>

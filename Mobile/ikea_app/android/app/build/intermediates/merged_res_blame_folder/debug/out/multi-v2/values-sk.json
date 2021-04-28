@@ -55,6 +55,23 @@
                     }
                 },
                 {
+                    "source": "C:\\Users\\yudha\\.gradle\\caches\\transforms-2\\files-2.1\\99c6ff58ff6c83738ffbf8a18655305e\\jetified-ucrop-2.2.6-native\\res\\values-sk\\values-sk.xml",
+                    "from": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,125,182",
+                        "endColumns": "69,56,50",
+                        "endOffsets": "120,177,228"
+                    },
+                    "to": {
+                        "startLines": "33,34,35",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "3302,3372,3429",
+                        "endColumns": "69,56,50",
+                        "endOffsets": "3367,3424,3475"
+                    }
+                },
+                {
                     "source": "C:\\Users\\yudha\\.gradle\\caches\\transforms-2\\files-2.1\\d67cd79abd1ca209502f51c69d23182b\\core-1.1.0\\res\\values-sk\\values-sk.xml",
                     "from": {
                         "startLines": "2",

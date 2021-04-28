@@ -4,6 +4,23 @@
             "outputFile": "D:\\Course\\P\\Code\\Mobile\\ikea_app\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-zh-rTW\\values-zh-rTW.xml",
             "map": [
                 {
+                    "source": "C:\\Users\\yudha\\.gradle\\caches\\transforms-2\\files-2.1\\99c6ff58ff6c83738ffbf8a18655305e\\jetified-ucrop-2.2.6-native\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "55,132,186,240,287",
+                        "endColumns": "76,53,53,46,116",
+                        "endOffsets": "127,181,235,282,399"
+                    },
+                    "to": {
+                        "startLines": "33,34,35,36,37",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "3113,3190,3244,3298,3345",
+                        "endColumns": "76,53,53,46,116",
+                        "endOffsets": "3185,3239,3293,3340,3457"
+                    }
+                },
+                {
                     "source": "C:\\Users\\yudha\\.gradle\\caches\\transforms-2\\files-2.1\\d14dbad7340cad958a2e361a440b498d\\appcompat-1.1.0\\res\\values-zh-rTW\\values-zh-rTW.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",

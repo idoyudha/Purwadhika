@@ -4,6 +4,23 @@
             "outputFile": "D:\\Course\\P\\Code\\Mobile\\ikea_app\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ja\\values-ja.xml",
             "map": [
                 {
+                    "source": "C:\\Users\\yudha\\.gradle\\caches\\transforms-2\\files-2.1\\99c6ff58ff6c83738ffbf8a18655305e\\jetified-ucrop-2.2.6-native\\res\\values-ja\\values-ja.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,97,153,208,257,301",
+                        "endColumns": "41,55,54,48,43,42",
+                        "endOffsets": "92,148,203,252,296,339"
+                    },
+                    "to": {
+                        "startLines": "33,34,35,36,37,38",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "3153,3195,3251,3306,3355,3399",
+                        "endColumns": "41,55,54,48,43,42",
+                        "endOffsets": "3190,3246,3301,3350,3394,3437"
+                    }
+                },
+                {
                     "source": "C:\\Users\\yudha\\.gradle\\caches\\transforms-2\\files-2.1\\97391023d423dfab844a059219e387e5\\jetified-firebase-messaging-21.1.0\\res\\values-ja\\values.xml",
                     "from": {
                         "startLines": "4",

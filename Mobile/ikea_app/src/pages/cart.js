@@ -10,7 +10,7 @@ import { updateCart } from '../actions/userAction';
 
 const CartPage = (props) => {
     const { cart, idUser, username } = useSelector(({ userReducer }) => {
-        console.log("cek", userReducer.cart)
+        // console.log("Check data from reducer", productReducer.product_list)
         return {
             cart: userReducer.cart,
             idUser: userReducer.id,

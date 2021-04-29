@@ -14,10 +14,11 @@ const TransactionPage = () => {
     const [status, setStatus] = useState('') 
     const [cart, setCart] = useState(undefined) 
 
-    const { username } = useSelector(({ userReducer }) => {
-      // console.log("cek", userReducer.cart)
+    const { username, data } = useSelector(({ userReducer, productReducer }) => {
+      // console.log("Check data from reducer", productReducer.product_list)
       return {
-          username: userReducer.username
+          username: userReducer.username,
+          data: productReducer.product_list
       }
     })
     
@@ -46,7 +47,7 @@ const TransactionPage = () => {
     }
     
     const printCart = () => {
-      console.log('Listprod', cart)
+      // console.log('Listprod', cart)
       if (cart !== undefined) {
         return cart.map((item, index) => {
           return <Card>
@@ -62,7 +63,26 @@ const TransactionPage = () => {
     }
 
     const pay = () => {
-      console.log('bayar', cart)
+      // console.log('bayar', cart)
+      // console.log('prod', data)
+      let idFound = []
+      data.forEach(eData => {
+        cart.forEach(eCart => {
+          console.log('id', eData.nama, eCart.nama)
+          if (eData.nama === eCart.nama) {
+            idFound.push(eData.id)
+            eData.qty -= eCart.qty 
+            eCart.status = "PAID"
+          }
+        });
+      });
+      // for (i = 0; i < data.length; i++) {
+      //   for (j = 0; j < cart.length; j++) {
+      //     if (data[i].id === cart[j].id)
+      //     idFound.push(data[i].id)
+      //   }
+      // }
+      console.log('idFound', idFound)
     }
 
     return (

@@ -5,6 +5,8 @@ import { Header, Icon, SearchBar } from 'react-native-elements'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { URL_API } from '../helper'
 import CardProducts from '../components/card'
+import { useDispatch, useSelector } from 'react-redux';
+import { getProducts } from '../actions';
 
 const style = StyleSheet.create({
     searchBar: {
@@ -22,36 +24,45 @@ const style = StyleSheet.create({
 })
 const HomePage = (props) => {
 
+    const {data} = useSelector(({ productReducer }) => {
+        // console.log("Check data from reducer", productReducer.product_list)
+        return {
+            data: productReducer.product_list
+        }
+    })
+
     const [banner, setBanner] = useState([])
-    const [products, setProducts] = useState([])
+    // const [products, setProducts] = useState([])
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
         getBanner()
-        getProducts()
+        dispatch(getProducts())
     }, [])
 
     const getBanner = () => {
         axios.get(URL_API + `/banner`)
             .then(res => {
-                console.log("banner ==>", res.data)
+                // console.log("banner ==>", res.data)
                 setBanner(res.data)
             }).catch(err => {
                 console.log(err)
             })
     }
 
-    const getProducts = () => {
-        axios.get(URL_API + `/products`)
-        .then(res => {
-            console.log("products ==>", res.data)
-            setProducts(res.data)
-        }).catch(err => {
-            console.log(err)
-        })
-    }
+    // const getProduct = () => {
+    //     axios.get(URL_API + `/products`)
+    //     .then(res => {
+    //         console.log("products ==>", res.data)
+    //         setProducts(res.data)
+    //     }).catch(err => {
+    //         console.log(err)
+    //     })
+    // }
 
     const renderProducts = () => {
-        return products.map((e, index) => {
+        return data.map((e, index) => {
             return (
                 // <TouchableWithoutFeedback key={index}>
                     <View style={{ width: wp('50%') }}>

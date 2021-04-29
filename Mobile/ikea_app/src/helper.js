@@ -1,7 +1,8 @@
 import { Platform } from "react-native";
 import PushNotification from "react-native-push-notification";
 
-export const URL_API = "https://c632d6c64ff3.ngrok.io"
+// export const URL_API = "https://c632d6c64ff3.ngrok.io"
+export const URL_API = "http://192.168.1.71:2020"
 
 // For activate notif configuration
 export const notifConfiguration = (handleScreen) => {

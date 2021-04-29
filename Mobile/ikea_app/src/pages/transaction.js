@@ -6,6 +6,7 @@ import { URL_API } from '../helper';
 import { View, Button } from 'react-native';
 import axios from 'axios';
 import { Body, Card, CardItem, Left, Right, Thumbnail, Container, Header, Content, Icon } from 'native-base';
+import { getProducts } from '../actions/productActions';
 
 const TransactionPage = () => {
 
@@ -13,6 +14,7 @@ const TransactionPage = () => {
     const [date, setDate] = useState('') 
     const [status, setStatus] = useState('') 
     const [cart, setCart] = useState(undefined) 
+    const [idTransaction, setIdTransaction] = useState(-1) 
 
     const { username, data } = useSelector(({ userReducer, productReducer }) => {
       // console.log("Check data from reducer", productReducer.product_list)
@@ -23,6 +25,8 @@ const TransactionPage = () => {
     })
     
     const [visible, setVisible] = useState(false);
+
+    const dispatch = useDispatch()
 
     const toggleOverlay = () => {
       setVisible(!visible);
@@ -40,6 +44,7 @@ const TransactionPage = () => {
         setTotal(response.data[0].total)
         setDate(response.data[0].date_transaction)
         setCart(response.data[0].cart)
+        setIdTransaction(response.data[0].id)
       })
       .catch(error => {
         console.log(error)
@@ -63,26 +68,37 @@ const TransactionPage = () => {
     }
 
     const pay = () => {
-      // console.log('bayar', cart)
-      // console.log('prod', data)
-      let idFound = []
       data.forEach(eData => {
         cart.forEach(eCart => {
-          console.log('id', eData.nama, eCart.nama)
-          if (eData.nama === eCart.nama) {
-            idFound.push(eData.id)
-            eData.qty -= eCart.qty 
-            eCart.status = "PAID"
+          let index = eData.stock.findIndex((element) => eCart.type === element.type)
+          if (eData.nama === eCart.nama && eCart.type === eData.stock[index].type) {
+            eData.stock[index].qty -= eCart.qty 
+            // Update database product
+            console.log('data', eData.stock, eData.nama)
+            axios.patch(URL_API + `/products/${eData.id}`, {
+              stock: eData.stock
+            })
+            .then(response => {
+              console.log(response.data)
+            })
+            .catch(error => {
+              console.log(error)
+            })
           }
         });
       });
-      // for (i = 0; i < data.length; i++) {
-      //   for (j = 0; j < cart.length; j++) {
-      //     if (data[i].id === cart[j].id)
-      //     idFound.push(data[i].id)
-      //   }
-      // }
-      console.log('idFound', idFound)
+      // Update Transaction
+      axios.patch(URL_API + `/userTransaction/${idTransaction}`,{
+        status: "PAID"
+      })
+      .then(response => {
+        console.log(response.data)
+        setStatus('PAID')
+      })
+      .catch(error => {
+        console.log(error)
+      })
+      // Update prodcuts 
     }
 
     return (

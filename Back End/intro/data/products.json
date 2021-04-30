@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "name": "Sony Alpha A7",
+        "price": 500
+    },
+    {
+        "id": 2,
+        "name": "Sony Alpha A9",
+        "price": 700
+    },
+    {
+        "id": 3,
+        "name": "Sony A7000",
+        "price": 300
+    }
+]

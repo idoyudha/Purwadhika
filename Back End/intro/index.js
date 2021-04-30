@@ -7,7 +7,7 @@ const PORT = 2000
 // JSON:stringify => convert object format to buffer format
 
 const server = http.createServer((request, response) => {
-    console.log(request.url)
+    // console.log(request.url)
     if (request.url == '/') {
         if (request.method == 'GET') {
             response.writeHead(200, {"Content-Type":"text/html"})
@@ -16,11 +16,28 @@ const server = http.createServer((request, response) => {
     }
     else if (request.url.includes('/products')) {
         let products = fs.readFileSync('./data/products.json')
-        console.log(JSON.parse(products))
-        console.log(url.parse(request.url, true).query.id)
+        let q = url.parse(request.url, true).query.id
+        let index = JSON.parse(products).findIndex((e) => e.id == q)
         if (request.method == 'GET') {
             response.writeHead(200, {"Content-Type":"text/html"})
-            response.end(products)
+            let result = JSON.parse(products)[index]
+            if (q) {
+                if (index > -1) {
+                    response.end(JSON.stringify(result))
+                }
+                else {
+                    response.end("<h2>Query not found</h2>")
+                }
+            }
+            else {
+                response.end(products)
+            }
+        }
+        else if (request.method == 'DELETE') {
+            response.writeHead(200, {"Content-Type":"text/html"})
+            let result = JSON.parse(products)
+            result.splice(index,1)
+            response.end(JSON.stringify(result))
         }
     }
     else if (request.url.includes('/users')) {

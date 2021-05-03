@@ -161,6 +161,7 @@ const server = http.createServer((request, response) => {
         else if (request.method == "POST") {
             let body = []
             request.on('data', (chunk) => {
+                console.log(chunk)
                 body.push(chunk)
             })
             .on('end', () => {
@@ -168,16 +169,6 @@ const server = http.createServer((request, response) => {
                 console.log(body.email)
                 let index = users.findIndex((e) => e.email === body.email)
                 console.log(index)
-                if (index > 0) {
-                    response.writeHead(200, {"Content-Type":"text/html"})
-                    response.end("Email already registered")
-                }
-                else {
-                    users.push(body)
-                    fs.writeFileSync('./data/users.json', JSON.stringify(users))
-                    response.writeHead(201, {"Content-Type":"text/html"})
-                    response.end(JSON.stringify(users))
-                }
             })
         }
         else if (request.method == "PATCH") {

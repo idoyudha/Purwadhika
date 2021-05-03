@@ -1,17 +1,26 @@
 [
     {
         "id": 1,
-        "name": "Ido",
-        "role": "admin"
+        "email": "ido@mail.com",
+        "password": "ido123",
+        "status": "active"
     },
     {
-        "id": 1,
-        "name": "Tom",
-        "role": "user"
+        "id": 2,
+        "email": "jack@mail.com",
+        "password": "jack123",
+        "status": "active"
     },
     {
-        "id": 1,
-        "name": "Jack",
-        "role": "user"
+        "id": 3,
+        "email": "tom@mail.com",
+        "password": "tom123",
+        "status": "Inactive"
+    },
+    {
+        "id": 4,
+        "email": "ahmad@mail.com",
+        "password": "ahmad",
+        "status": "Inactive"
     }
 ]

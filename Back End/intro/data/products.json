@@ -1,17 +1,1 @@
-[
-    {
-        "id": 1,
-        "name": "Sony Alpha A7",
-        "price": 500
-    },
-    {
-        "id": 2,
-        "name": "Sony Alpha A9",
-        "price": 700
-    },
-    {
-        "id": 3,
-        "name": "Sony A7000",
-        "price": 300
-    }
-]
+[{"id":1,"email":"ido@mail.com","password":"ido123","status":"active"},{"id":2,"email":"jack@mail.com","password":"jack123","status":"active"},{"id":3,"email":"tom@mail.com","password":"tom123","status":"Inactive"}]

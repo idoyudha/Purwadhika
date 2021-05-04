@@ -1,1 +1,22 @@
-[{"id":1,"email":"ido@mail.com","password":"ido123","status":"active"},{"id":2,"email":"jack@mail.com","password":"jack123","status":"active"},{"id":3,"email":"tom@mail.com","password":"tom123","status":"Inactive"}]
+[
+    {
+        "id": 2,
+        "name": "Sony Alpha 9",
+        "price": 9590
+    },
+    {
+        "id": 3,
+        "name": "Sony Alpha 6",
+        "price": 3000
+    },
+    {
+        "id": 4,
+        "name": "Sony 4",
+        "price": 7690
+    },
+    {
+        "name": "Sony A5000",
+        "price": 2500,
+        "id": 5
+    }
+]

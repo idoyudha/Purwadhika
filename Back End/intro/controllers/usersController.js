@@ -7,9 +7,13 @@ module.exports = {
         let users = JSON.parse(fs.readFileSync('./data/users.json'))
         let email = url.parse(request.url, true).query.email
         let pass = url.parse(request.url, true).query.pass
-        console.log(email, pass)
+        console.log('Email and Password', email, pass)
+        let index = users.findIndex((e) => e.email === email && e.password === pass)
+        console.log('index', index)
+        if (index == -1) {
+            response.status(200).send("Wrong email or password")
+        }
         if (email || pass) {
-            let index = users.findIndex((e) => e.email === email && e.password === pass)
             console.log(users[index].status)
             if (users[index].status === "active") {
                 if (index > -1) {
@@ -54,7 +58,7 @@ module.exports = {
         let action = url.parse(request.url, true).query.action
         let email = url.parse(request.url, true).query.email
         let index = users.findIndex((e) => e.email === email)
-        console.log(action, email, index)
+        console.log('index', action, email, index)
         if (index > -1) {
             if (action === 'delete') {
                 console.log('delete', users[index].email)

@@ -1,1 +1,38 @@
-[{"id":1,"email":"ido@mail.com","password":"ido123","status":"active"},{"id":2,"email":"jack@mail.com","password":"jack123","status":"active"},{"id":3,"email":"tom@mail.com","password":"tom123","status":"deactivate"},{"id":4,"email":"ahmad@mail.com","password":"ahmad","status":"active"},{"email":"caca@mail.com","password":"caca123","id":5,"status":"Inactive"},{"email":"cucu@mail.com","password":"cucu123","id":6,"status":"active"}]
+[
+    {
+        "id": 1,
+        "email": "ido@mail.com",
+        "password": "ido123",
+        "status": "active"
+    },
+    {
+        "id": 2,
+        "email": "jack@mail.com",
+        "password": "jack123",
+        "status": "Inactive"
+    },
+    {
+        "id": 3,
+        "email": "tom@mail.com",
+        "password": "tom123",
+        "status": "deactivate"
+    },
+    {
+        "id": 4,
+        "email": "ahmad@mail.com",
+        "password": "ahmad",
+        "status": "active"
+    },
+    {
+        "email": "caca@mail.com",
+        "password": "caca123",
+        "id": 5,
+        "status": "Inactive"
+    },
+    {
+        "email": "cucu@mail.com",
+        "password": "cucu123",
+        "id": 6,
+        "status": "active"
+    }
+]

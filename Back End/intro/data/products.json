@@ -2,7 +2,7 @@
     {
         "id": 2,
         "name": "Sony Alpha 9",
-        "price": 9590
+        "price": 9010
     },
     {
         "id": 3,
@@ -18,5 +18,15 @@
         "name": "Sony A5000",
         "price": 2500,
         "id": 5
+    },
+    {
+        "name": "Sony Alpha 7",
+        "price": 7070,
+        "id": 1
+    },
+    {
+        "name": "Sony Alpha 5",
+        "price": 5200,
+        "id": 6
     }
 ]

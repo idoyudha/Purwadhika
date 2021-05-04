@@ -12,7 +12,10 @@ app.get('/', (request, response) => {
 })
 
 const { productsRouter } = require('./routers')
+const { usersRouter } = require('./routers')
+
 app.use('/products', productsRouter)
+app.use('/users', usersRouter)
 
 // app.get('/products', (request, response) => {
 //     let products = JSON.parse(fs.readFileSync('./data/products.json'))

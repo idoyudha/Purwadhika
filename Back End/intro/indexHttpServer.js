@@ -136,7 +136,7 @@ const server = http.createServer((request, response) => {
                 // let index = users.findIndex((e) => console.log(e.email, email))
                 console.log(users[index].status)
                 if (users[index].status === "active") {
-                    if (index > 0) {
+                    if (index > -1) {
                         response.writeHead(200, {"Content-Type":"text/html"})
                         response.end("Login Success")
                         console.log("Login Success")

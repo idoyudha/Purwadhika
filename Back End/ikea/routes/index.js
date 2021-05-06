@@ -7,8 +7,10 @@
 // });
 
 const homeRoute = require('./homeRoute')
+const userRoute = require('./userRoute')
 
 module.exports = {
-  homeRoute
+  homeRoute,
+  userRoute
 }
 

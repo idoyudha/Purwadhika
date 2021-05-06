@@ -7,9 +7,19 @@ const port = 2025
 //     response.send('Hello World!')
 // })
 
-const { homeRoute } = require('./routes')
+const { homeRoute, userRoute } = require('./routes')
+const { db } = require('./config/database')
 
+app.use(express.json())
 app.use('/', homeRoute)
+app.use('/users', userRoute)
+
+db.getConnection(( error, connection ) => {
+    if (error) {
+        return console.error('error MySQL: ', error.message)
+    }
+    console.log(`Connected to MySQL Server : ${connection.threadId}`)
+})
 
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`)

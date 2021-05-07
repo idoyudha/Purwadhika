@@ -2,17 +2,16 @@ const { response } = require('express')
 const express = require('express')
 const app = express()
 const port = 2025 
+const cors = require('cors')
 
-// app.get('/', (request, response) => {
-//     response.send('Hello World!')
-// })
-
-const { homeRoute, userRoute } = require('./routes')
+const { homeRoute, userRoute, productRoute } = require('./routes')
 const { db } = require('./config/database')
 
+app.use(cors())
 app.use(express.json())
 app.use('/', homeRoute)
 app.use('/users', userRoute)
+app.use('/products', productRoute)
 
 db.getConnection(( error, connection ) => {
     if (error) {

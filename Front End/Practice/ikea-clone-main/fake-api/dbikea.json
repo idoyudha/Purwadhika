@@ -1,0 +1,246 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "Admin",
+      "email": "admin@mail.com",
+      "password": "1234",
+      "cart": [
+        {
+          "qty": 2,
+          "nama": "HAUGA V.2",
+          "type": "Krem",
+          "harga": 1599000,
+          "subTotal": 3198000,
+          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/557/0955765_PE804101_S4.jpg"
+        },
+        {
+          "qty": 2,
+          "nama": "LINNEBÄCK",
+          "type": "White",
+          "harga": 995000,
+          "subTotal": 1990000,
+          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/334/0933452_PE791908_S4.jpg"
+        },
+        {
+          "qty": 2,
+          "nama": "HAUGA V.2",
+          "type": "Black",
+          "harga": 1599000,
+          "subTotal": 3198000,
+          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/557/0955765_PE804101_S4.jpg"
+        }
+      ],
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "username": "Abdi",
+      "email": "abdi@mail.com",
+      "password": "1234",
+      "cart": [],
+      "role": "user"
+    },
+    {
+      "username": "Aldo",
+      "email": "aldo@mail.com",
+      "password": "12345",
+      "role": "user",
+      "cart": [],
+      "id": 3
+    },
+    {
+      "username": "Ade",
+      "email": "ade@mail.com",
+      "password": "1234",
+      "role": "user",
+      "cart": [],
+      "id": 4
+    },
+    {
+      "username": "aldi",
+      "email": "aldi@mail.com",
+      "password": "1234",
+      "role": "user",
+      "cart": [],
+      "id": 5
+    }
+  ],
+  "products": [
+    {
+      "nama": "IDALINNEA D",
+      "deskripsi": " Ritsleting yang tersembunyi membuat sarung mudah dilepas.  Sarung bantal dengan tampilan cermin karena memiliki pola yang sama di kedua sisi.  Katun adalah bahan alami lembut dan mudah dirawat yang dapat Anda cuci dengan mesin.",
+      "brand": "IKEA",
+      "kategori": "Sofa",
+      "harga": 79000,
+      "stock": [
+        {
+          "id": null,
+          "type": "M",
+          "qty": 10
+        },
+        {
+          "id": null,
+          "type": "L",
+          "qty": 12
+        }
+      ],
+      "images": [
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/107/0810720_PE771385_S4.jpg",
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/107/0810719_PE771386_S4.jpg"
+      ],
+      "id": 1
+    },
+    {
+      "nama": "HAUGA V.2",
+      "deskripsi": "Mudah untuk menyembunyikan kabel dan stopkontak tapi tetap dapat dijangkau dengan jalur kabel di bagian belakang.",
+      "brand": "IKEA",
+      "kategori": "Meja",
+      "harga": 1599000,
+      "stock": [
+        {
+          "id": null,
+          "type": "Black",
+          "qty": 10
+        },
+        {
+          "id": null,
+          "type": "Krem",
+          "qty": 8
+        }
+      ],
+      "images": [
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/557/0955765_PE804101_S4.jpg",
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/594/0959497_PE806037_S4.jpg",
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/727/0972709_PE811745_S4.jpg",
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/557/0955706_PE803970_S4.jpg"
+      ],
+      "id": 2
+    },
+    {
+      "nama": "LINNEBÄCK",
+      "deskripsi": "Lebar:\t55 cm Kedalaman:\t69,5 cm Tinggi:\t72,4 cm Lebar dudukan:\t57 cm Kedalaman dudukan:\t50 cm Tinggi dudukan:\t42,4 cm Berat total:\t6,50 kg",
+      "brand": "IKEA",
+      "kategori": "Kursi",
+      "harga": 995000,
+      "stock": [
+        {
+          "id": null,
+          "type": "Black",
+          "qty": 12
+        },
+        {
+          "id": null,
+          "type": "White",
+          "qty": 3
+        }
+      ],
+      "images": [
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/334/0933452_PE791908_S4.jpg",
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/407/0940712_PE795127_S4.jpg"
+      ],
+      "id": 3
+    },
+    {
+      "nama": "IDANÄS",
+      "deskripsi": " Anda dapat dengan mudah menyedot debu di bawah rangka tempat tidur untuk menjaga ruang tetap bersih dan bebas debu.  Ada banyak ruang di bawah tempat tidur untuk kotak penyimpanan sehingga sempurna untuk menyimpan selimut dan bantal tambahan.  Sisi tempat tidur dapat disesuaikan memungkinkan Anda untuk menggunakan kasur dengan ketebalan yang berbeda.  Veneer kayu memberi Anda tampilan, rasa dan keindahan yang sama seperti kayu solid dengan variasi unik dalam serat, warna, dan tekstur.",
+      "brand": "IKEA",
+      "kategori": "Rangka tempat tidur",
+      "harga": 5499000,
+      "stock": [
+        {
+          "id": null,
+          "type": "White",
+          "qty": 5
+        },
+        {
+          "id": null,
+          "type": "Black",
+          "qty": 10
+        }
+      ],
+      "images": [
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/160/0916066_PE784942_S4.jpg",
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/323/0932344_PE791460_S4.jpg",
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/391/0939185_PE794439_S4.jpg"
+      ],
+      "id": 4
+    },
+    {
+      "nama": "RUDSTA",
+      "deskripsi": " Anda dapat dengan mudah menyedot debu di bawah rangka tempat tidur untuk menjaga ruang tetap bersih dan bebas debu.  Ada banyak ruang di bawah tempat tidur untuk kotak penyimpanan sehingga sempurna untuk menyimpan selimut dan bantal tambahan.  Sisi tempat tidur dapat disesuaikan memungkinkan Anda untuk menggunakan kasur dengan ketebalan yang berbeda.  Veneer kayu memberi Anda tampilan, rasa dan keindahan yang sama seperti kayu solid dengan variasi unik dalam serat, warna, dan tekstur.",
+      "brand": "IKEA",
+      "kategori": "Kabinet pintu kaca",
+      "harga": 2499000,
+      "stock": [
+        {
+          "id": null,
+          "type": "Black",
+          "qty": 12
+        },
+        {
+          "id": null,
+          "type": "Brown",
+          "qty": 10
+        }
+      ],
+      "images": [
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/390/0939002_PE794384_S4.jpg",
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/388/0938824_PE794380_S4.jpg",
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/741/0974172_PE812299_S4.jpg"
+      ],
+      "id": 5
+    },
+    {
+      "nama": "VARDAGEN",
+      "deskripsi": "Anda dapat menggunakan panci ini dengan tutup di kompor dan oven, dan membawanya ke meja dan menyajikan makanan dari itu.",
+      "brand": "IKEA",
+      "kategori": "Panci dengan penutup",
+      "harga": 599000,
+      "stock": [
+        {
+          "id": null,
+          "type": "R30",
+          "qty": 10
+        },
+        {
+          "id": null,
+          "type": "R25",
+          "qty": 11
+        }
+      ],
+      "images": [
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/771/0677106_PE718920_S4.jpg",
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/938/0893875_PE718921_S4.jpg",
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/938/0893878_PE718922_S4.jpg"
+      ],
+      "id": 6
+    },
+    {
+      "nama": "VITLÖK",
+      "deskripsi": "Pot tanaman digalvanis agar terlindung dari karat.",
+      "brand": "IKEA",
+      "kategori": "Kotak bunga dengan penyangga",
+      "harga": 299000,
+      "stock": [
+        {
+          "id": null,
+          "type": "Type-1",
+          "qty": 12
+        },
+        {
+          "id": null,
+          "type": "Type-2",
+          "qty": 13
+        }
+      ],
+      "images": [
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/541/0954177_PE804200_S4.jpg",
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/541/0954178_PE804201_S4.jpg",
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/541/0954179_PE804202_S4.jpg"
+      ],
+      "id": 7
+    }
+  ],
+  "userTransaction": []
+}

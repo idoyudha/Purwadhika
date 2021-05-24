@@ -6,6 +6,8 @@ const { db } = require('../config/database')
 module.exports = {
     getProduct: (request, response) => {
         let getSQL, dataSearch = []
+        let getImage = `SELECT * FROM PRODUCT_IMAGE`
+        let getStock = `SELECT * FROM PRODUCT_STOCK JOIN STATUS ON PRODUCT_STOCK.idstatus = STATUS.idstatus`
         for (let prop in request.query) {
             dataSearch.push(`${prop} = ${db.escape(request.query[prop])}`)
         }
@@ -13,13 +15,51 @@ module.exports = {
             getSQL = `SELECT * FROM product WHERE ${dataSearch.join(' AND ')};`
         }
         else {
-            getSQL = `SELECT * FROM product`
+            getSQL = `SELECT * FROM PRODUCT JOIN STATUS ON PRODUCT.idstatus = STATUS.idstatus`
         }
+
         db.query(getSQL, (error, result) => {
             if (error) {
                 response.status(200).send({ status: 'Error MySQL', message: error})
             }
-            response.status(200).send(result)
+
+            db.query(getImage,(error_image, result_image) => {
+                if (error_image) {
+                    response.status(200).send({ status: 'Error MySQL', message: error})
+                }
+
+                result.forEach(item => {
+                    item.images = []
+                    result_image.forEach(element => {
+                        if (item.idproduct == element.idproduct) {
+                            item.images.push(element.images)
+                        }
+                    });
+                });
+
+                db.query(getStock,(error_stock, result_stock) => {
+                    if (error_stock) {
+                        response.status(200).send({ status: 'Error MySQL', message: error})
+                    }
+    
+                    result.forEach(item => {
+                        item.stock = []
+                        result_stock.forEach(element => {
+                            if (item.idproduct == element.idproduct) {
+                                item.stock.push({   'id': element.idproduct,
+                                                    'type': element.type, 
+                                                    'quantity': element.quantity, 
+                                                    'status': element.status})
+                            }
+                        });
+                    });
+                    
+                    // console.log(result)
+                    response.status(200).send(result)
+                })
+                
+            })
+
         })
     },
 

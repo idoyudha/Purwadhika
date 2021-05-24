@@ -10,9 +10,10 @@ module.exports = {
         let getStock = `SELECT * FROM PRODUCT_STOCK JOIN STATUS ON PRODUCT_STOCK.idstatus = STATUS.idstatus`
         for (let prop in request.query) {
             dataSearch.push(`${prop} = ${db.escape(request.query[prop])}`)
+            console.log(prop)
         }
         if (dataSearch.length > 0) {
-            getSQL = `SELECT * FROM product WHERE ${dataSearch.join(' AND ')};`
+            getSQL = `SELECT * FROM PRODUCT JOIN STATUS ON PRODUCT.idstatus = STATUS.idstatus WHERE ${dataSearch.join(' AND ')};`
         }
         else {
             getSQL = `SELECT * FROM PRODUCT JOIN STATUS ON PRODUCT.idstatus = STATUS.idstatus`

@@ -105,10 +105,10 @@ module.exports = {
         let email = request.body.email
         let password = request.body.password
         let role = request.body.role
-        let status = request.body.status
-        console.log(email)
+        let idstatus = request.body.idstatus
+        console.log(username, email, password, role, idstatus)
         let getSQL = `SELECT * FROM USER WHERE email='${email}'`
-        let postSQL = `INSERT INTO user (username, email, password, role, status) VALUES ('${username}', '${email}', '${password}', '${role}', '${status}');`
+        let postSQL = `INSERT INTO user (username, email, password, role, idstatus) VALUES ('${username}', '${email}', '${password}', '${role}', '${idstatus}');`
         db.query(getSQL, (error, result) => {
             if (error) {
                 response.status(500).send({ status: 'Error get MySQL', messages: error})

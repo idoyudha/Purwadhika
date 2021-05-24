@@ -21,9 +21,9 @@ class ProductDetail extends React.Component {
     }
 
     getProductDetail = () => {
-        console.log(this.props.location)
+        console.log('props location', this.props.location)
         // axios.get(URL_API + `/products${this.props.location.search}`)
-        axios.get(URL_API + `/products?idproduct=1`)
+        axios.get(URL_API + `/products${this.props.location.search}`)
             .then(response => {
                 console.log("data detail product", response.data)
                 this.setState({ detail: response.data[0] })
@@ -86,10 +86,11 @@ class ProductDetail extends React.Component {
     }
 
     render() {
+        console.log('State detail', this.state.detail)
         return (
             <div className="row p-5">
                 {
-                    this.state.detail.id &&
+                    this.state.detail.idproduct &&
                     <>
                         <div className="col-md-1">
                             {this.renderImages()}
@@ -99,9 +100,9 @@ class ProductDetail extends React.Component {
                         </div>
                         <div className="col-md-4">
                             <div style={{ borderBottom: '1.5px solid gray' }}>
-                                <h4 style={{ fontWeight: 'bolder' }}>{this.state.detail.nama}</h4>
-                                <h6 className="text-mute">{this.state.detail.kategori}</h6>
-                                <h2 style={{ fontWeight: 'bolder' }}>Rp {this.state.detail.harga.toLocaleString()}</h2>
+                                <h4 style={{ fontWeight: 'bolder' }}>{this.state.detail.name}</h4>
+                                <h6 className="text-mute">{this.state.detail.category}</h6>
+                                <h2 style={{ fontWeight: 'bolder' }}>Rp {this.state.detail.price.toLocaleString()}</h2>
                             </div>
                             <div style={{ borderBottom: '1.5px solid gray' }}>
                                 <div

@@ -22,17 +22,17 @@ class ProductDetail extends React.Component {
 
     getProductDetail = () => {
         console.log(this.props.location)
-        axios.get(URL_API + `/products${this.props.location.search}`)
-            .then(res => {
-                console.log("data detail product", res.data)
-                this.setState({ detail: res.data[0] })
-            }).catch(err => {
-                console.log(err)
+        // axios.get(URL_API + `/products${this.props.location.search}`)
+        axios.get(URL_API + `/products?idproduct=1`)
+            .then(response => {
+                console.log("data detail product", response.data)
+                this.setState({ detail: response.data[0] })
+            }).catch(error => {
+                console.log(error)
             })
     }
 
     onBtAddToCart = () => {
-        // qty, nama, type, price, total,image
         // mengambil data cart user dari reducer
         // data produk di push kedalam array.cart reducer
         console.log(this.props.cart)

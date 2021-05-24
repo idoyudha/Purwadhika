@@ -10,7 +10,7 @@ import axios from "axios"
 import { URL_API } from "../helper"
 
 // redux-thunk
-export const getProductAction = (field="id",sortType="asc") => {
+export const getProductAction = (field="idproduct",sortType="asc") => {
     return (dispatch) => {
         axios.get(URL_API + `/products`)
             .then(res => {

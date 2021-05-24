@@ -34,15 +34,13 @@ class ProductsPage extends React.Component {
                     <Link to={`/product-detail?id=${item.id}`} style={{textDecoration:'none',color:'black'}}>
                         <CardImg top width="100%" src={item.images[0]} alt="Card image cap" />
                         <CardBody>
-                            <CardTitle tag="h5" style={{ fontWeight: 'bolder' }}>{item.nama}</CardTitle>
+                            <CardTitle tag="h5" style={{ fontWeight: 'bolder' }}>{item.name}</CardTitle>
                             <CardSubtitle style={{ fontSize: '14px' }} className="mb-2 text-muted">{item.kategori}</CardSubtitle>
-                            <CardText tag="h5" style={{ fontWeight: 'bolder' }}>Rp. {item.harga.toLocaleString()}</CardText>
+                            <CardText tag="h5" style={{ fontWeight: 'bolder' }}>Rp. {item.price.toLocaleString()}</CardText>
                             <Button type="button" outline
                                 style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <span class="material-icons">
-                                    visibility
-                        </span>
-                                <span>Lihat Sekilas</span>
+                                <span class="material-icons">visibility</span>
+                                <span>Detail</span>
                             </Button>
                         </CardBody>
                     </Link>

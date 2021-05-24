@@ -21,7 +21,7 @@ class LandingPage extends React.Component {
                         <CardBody>
                             <CardTitle tag="h5" style={{ fontWeight: 'bolder' }}>{item.nama}</CardTitle>
                             <CardSubtitle tag="h6" className="mb-2 text-muted">{item.kategori}</CardSubtitle>
-                            <CardText tag="h5" style={{ fontWeight: 'bolder' }}>Rp. {item.harga.toLocaleString()}</CardText>
+                            <CardText tag="h5" style={{ fontWeight: 'bolder' }}>Rp. {item.price.toLocaleString()}</CardText>
                             <Button type="button" outline
                                 style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                 <span class="material-icons">

@@ -24,19 +24,27 @@ class ProductManagement extends React.Component {
         }
     }
 
-    // componentDidMount() {
-    //     // this.getData()
-    // }
-
-    // getData = () => {
-    //     axios.get(URL_API + '/products')
-    //         .then(res => {
-    //             this.props.getProductAction(res.data)
-    //         })
-    //         .catch(err => {
-    //             console.log(err)
-    //         })
-    // }
+    deleteProduct = (id) => {
+        var answer = prompt("Are you sure want to delete this product? (YES/NO)")
+        if (answer == null) {
+            console.log('NULL')
+        }
+        else if (answer.toLocaleLowerCase() == 'no') {
+            console.log('NO')
+            console.log(this.props.getProductAction)
+        }
+        else {
+            console.log('YES')
+            axios.delete(URL_API + `/products/delete/${id}`)
+            .then(response => {
+                console.log(response)
+                this.printProduk()
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        }
+    }
 
     printProduk = () => {
         return this.props.products.map((item, index) => {
@@ -45,30 +53,29 @@ class ProductManagement extends React.Component {
                 <td style={{ width: '20vw', textAlign: 'center' }}>
                     {
                         this.state.thumbnail[0] == index ?
-                            <img src={item.images[this.state.thumbnail[1]]} width="80%" alt={item.nama + index} />
+                            <img src={item.images[this.state.thumbnail[1]]} width="80%" alt={item.name + index} />
                             :
-                            <img src={item.images[0]} width="80%" alt={item.nama + index} />
+                            <img src={item.images[0]} width="80%" alt={item.name + index} />
                     }
                     <div>
                         {
                             item.images.map((value, idx) => {
-                                return <img src={value} style={kursor} width="20%" alt={item.nama + idx}
+                                return <img src={value} style={kursor} width="20%" alt={item.name + idx}
                                     onClick={() => this.setState({ thumbnail: [index, idx] })} />
                             })
                         }
                     </div>
                 </td>
-                <td>{item.nama}</td>
+                <td>{item.name}</td>
                 <td>{item.brand}</td>
-                <td>{item.kategori}</td>
                 <td>{
                     item.stock.map((item, index) => {
                         return <h5>{item.type} : <Badge color={item.qty >= 12 ? "success" : "warning"}>{item.qty}</Badge></h5>
                     })
                 }</td>
-                <td>Rp. {item.harga.toLocaleString()}</td>
+                <td>Rp. {item.price.toLocaleString()}</td>
                 <td><Button type="button" size="sm" color="warning" onClick={() => this.setState({ detailProduk: item, modalEditOpen: !this.state.modalEditOpen })}>Detail</Button>
-                    <Button size="sm" color="danger">Delete</Button></td>
+                    <Button size="sm" color="danger" onClick={() => this.deleteProduct(item.idproduct)}>Delete</Button></td>
             </tr>
         })
     }
@@ -114,7 +121,6 @@ class ProductManagement extends React.Component {
                             <th>Product</th>
                             <th>Nama</th>
                             <th>Brand</th>
-                            <th>Kategori</th>
                             <th>Stok</th>
                             <th>Harga</th>
                             <th>Action</th>

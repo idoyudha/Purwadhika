@@ -14,19 +14,19 @@ class ModalEditProduct extends React.Component {
     onBtAdd = () => {
         console.log(this.state.stock)
         axios.post(URL_API + '/products', {
-            nama: this.inNama.value,
-            deskripsi: this.inDeskripsi.value,
+            name: this.inNama.value,
+            description: this.inDeskripsi.value,
             brand: this.inBrand.value,
-            kategori: this.inKategori.value,
-            harga: parseInt(this.inHarga.value),
+            price: parseInt(this.inHarga.value),
             stock: this.state.stock,
             images: this.state.images
         }).then(res => {
             console.log(res.data)
-            alert('Add Product Success')
+            alert('Edit Product Success')
             this.props.getData()
         }).catch(err => {
             console.log(err)
+            alert('Fail to Edit Product')
         })
     }
 
@@ -124,18 +124,18 @@ class ModalEditProduct extends React.Component {
 
     render() {
         console.log("detailProduk", this.props.detailProduk)
-        let { nama, deskripsi, brand, kategori, harga } = this.props.detailProduk
+        let { name, description, brand, price } = this.props.detailProduk
         return (
             <Modal isOpen={this.props.modalOpen} toggle={this.props.btClose} >
-                <ModalHeader toggle={this.props.btClose}>Add Product</ModalHeader>
+                <ModalHeader toggle={this.props.btClose}>Edit Product</ModalHeader>
                 <ModalBody>
                     <FormGroup>
                         <Label for="textNama">Nama Product</Label>
-                        <Input type="text" id="textNama" defaultValue={nama} innerRef={elemen => this.inNama = elemen} />
+                        <Input type="text" id="textNama" defaultValue={name} innerRef={elemen => this.inNama = elemen} />
                     </FormGroup>
                     <FormGroup>
                         <Label for="textDes">Deskripsi</Label>
-                        <Input type="text" defaultValue={deskripsi} id="textDes" innerRef={elemen => this.inDeskripsi = elemen} />
+                        <Input type="text" defaultValue={description} id="textDes" innerRef={elemen => this.inDeskripsi = elemen} />
                     </FormGroup>
                     <Row>
                         <Col>
@@ -144,16 +144,10 @@ class ModalEditProduct extends React.Component {
                                 <Input type="text" defaultValue={brand} id="textBrand" innerRef={elemen => this.inBrand = elemen} />
                             </FormGroup>
                         </Col>
-                        <Col>
-                            <FormGroup>
-                                <Label for="textKategori">Kategori</Label>
-                                <Input type="text" defaultValue={kategori} id="textKategori" innerRef={elemen => this.inKategori = elemen} />
-                            </FormGroup>
-                        </Col>
                     </Row>
                     <FormGroup>
                         <Label for="textHarga">Harga</Label>
-                        <Input type="number" defaultValue={harga} id="textHarga" innerRef={elemen => this.inHarga = elemen} />
+                        <Input type="number" defaultValue={price} id="textHarga" innerRef={elemen => this.inHarga = elemen} />
                     </FormGroup>
                     <FormGroup>
                         <Label>Stock</Label>

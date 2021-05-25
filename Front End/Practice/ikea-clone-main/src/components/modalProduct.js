@@ -13,20 +13,20 @@ class ModalProduct extends React.Component {
 
     onBtAdd = () => {
         console.log(this.state.stock)
-        axios.post(URL_API + '/products', {
-            nama: this.inNama.value,
-            deskripsi: this.inDeskripsi.value,
+        axios.post(URL_API + '/products/add', {
+            name: this.inNama.value,
+            description: this.inDeskripsi.value,
             brand: this.inBrand.value,
-            kategori: this.inKategori.value,
-            harga: parseInt(this.inHarga.value),
+            price: parseInt(this.inHarga.value),
             stock: this.state.stock,
             images: this.state.images
-        }).then(res => {
-            console.log(res.data)
+        }).then(response => {
+            console.log(response.data)
             this.props.getData()
             alert('Add Product Success')
-        }).catch(err => {
-            console.log(err)
+        }).catch(error => {
+            console.log(error)
+            alert('Fail to Add Product')
         })
     }
 
@@ -113,12 +113,6 @@ class ModalProduct extends React.Component {
                             <FormGroup>
                                 <Label for="textBrand">Brand</Label>
                                 <Input type="text" id="textBrand" innerRef={elemen => this.inBrand = elemen} />
-                            </FormGroup>
-                        </Col>
-                        <Col>
-                            <FormGroup>
-                                <Label for="textKategori">Kategori</Label>
-                                <Input type="text" id="textKategori" innerRef={elemen => this.inKategori = elemen} />
                             </FormGroup>
                         </Col>
                     </Row>

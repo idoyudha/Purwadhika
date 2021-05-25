@@ -16,7 +16,7 @@ module.exports = {
             getSQL = `SELECT * FROM PRODUCT JOIN STATUS ON PRODUCT.idstatus = STATUS.idstatus WHERE ${dataSearch.join(' AND ')};`
         }
         else {
-            getSQL = `SELECT * FROM PRODUCT JOIN STATUS ON PRODUCT.idstatus = STATUS.idstatus`
+            getSQL = `SELECT * FROM PRODUCT JOIN STATUS ON PRODUCT.idstatus = STATUS.idstatus WHERE PRODUCT.idstatus=1`
         }
 
         db.query(getSQL, (error, result) => {
@@ -65,18 +65,46 @@ module.exports = {
     },
 
     addProduct: (request, response) => {
-        let image = request.body.image
+        console.log(request.body)
         let name = request.body.name
         let brand = request.body.brand
         let description = request.body.description
-        let qty = request.body.qty
         let price = request.body.price
-        let postSQL =  `INSERT INTO product (image, name, brand, description, qty, price) VALUES ('${image}', '${name}', '${brand}', '${description}', ${qty}, ${price});`
-        db.query(postSQL, (error, result) => {
+        let images = request.body.images
+        let stock = request.body.stock
+        let postProduct =  `INSERT INTO PRODUCT (name, brand, description, price) VALUES ('${name}', '${brand}', '${description}', ${price});`
+        let postImage = `INSERT INTO PRODUCT_IMAGE (idproduct, images) VALUES `
+        let postStock = `INSERT INTO PRODUCT_STOCK (idproduct, type, quantity) VALUES `
+        db.query(postProduct, (error, result) => {
             if (error) {
                 response.status(500).send({ status: 'Error get MySQL', messages: error})
             }
-            response.status(200).send("Add product success!")
+            // console.log(result)
+            if (result.insertId) {
+                let multipleInsertImage = []
+                images.forEach(element => {
+                    multipleInsertImage.push(`(${result.insertId}, ${db.escape(element)})`)
+                });
+                console.log(postImage + multipleInsertImage)
+                
+                let multipleInsertStock = []
+                stock.forEach(element => {
+                    multipleInsertStock.push(`(${result.insertId}, ${db.escape(element.type)}, ${db.escape(element.quantity)})`)
+                });
+                console.log(postStock + multipleInsertStock)
+
+                db.query(postImage + multipleInsertImage, (errorImg, resultImg) => {
+                    if (errorImg) {
+                        response.status(500).send({ status: 'Error get MySQL', messages: error})
+                    }
+                    db.query(postStock + multipleInsertStock, (errorStock, resultStock) => {
+                        if (errorStock) {
+                            response.status(500).send({ status: 'Error get MySQL', messages: error})
+                        }
+                        response.status(200).send("Add product success!")
+                    })
+                })
+            }
         })
     },
 
@@ -100,7 +128,7 @@ module.exports = {
 
     deleteProduct: (request, response) => {
         console.log('id', request.params.id)
-        let deleteSQL = `UPDATE product SET qty = '0', status = 'Not-Available' WHERE (idproduct = ${request.params.id})`;
+        let deleteSQL = `UPDATE product SET idstatus = 2 WHERE (idproduct = ${request.params.id})`;
         db.query(deleteSQL, (error, result) => {
             if (error) {
                 response.status(500).send({ status: 'Error get MySQL', messages: error})

@@ -38,7 +38,6 @@ class ProductManagement extends React.Component {
             axios.delete(URL_API + `/products/delete/${id}`)
             .then(response => {
                 console.log(response)
-                this.printProduk()
             })
             .catch(error => {
                 console.log(error)
@@ -70,11 +69,11 @@ class ProductManagement extends React.Component {
                 <td>{item.brand}</td>
                 <td>{
                     item.stock.map((item, index) => {
-                        return <h5>{item.type} : <Badge color={item.qty >= 12 ? "success" : "warning"}>{item.qty}</Badge></h5>
+                        return <h5>{item.type} : <Badge color={item.quantity >= 12 ? "success" : "warning"}>{item.quantity}</Badge></h5>
                     })
                 }</td>
                 <td>Rp. {item.price.toLocaleString()}</td>
-                <td><Button type="button" size="sm" color="warning" onClick={() => this.setState({ detailProduk: item, modalEditOpen: !this.state.modalEditOpen })}>Detail</Button>
+                <td><Button type="button" size="sm" color="warning" onClick={() => this.setState({ detailProduk: item, modalEditOpen: !this.state.modalEditOpen })}>Edit</Button>
                     <Button size="sm" color="danger" onClick={() => this.deleteProduct(item.idproduct)}>Delete</Button></td>
             </tr>
         })

@@ -110,15 +110,31 @@ module.exports = {
 
     updateProduct: (request, response) => {
         let updateProduct = []
-        for (let property in request.body) {
-            updateProduct.push(`${property} = '${request.body[property]}'`)
+        let updateImages = []
+        let updateStocks = []
+        let all_body = request.body 
+        let product_images = request.body.images
+        let product_stocks = request.body.stock
+        delete all_body.images
+        delete all_body.stock
+        for (let property in all_body) {
+            updateProduct.push(`${property} = ${db.escape(all_body[property])}`)
         }
-        console.log('Body', request.body)
-        console.log('query', updateProduct)
-        let updateSQL = `UPDATE product SET ${updateProduct} WHERE (idproduct = '${request.body.idproduct}');`
-        console.log(updateSQL)
-        // UPDATE db_ikea.product SET idproduct = 5,price = 25900 WHERE (idproduct = '5');
-        db.query(updateSQL, (error, result) => {
+        console.log('Product', updateProduct)
+        for (let property in product_images) {
+            updateImages.push(`images = ${product_images[property]}`)
+        }
+        console.log('Images', updateImages)
+        for (let property in product_stocks) {
+            updateStocks.push(`${property} = '${product_stocks[property]}'`)
+        }
+        // console.log('Stocks', updateStocks)
+        let updateSQLProduct = `UPDATE PRODUCT SET ${updateProduct} WHERE (idproduct = '${request.body.idproduct}');`
+        console.log(updateSQLProduct)
+        // let updateSQLImages = `UPDATE PRODUCT_IMAGE SET ${updateImages} WHERE (idproduct_image = '${request.body.idproduct}');`
+        // let updateSQLStock = `UPDATE PRODUCT_STOCK SET ${updateStocks} WHERE (idproduct = '${request.body.idproduct}');`
+        // console.log(updateSQL)
+        db.query(updateSQLProduct, (error, result) => {
             if (error) {
                 response.status(500).send({ status: 'Error get MySQL', messages: error})
             }

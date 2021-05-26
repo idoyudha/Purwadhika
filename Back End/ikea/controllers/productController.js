@@ -122,6 +122,7 @@ module.exports = {
         }
         console.log('Product', updateProduct)
         for (let property in product_images) {
+            let idproduct_image = `SELECT idproduct_image FROM PRODUCT_IMAGE WHERE images = `
             updateImages.push(`images = ${product_images[property]}`)
         }
         console.log('Images', updateImages)
@@ -133,7 +134,6 @@ module.exports = {
         console.log(updateSQLProduct)
         // let updateSQLImages = `UPDATE PRODUCT_IMAGE SET ${updateImages} WHERE (idproduct_image = '${request.body.idproduct}');`
         // let updateSQLStock = `UPDATE PRODUCT_STOCK SET ${updateStocks} WHERE (idproduct = '${request.body.idproduct}');`
-        // console.log(updateSQL)
         db.query(updateSQLProduct, (error, result) => {
             if (error) {
                 response.status(500).send({ status: 'Error get MySQL', messages: error})

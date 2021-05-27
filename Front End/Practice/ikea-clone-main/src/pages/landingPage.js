@@ -13,10 +13,9 @@ class LandingPage extends React.Component {
     }
 
     printProducts = () => {
-        console.log(this.props.products)
         if (this.props.products.length > 0) {
             return this.props.products.map((item, index) => {
-                console.log('PRINT PROD IMG', item.images[0].images)
+                // console.log('PRINT PROD IMG', item.images[0].images)
                 return <div >
                     <Card style={{ border: 'none' }}>
                         <CardImg top width="100%" src={item.images[0].images} alt="Card image cap" />

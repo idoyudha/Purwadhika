@@ -1,4 +1,5 @@
 const mysql = require('mysql')
+const util = require('util')
 
 const db = mysql.createPool ({
     host: 'localhost',
@@ -9,6 +10,8 @@ const db = mysql.createPool ({
     multipleStatements: true
 })
 
+const dbQuery = util.promisify(db.query).bind(db)
+
 // db.getConnection(( error, connection ) => {
 //     if (error) {
 //         return console.error('error MySQL: ', error.message)
@@ -16,4 +19,4 @@ const db = mysql.createPool ({
 //     console.log(`Connected to MySQL Server : ${connection.threadId}`)
 // })
 
-module.exports = { db }
+module.exports = { db, dbQuery }

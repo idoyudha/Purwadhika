@@ -42,7 +42,7 @@ class ProductDetail extends React.Component {
                 type: this.state.selectedType.type,
                 harga: this.state.detail.harga,
                 subTotal: this.state.qty * this.state.detail.harga,
-                image: this.state.detail.images[0]
+                image: this.state.detail.images[0].images
             })
             // simpan lewat axios.patch
             axios.patch(URL_API + `/users/${this.props.id}`, { cart: this.props.cart })
@@ -61,7 +61,7 @@ class ProductDetail extends React.Component {
         let { images } = this.state.detail
         return images.map((item, index) => {
             return (
-                <img className="select-image mb-1" src={item}
+                <img className="select-image mb-1" src={item.images}
                     key={index}
                     width="100%"
                     onClick={() => this.setState({ thumbnail: index })}
@@ -96,7 +96,7 @@ class ProductDetail extends React.Component {
                             {this.renderImages()}
                         </div>
                         <div className="col-md-7">
-                            <img src={this.state.detail.images[this.state.thumbnail]} width="100%" />
+                            <img src={this.state.detail.images[this.state.thumbnail].images} width="100%" />
                         </div>
                         <div className="col-md-4">
                             <div style={{ borderBottom: '1.5px solid gray' }}>

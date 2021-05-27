@@ -23,6 +23,7 @@ class ModalProduct extends React.Component {
         }).then(response => {
             console.log(response.data)
             this.props.getData()
+            this.props.btClose()
             alert('Add Product Success')
         }).catch(error => {
             console.log(error)

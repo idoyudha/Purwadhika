@@ -32,7 +32,7 @@ class ProductsPage extends React.Component {
             return <div className="col-md-3 mt-2">
                 <Card style={{ border: 'none' }}>
                     <Link to={`/product-detail?idproduct=${item.idproduct}`} style={{textDecoration:'none',color:'black'}}>
-                        <CardImg top width="100%" src={item.images[0]} alt="Card image cap" />
+                        <CardImg top width="100%" src={item.images[0].images} alt="Card image cap" />
                         <CardBody>
                             <CardTitle tag="h5" style={{ fontWeight: 'bolder' }}>{item.name}</CardTitle>
                             <CardSubtitle style={{ fontSize: '14px' }} className="mb-2 text-muted">{item.kategori}</CardSubtitle>

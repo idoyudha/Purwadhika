@@ -52,14 +52,15 @@ class ProductManagement extends React.Component {
                 <td style={{ width: '20vw', textAlign: 'center' }}>
                     {
                         this.state.thumbnail[0] == index ?
-                            <img src={item.images[this.state.thumbnail[1]]} width="80%" alt={item.name + index} />
+                            <img src={item.images[this.state.thumbnail[1]].images} width="80%" alt={item.name + index} />
                             :
-                            <img src={item.images[0]} width="80%" alt={item.name + index} />
+                            <img src={item.images[0].images} width="80%" alt={item.name + index} />
                     }
                     <div>
-                        {
+                        {   
                             item.images.map((value, idx) => {
-                                return <img src={value} style={kursor} width="20%" alt={item.name + idx}
+                                console.log('thumbnail after click', this.state.thumbnail)
+                                return <img src={value.images} style={kursor} width="20%" alt={item.name + idx}
                                     onClick={() => this.setState({ thumbnail: [index, idx] })} />
                             })
                         }

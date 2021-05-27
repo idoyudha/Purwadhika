@@ -64,7 +64,7 @@ class ModalEditProduct extends React.Component {
         let images = this.state.images || this.props.detailProduk.images
         if (images) {
             return images.map((item, index) => {
-                return <Input type="text" defaultValue={item} placeholder={`Images-${index + 1}`} onChange={(e) => this.handleImages(e, index)} />
+                return <Input type="text" defaultValue={item.images} placeholder={`Images-${index + 1}`} onChange={(e) => this.handleImages(e, index)} />
             })
         }
     }
@@ -87,8 +87,6 @@ class ModalEditProduct extends React.Component {
     }
 
     onBtCancel = () => {
-        // this.setState({ stock: [], images: [] })
-        // fungsi untuk close modal
         this.props.btClose()
     }
 

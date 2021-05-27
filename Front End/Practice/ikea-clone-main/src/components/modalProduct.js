@@ -12,7 +12,8 @@ class ModalProduct extends React.Component {
     }
 
     onBtAdd = () => {
-        console.log(this.state.stock)
+        // console.log('STOCK STATE', this.state.stock)
+        // console.log('IMAGE STATE', this.state.images)
         axios.post(URL_API + '/products/add', {
             name: this.inNama.value,
             description: this.inDeskripsi.value,
@@ -33,13 +34,13 @@ class ModalProduct extends React.Component {
 
     onBtAddStock = () => {
         // let tempStock = [...this.state.stock]
-        this.state.stock.push({ id: null, type: null, qty: null })
+        this.state.stock.push({idproduct: null, type: null, quantity: null})
         this.setState({ stock: this.state.stock })
     }
 
     // menambah penampung data image pada state.images
     onBtAddImages = () => {
-        this.state.images.push("")
+        this.state.images.push({idproduct: null, images: null})
         this.setState({ images: this.state.images })
     }
 
@@ -78,7 +79,7 @@ class ModalProduct extends React.Component {
 
     // Untuk set value kedalam state.images
     handleImages = (e, index) => {
-        this.state.images[index] = e.target.value
+        this.state.images[index].images = e.target.value
     }
 
     handleType = (e, index) => {
@@ -86,7 +87,7 @@ class ModalProduct extends React.Component {
     }
 
     handleStock = (e, index) => {
-        this.state.stock[index].qty = parseInt(e.target.value)
+        this.state.stock[index].quantity = parseInt(e.target.value)
     }
 
     onBtCancel = () => {

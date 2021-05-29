@@ -12,11 +12,5 @@ const db = mysql.createPool ({
 
 const dbQuery = util.promisify(db.query).bind(db)
 
-// db.getConnection(( error, connection ) => {
-//     if (error) {
-//         return console.error('error MySQL: ', error.message)
-//     }
-//     console.log(`Connected to MySQL Server : ${connection.threadId}`)
-// })
 
 module.exports = { db, dbQuery }

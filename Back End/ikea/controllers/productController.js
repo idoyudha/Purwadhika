@@ -70,8 +70,6 @@ module.exports = {
                     multipleInsertStock.push(`(${productSQL.insertId}, ${db.escape(element.type)}, ${db.escape(element.quantity)})`)
                 });
             }
-            // console.log(postImage)
-            // console.log(multipleInsertImage)
             await dbQuery(postImage + multipleInsertImage)
             await dbQuery(postStock + multipleInsertStock)
             response.status(200).send('All done for Add')

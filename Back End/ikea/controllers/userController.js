@@ -32,7 +32,7 @@ module.exports = {
                 
                 let data = await dbQuery(getSQL)
                 if (data.length > 0) {
-                    response.status(200).send('Login success!')
+                    response.status(200).send(data) 
                 }
                 else {
                     response.status(200).send('Account or password not match!')

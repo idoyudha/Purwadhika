@@ -21,22 +21,33 @@ module.exports = {
         try {
             let queryInsert = 'INSERT INTO cart SET ?'
             queryInsert = await dbQuery(queryInsert, request.body)
-            response.status(200).send({status: "Success!", results: queryInsert})
+            response.status(200).send({status: "Add Success!", results: queryInsert})
         } 
         catch (error) {
             next(error)
         }
     },
 
-    updateCart: (request, response, next) => {
-        let iduser = request.body.iduser
-        let idproduct = request.body.idproduct
-        let idstock = request.body.idstock
-        let quantity = request.body.quantity
-        console.log(request.body)
+    updateCart: async (request, response, next) => {
+        try {
+            let idcart = request.body.idcart
+            let queryUpdate = `UPDATE cart SET ? WHERE idcart = ${idcart}`
+            queryUpdate = await dbQuery(queryUpdate, request.body)
+            response.status(200).send({status: "Update Success!", results: queryUpdate})
+        } 
+        catch (error) {
+            next(error)
+        }
     },
     
-    deleteCart: (request, response, next) => {
-        
+    deleteCart: async (request, response, next) => {
+        try {
+            let queryDelete = `DELETE FROM cart WHERE idcart = ${request.body.idcart};`
+            deleteCart = await dbQuery(queryDelete)
+            response.status(200).send(deleteCart)
+        } 
+        catch (error) {
+            next(error)
+        }
     }
 }

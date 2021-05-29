@@ -11,14 +11,15 @@ class CartPage extends React.Component {
     }
 
     printCart = () => {
+        console.log("Props CART", this.props.cart)
         return this.props.cart.map((item, index) => {
             return <div className="row">
                 <div className="col-md-2">
-                    <img src={item.image} width="100%" />
+                    <img src={item.images} width="100%" />
                 </div>
                 <div className="col-md-6">
-                    <h5 style={{ fontWeight: 'bolder' }}>{item.nama}</h5>
-                    <h4 style={{ fontWeight: 'bolder' }}>Rp {item.harga.toLocaleString()}</h4>
+                    <h5 style={{ fontWeight: 'bolder' }}>{item.name}</h5>
+                    <h4 style={{ fontWeight: 'bolder' }}>Rp {item.price.toLocaleString()}</h4>
                 </div>
                 <div className="col-md-4">
                     <div className="d-flex justify-content-between align-items-center">
@@ -33,7 +34,7 @@ class CartPage extends React.Component {
                             </span>
                             </span>
                         </div>
-                        <h4>Rp {item.subTotal.toLocaleString()}</h4>
+                        {/* <h4>Rp {item.subTotal.toLocaleString()}</h4> */}
                     </div>
                     <Button outline color="warning" style={{ border: 'none', float: 'right' }} onClick={() => this.onBtRemove(index)}>Remove</Button>
                 </div>
@@ -97,14 +98,13 @@ class CartPage extends React.Component {
                 }
             })
         })
-        // 
     }
 
     render() {
-        console.log(this.props.cart)
+        console.log('PROPS', this.props)
         return (
             <div>
-                <h1 className="text-center mt-5">Keranjang Belanja</h1>
+                <h1 className="text-center mt-5">CART</h1>
                 <div className="mt-5">
                     {this.printCart()}
                 </div>

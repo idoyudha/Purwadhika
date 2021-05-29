@@ -75,7 +75,7 @@ class ModalEditProduct extends React.Component {
     }
 
     handleImages = (e, index) => {
-        this.props.detailProduk.images[index] = e.target.value
+        this.props.detailProduk.images[index].images = e.target.value
     }
 
     handleType = (e, index) => {
@@ -83,7 +83,7 @@ class ModalEditProduct extends React.Component {
     }
 
     handleStock = (e, index) => {
-        this.props.detailProduk.stock[index].qty = parseInt(e.target.value)
+        this.props.detailProduk.stock[index].quantity = parseInt(e.target.value)
     }
 
     onBtCancel = () => {

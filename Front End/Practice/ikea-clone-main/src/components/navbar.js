@@ -112,7 +112,9 @@ class NavbarComp extends React.Component {
                                                     Profile
                                                 </DropdownItem>
                                                 <DropdownItem>
-                                                    Cart
+                                                    <Link to="/cart" style={{ textDecoration: 'none', color: 'black' }}>
+                                                        Cart
+                                                    </Link>
                                                 </DropdownItem>
                                                 <DropdownItem>
                                                     History

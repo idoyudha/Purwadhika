@@ -71,6 +71,7 @@ class AuthPage extends React.Component {
     }
 
     onBtLogin = () => {
+        // console.log('Login value', this.inEmail.value, this.inPassword.value)
         this.props.authLogin(this.inEmail.value, this.inPassword.value)
     }
 

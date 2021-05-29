@@ -11,7 +11,7 @@ class ProductDetail extends React.Component {
             detail: {},
             thumbnail: 0,
             openType: false,
-            qty: 1,
+            quantity: 1,
             selectedType: {}
         }
     }
@@ -38,23 +38,21 @@ class ProductDetail extends React.Component {
         console.log(this.props.cart)
         if (this.state.selectedType.type) {
             this.props.cart.push({
-                qty: this.state.qty, nama: this.state.detail.nama,
-                type: this.state.selectedType.type,
-                harga: this.state.detail.harga,
-                subTotal: this.state.qty * this.state.detail.harga,
-                image: this.state.detail.images[0].images
+                iduser: this.props.iduser,
+                idproduct: this.state.selectedType.idproduct,
+                idstock: this.state.selectedType.idproduct_stock, 
+                quantity: this.state.quantity
             })
             // simpan lewat axios.patch
-            axios.patch(URL_API + `/users/${this.props.id}`, { cart: this.props.cart })
-                .then(res => {
+            axios.post(URL_API + `/transaction/add-cart`, this.props.cart )
+                .then(response => {
                     alert('Add to cart success ✔')
-                }).catch(err => {
-                    console.log(err)
+                }).catch(error => {
+                    console.log(error)
                 })
         } else {
             alert('Choose product type first')
         }
-
     }
 
     renderImages = () => {
@@ -72,21 +70,22 @@ class ProductDetail extends React.Component {
     }
 
     onBtInc = () => {
-        if (this.state.qty < this.state.selectedType.qty) {
-            this.setState({ qty: this.state.qty += 1 })
+        if (this.state.quantity < this.state.selectedType.quantity) {
+            this.setState({ quantity: this.state.quantityy += 1 })
         } else {
             alert('Product out of stock')
         }
     }
 
     onBtDec = () => {
-        if (this.state.qty > 1) {
-            this.setState({ qty: this.state.qty -= 1 })
+        if (this.state.quantity > 1) {
+            this.setState({ quantity: this.state.quantity -= 1 })
         }
     }
 
     render() {
-        console.log('State detail', this.state.detail)
+        console.log('State detail all', this.state)
+        console.log('Props', this.props)
         return (
             <div className="row p-5">
                 {
@@ -116,8 +115,8 @@ class ProductDetail extends React.Component {
                                                 <div>
                                                     <Button outline color="secondary" size="sm"
                                                         style={{ width: '100%', border: 'none', textAlign: 'left' }}
-                                                        onClick={() => this.setState({ selectedType: item, qty: 1 })}
-                                                    > {item.type} : {item.qty}</Button>
+                                                        onClick={() => this.setState({ selectedType: item, quantity: 1 })}
+                                                    > {item.type} : {item.quantity}</Button>
                                                 </div>
                                             )
                                         })
@@ -130,7 +129,7 @@ class ProductDetail extends React.Component {
                                     <span className="material-icons" style={{ cursor: 'pointer' }} onClick={this.onBtDec}>
                                         remove
                                     </span>
-                                    <Input size="sm" placeholder="qty" value={this.state.qty} style={{ width: "50%", display: 'inline-block' }} />
+                                    <Input size="sm" placeholder="qty" value={this.state.quantity} style={{ width: "50%", display: 'inline-block' }} />
                                     <span className="material-icons" style={{ cursor: 'pointer' }} onClick={this.onBtInc}>
                                         add
                                     </span>

@@ -15,7 +15,13 @@ module.exports = {
             else {
                 getSQL = `SELECT * FROM USER`
             }
+            console.log(res)
+            let cartSQL = `SELECT cart.iduser, cart.idproduct, product.name, pi.images, product.price, ps.type, ps.quantity, 
+            cart.quantity FROM cart JOIN product ON cart.idproduct = product.idproduct JOIN product_stock ps ON 
+            ps.idproduct_stock = cart.idstock JOIN product_image pi ON pi.idproduct_image = cart.idstock 
+            WHERE ${res}`
             let data = await dbQuery(getSQL)
+            data[0].cart = await dbQuery(cartSQL)
             response.status(200).send(data)
         } 
         catch (error) {
@@ -29,7 +35,10 @@ module.exports = {
                 let getSQL = `SELECT * FROM USER WHERE 
                 email=${db.escape(request.body.email)} AND
                 password=${db.escape(request.body.password)}`
-                
+
+                let iduser = `SELECT iduser FROM db_ikea.user WHERE email = ${db.escape(request.body.email)}`
+                console.log('iduser', iduser)
+
                 let data = await dbQuery(getSQL)
                 if (data.length > 0) {
                     response.status(200).send(data) 

@@ -28,7 +28,7 @@ class CartPage extends React.Component {
                                 <span className="material-icons" style={{ cursor: 'pointer' }} onClick={() => this.onBtDec(index)}>
                                     remove
                                     </span>
-                                <Input size="sm" placeholder="qty" value={item.qty} style={{ width: "50%", display: 'inline-block' }} />
+                                <Input size="sm" placeholder="qty" value={item.quantity} style={{ width: "50%", display: 'inline-block' }} />
                                 <span className="material-icons" style={{ cursor: 'pointer' }} onClick={() => this.onBtInc(index)}>
                                     add
                             </span>
@@ -54,14 +54,14 @@ class CartPage extends React.Component {
 
     onBtInc = (index) => {
         console.log(index)
-        this.props.cart[index].qty += 1
+        this.props.cart[index].quantity += 1
         this.props.updateCart([...this.props.cart])
         // axios.patch
     }
 
     onBtDec = (index) => {
         console.log(index)
-        this.props.cart[index].qty -= 1
+        this.props.cart[index].quantity -= 1
         this.props.updateCart([...this.props.cart])
         // axios.patch
     }
@@ -88,7 +88,7 @@ class CartPage extends React.Component {
                     })
                     // console.log("idx", idxStock, item.qty)
                     // console.log("before", value.stock[idxStock])
-                    value.stock[idxStock].qty -= item.qty
+                    value.stock[idxStock].quantity -= item.quantity
                     // console.log("after", value.stock[idxStock])
                     axios.patch(URL_API + `/products/${value.id}`, {
                         stock: value.stock

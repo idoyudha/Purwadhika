@@ -5,7 +5,7 @@ module.exports = {
     getCart: async (request, response, next) => {
         try {
             // iduser, idproduct, name, image, price, type, quantity, idstock, quantity
-            let cart = `SELECT cart.iduser, cart.idproduct, product.name, pi.images, product.price, ps.type, ps.quantity, 
+            let cart = `SELECT cart.iduser, cart.idproduct, cart.idcart, product.name, pi.images, product.price, ps.type, ps.quantity, 
             cart.quantity FROM cart JOIN product ON cart.idproduct = product.idproduct JOIN product_stock ps ON 
             ps.idproduct_stock = cart.idstock JOIN product_image pi ON pi.idproduct_image = cart.idstock 
             WHERE cart.iduser=${request.params.iduser}`

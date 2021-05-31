@@ -1,4 +1,4 @@
-const { response, query } = require('express')
+const { response, query, request } = require('express')
 const { dbQuery } = require('../config/database')
 
 module.exports = {
@@ -20,8 +20,22 @@ module.exports = {
     addCart: async (request, response, next) => {
         try {
             let queryInsert = 'INSERT INTO cart SET ?'
+            console.log('INSERT ADD CART', request.body)
             queryInsert = await dbQuery(queryInsert, request.body)
-            response.status(200).send({status: "Add Success!", results: queryInsert})
+            console.log(queryCheck)
+            response.status(200).send({status: "Add Success!", results: queryCheck})
+        } 
+        catch (error) {
+            next(error)
+        }
+    },
+
+    updateSameProductInCart: async (request, response, next) => {
+        try {
+            let queryUpdate = `UPDATE cart SET quantity = ${request.body.quantity} WHERE idcart = ${request.body.idcart}`
+            queryUpdate = await dbQuery(queryUpdate, request.body)
+            console.log(queryUpdate)
+            response.status(200).send({status: "Add Success!", results: queryUpdate})
         } 
         catch (error) {
             next(error)
@@ -42,7 +56,7 @@ module.exports = {
     
     deleteCart: async (request, response, next) => {
         try {
-            let queryDelete = `DELETE FROM cart WHERE idcart = ${request.body.idcart};`
+            let queryDelete = `DELETE FROM cart WHERE idcart = ${request.params.id};`
             deleteCart = await dbQuery(queryDelete)
             response.status(200).send(deleteCart)
         } 

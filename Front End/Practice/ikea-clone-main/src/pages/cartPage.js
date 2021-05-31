@@ -10,6 +10,23 @@ class CartPage extends React.Component {
         this.state = {}
     }
 
+    componentDidMount() {
+        this.reLogin()
+    }
+    
+    reLogin = () => {
+        let idToken = localStorage.getItem("tkn_id")
+        console.log('idToken', idToken)
+        axios.get(URL_API + `/users?iduser=${idToken}`)
+          .then(res => {
+            console.log('Response keeplogin', res)
+            this.props.keepLogin(res.data[0])
+          })
+          .catch(err => {
+            console.log("Keeplogin error :", err)
+          })
+    }
+
     printCart = () => {
         console.log("Props CART", this.props.cart)
         return this.props.cart.map((item, index) => {
@@ -19,6 +36,7 @@ class CartPage extends React.Component {
                 </div>
                 <div className="col-md-6">
                     <h5 style={{ fontWeight: 'bolder' }}>{item.name}</h5>
+                    <h5 style={{ fontWeight: 'bolder' }}>{item.type}</h5>
                     <h4 style={{ fontWeight: 'bolder' }}>Rp {item.price.toLocaleString()}</h4>
                 </div>
                 <div className="col-md-4">
@@ -43,10 +61,9 @@ class CartPage extends React.Component {
     }
 
     onBtRemove = (index) => {
-        console.log('index delete idcart', this.props.cart[index].idcart )
-        axios.delete(URL_API + `/transaction/delete-cart`, { 
-            idcart: this.props.cart[index].idcart 
-        })
+        let idcart = this.props.cart[index].idcart 
+        console.log('index delete idcart', idcart)
+        axios.delete(URL_API + `/transaction/delete-cart/${idcart}`)
         .then(response => {
             this.props.cart.splice(index, 1)
             this.props.updateCart([...this.props.cart])
@@ -66,7 +83,9 @@ class CartPage extends React.Component {
         console.log(index)
         this.props.cart[index].quantity -= 1
         this.props.updateCart([...this.props.cart], index)
-        // axios.patch
+        if (this.props.cart[index].quantity == 1) {
+            this.onBtRemove(index)
+        }
     }
 
     onBtCheckOut = () => {

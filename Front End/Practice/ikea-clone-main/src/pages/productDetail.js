@@ -12,7 +12,8 @@ class ProductDetail extends React.Component {
             thumbnail: 0,
             openType: false,
             quantity: 1,
-            selectedType: {}
+            selectedType: {},
+            cart: []
         }
     }
 
@@ -37,14 +38,25 @@ class ProductDetail extends React.Component {
         // data produk di push kedalam array.cart reducer
         console.log(this.props.cart)
         if (this.state.selectedType.type) {
-            this.props.cart.push({
+            this.state.cart.push({
                 iduser: this.props.iduser,
                 idproduct: this.state.selectedType.idproduct,
                 idstock: this.state.selectedType.idproduct_stock, 
                 quantity: this.state.quantity
             })
+            this.props.cart.push({
+                iduser: this.props.iduser,
+                idproduct: this.state.selectedType.idproduct,
+                idstock: this.state.selectedType.idproduct_stock, 
+                quantity: this.state.quantity,
+                price: this.state.detail.price,
+                images: this.state.detail.images[0].images,
+                name: this.state.detail.name,
+                type: this.state.selectedType.type
+            })
             // simpan lewat axios.patch
-            axios.post(URL_API + `/transaction/add-cart`, this.props.cart )
+            console.log('PROPS CART AFTER add', this.props.cart)
+            axios.post(URL_API + `/transaction/add-cart`, this.state.cart )
                 .then(response => {
                     alert('Add to cart success ✔')
                 }).catch(error => {
@@ -70,8 +82,9 @@ class ProductDetail extends React.Component {
     }
 
     onBtInc = () => {
+        console.log('qty', this.state.quantity)
         if (this.state.quantity < this.state.selectedType.quantity) {
-            this.setState({ quantity: this.state.quantityy += 1 })
+            this.setState({ quantity: this.state.quantity += 1 })
         } else {
             alert('Product out of stock')
         }

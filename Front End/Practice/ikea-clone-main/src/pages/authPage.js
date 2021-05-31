@@ -73,7 +73,22 @@ class AuthPage extends React.Component {
     onBtLogin = () => {
         // console.log('Login value', this.inEmail.value, this.inPassword.value)
         this.props.authLogin(this.inEmail.value, this.inPassword.value)
+        let idToken = localStorage.getItem("tkn_id")
+        console.log('idToken', idToken)
     }
+
+    reLogin = () => {
+        let idToken = localStorage.getItem("tkn_id")
+        console.log('idToken', idToken)
+        axios.get(URL_API + `/users?iduser=${idToken}`)
+        .then(res => {
+            console.log('Response keeplogin', res)
+            this.props.keepLogin(res.data[0])
+        })
+        .catch(err => {
+            console.log("Keeplogin error :", err)
+        })
+      }
 
     handlePassword = () => {
         console.log(this.inRegisPassword.value)

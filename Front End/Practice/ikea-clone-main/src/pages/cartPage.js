@@ -43,26 +43,29 @@ class CartPage extends React.Component {
     }
 
     onBtRemove = (index) => {
-        this.props.cart.splice(index, 1)
-        axios.patch(URL_API + `/users/${this.props.id}`, { cart: this.props.cart })
-            .then(res => {
-                this.props.updateCart([...this.props.cart])
-            }).catch(err => {
-                console.log(err)
-            })
+        console.log('index delete idcart', this.props.cart[index].idcart )
+        axios.delete(URL_API + `/transaction/delete-cart`, { 
+            idcart: this.props.cart[index].idcart 
+        })
+        .then(response => {
+            this.props.cart.splice(index, 1)
+            this.props.updateCart([...this.props.cart])
+        }).catch(error => {
+            console.log(error)
+        })
     }
 
     onBtInc = (index) => {
         console.log(index)
         this.props.cart[index].quantity += 1
-        this.props.updateCart([...this.props.cart])
+        this.props.updateCart([...this.props.cart], index)
         // axios.patch
     }
 
     onBtDec = (index) => {
         console.log(index)
         this.props.cart[index].quantity -= 1
-        this.props.updateCart([...this.props.cart])
+        this.props.updateCart([...this.props.cart], index)
         // axios.patch
     }
 

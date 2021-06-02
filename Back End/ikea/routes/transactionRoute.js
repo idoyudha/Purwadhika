@@ -8,5 +8,6 @@ router.patch('/update-cart', transactionController.updateCart)
 router.patch('/update-cart-prod', transactionController.updateSameProductInCart)
 router.post('/payment/:iduser', transactionController.moveToTransaction)
 router.get('/payment/:iduser', transactionController.getTransaction)
+router.patch('/pay/:idtransaction', transactionController.payButton)
 
 module.exports = router

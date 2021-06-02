@@ -36,7 +36,15 @@ class ProductDetail extends React.Component {
     onBtAddToCart = () => {
         // mengambil data cart user dari reducer
         // data produk di push kedalam array.cart reducer
-        console.log(this.props.cart)
+        // console.log(this.props.cart)
+        // let cartData = this.props.cart
+        // console.log('cartdata', cartData)
+        // for (let data in cartData) {
+        //     for (let x in data) {
+        //         console.log(x)
+        //     }
+        // }
+        // console.log('FINDINDEX', index)
         if (this.state.selectedType.type) {
             this.state.cart.push({
                 iduser: this.props.iduser,

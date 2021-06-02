@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Button, Input } from 'reactstrap';
 import { updateCart } from '../actions'
 import { URL_API } from '../helper';
+import { Link } from 'react-router-dom';
 class CartPage extends React.Component {
     constructor(props) {
         super(props);
@@ -18,13 +19,13 @@ class CartPage extends React.Component {
         let idToken = localStorage.getItem("tkn_id")
         console.log('idToken', idToken)
         axios.get(URL_API + `/users?iduser=${idToken}`)
-          .then(res => {
-            console.log('Response keeplogin', res)
-            this.props.keepLogin(res.data[0])
-          })
-          .catch(err => {
-            console.log("Keeplogin error :", err)
-          })
+        .then(res => {
+          console.log('Response keeplogin', res)
+          this.props.keepLogin(res.data[0])
+        })
+        .catch(err => {
+          console.log("Keeplogin error :", err)
+        })
     }
 
     printCart = () => {
@@ -89,37 +90,8 @@ class CartPage extends React.Component {
     }
 
     onBtCheckOut = () => {
-        //1. mengurangi qty productnya dulu, yg ada direducer
-        //2. axios.patch data product krn qty stocknya berubah
-        //3. idUser,username,date,totalPayment,status(paid),cart
-        //4. axios.post => userTransactions
-        //5. data userTransaction ditampilkan di historyPage user, transactionPage Admin
-
         console.log(this.props.cart)
         console.log(this.props.products)
-        this.props.cart.forEach((item, index) => {
-            this.props.products.forEach((value, idx) => {
-                if (item.nama == value.nama) {
-                    // console.log(item.nama, value.nama)
-                    // console.log(value.stock, item.type)
-                    let idxStock = value.stock.findIndex(val => {
-                        // console.log(val.type)
-                        // console.log(item.type)
-                        // val.type == item.type
-                        return val.type == item.type
-                    })
-                    // console.log("idx", idxStock, item.qty)
-                    // console.log("before", value.stock[idxStock])
-                    value.stock[idxStock].quantity -= item.quantity
-                    // console.log("after", value.stock[idxStock])
-                    axios.patch(URL_API + `/products/${value.id}`, {
-                        stock: value.stock
-                    }).then(res=>{
-                        console.log("pengurangan product",res.data)
-                    }).catch(err => console.log(err))
-                }
-            })
-        })
     }
 
     render() {
@@ -130,7 +102,9 @@ class CartPage extends React.Component {
                 <div className="mt-5">
                     {this.printCart()}
                 </div>
-                <Button type="button" onClick={this.onBtCheckOut}>Checkout</Button>
+                <Link to="/checkout" className="nav-link" style={{ color: '#2c3e50', fontWeight: 'bold' }}>
+                    <Button type="button" onClick={this.onBtCheckOut}>Checkout</Button> 
+                </Link>
             </div>
         );
     }

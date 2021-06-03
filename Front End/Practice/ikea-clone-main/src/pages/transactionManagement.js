@@ -1,14 +1,14 @@
-import axios from 'axios';
 import React from 'react';
-import { Table, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import axios from 'axios';
 import { URL_API } from '../helper';
+import { Table, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { getDataTransaction } from '../actions';
 import { connect } from 'react-redux';
 
-class CheckoutPage extends React.Component {
+class TransactiontManagement extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {  
+        this.state = {
             transaction: [],
             modal: false,
             modalData: []
@@ -16,51 +16,35 @@ class CheckoutPage extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getDataTransaction()  
-        // this.getDataTransaction()    
+        this.getDataTransaction()    
     }
 
-    // getDataTransaction = () => {
-    //     let idToken = localStorage.getItem("tkn_id")
-    //     axios.get(URL_API + `/transaction/payment/${idToken}`)
-    //     .then(response => {
-    //         console.log('Response data transaction', response.data)
-    //         this.setState({transaction: response.data})
-    //         this.setState({modalData: response.data})
-    //     })
-    //     .catch(error => {
-    //       console.log(error)
-    //     })
-    // }
+    getDataTransaction = () => {
+        let idToken = localStorage.getItem("tkn_id")
+        axios.get(URL_API + `/transaction/payment/${idToken}`)
+        .then(response => {
+            console.log('Response data transaction', response.data)
+            this.setState({transaction: response.data})
+            this.setState({modalData: response.data})
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
 
     toggle = (item) => { 
         this.setState({ modal: !this.state.modal })
         this.setState({ modalData: item })
     }
 
-    convertTime = (data) => {
-        let date = new Date(data);
-        let year = date.getFullYear();
-        let month = date.getMonth()+1;
-        let dt = date.getDate();
-
-        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-        if (dt < 10) {
-            dt = '0' + dt;
-        }
-
-        return (dt + ' ' + monthNames[month] + ' ' + year);
-    }
-
     printTransaction = () => {
-        // return this.state.transaction.map((item,index) => {
-        return this.props.checkout.map((item,index) => {
+        return this.state.transaction.map((item,index) => {
             return  <>
                         <tr>
                             <td>{item.invoice}</td>
-                            <td>{this.convertTime(item.date)}</td>
-                            <td>IDR {item.delivery_cost.toLocaleString()}</td>
-                            <td>IDR {(item.total_payment + item.delivery_cost).toLocaleString()}</td>
+                            <td>{item.date}</td>
+                            <td>IDR {item.delivery_cost}</td>
+                            <td>IDR {item.total_payment}</td>
                             <td>{item.note}</td>
                             <td>{item.status}</td>
                             <td>
@@ -68,11 +52,11 @@ class CheckoutPage extends React.Component {
                                 { item.status == 'Unpaid' ?
 
                                     <Button color="danger" onClick={() => this.payButton(item.idtransaction)}>
-                                        PAY
+                                        CONFIRM
                                     </Button>
                                     :
                                     <Button color="secondary" disabled>
-                                        PAID
+                                        CONFIRMED
                                     </Button>
                                 }
                             </td>
@@ -94,7 +78,8 @@ class CheckoutPage extends React.Component {
 
     printDetailTransaction = () => {
         let { detail } = this.state.modalData
-        // console.log('PRINT DETAIL TRANSACTION', detail)
+        console.log('PRINT DETAIL TRANSACTION', detail)
+        console.log('Props CHEKCOUT', this.props.checkout)
         if (detail != undefined && detail != 1) {
             return detail.map((item, index) => {
                 return  <>
@@ -111,12 +96,11 @@ class CheckoutPage extends React.Component {
         }
     }
 
-    render() { 
-        // console.log('State transaction', this.state.transaction)
-        // console.log('PROPS HISTORY', this.props.checkout)
-        return (  
+    render() {
+        console.log('Props CHEKCOUT', this.props.checkout)
+        return (
             <>
-                <h1 className="text-center mt-5">Checkout</h1>
+                <h3 className="text-center">Transaction Management</h3>
                 <p className="text-center">Need to refresh (bug)</p>
                 <Table>
                     <thead>
@@ -140,7 +124,8 @@ class CheckoutPage extends React.Component {
                         <Modal isOpen={this.state.modal} toggle={this.toggle} size='lg'>
                             <ModalHeader toggle={this.toggle}>Detail</ModalHeader>
                             <ModalBody>
-                                <p>Date: {this.convertTime(this.state.modalData.date)}</p>
+                                <p>Username: {this.state.modalData.username}</p>
+                                <p>Date: {this.state.modalData.date}</p>
                                 <p>Invoice: {this.state.modalData.invoice}</p>
                                 <p>Note: {this.state.modalData.note}</p>
                                 <p>Status: {this.state.modalData.status}</p>
@@ -168,16 +153,14 @@ class CheckoutPage extends React.Component {
                     } 
                 </div>
             </>
-        );
+        )
     }
 }
- 
-// export default CheckoutPage;
 
 const mapToProps = ({ authReducer }) => {
     return {
-        ...authReducer
+        checkout: authReducer.checkout
     }
 }
 
-export default connect(mapToProps, { getDataTransaction })(CheckoutPage);
+export default connect(mapToProps, { getDataTransaction })(TransactiontManagement);

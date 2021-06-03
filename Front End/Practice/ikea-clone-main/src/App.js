@@ -9,6 +9,7 @@ import { URL_API } from './helper';
 import { keepLogin, getProductAction } from './actions'
 import { connect } from 'react-redux'
 import ProductManagement from './pages/productManagement';
+import TransactiontManagement from './pages/transactionManagement';
 import NotFound from './pages/notFound';
 import ProductsPage from './pages/productsPage';
 import ProductDetail from './pages/productDetail';
@@ -41,16 +42,6 @@ class App extends React.Component {
       })
   }
 
-  // getProducts = () => {
-  //   axios.get(URL_API + `/products`)
-  //     .then(res => {
-  //       this.props.getProductAction(res.data)
-  //     })
-  //     .catch(err => {
-  //       console.log("getProduct error :", err)
-  //     })
-  // }
-
   render() {
     return (
       <div>
@@ -66,6 +57,7 @@ class App extends React.Component {
             this.props.role == "admin" &&
             <>
               <Route path="/product-management" component={ProductManagement} />
+              <Route path="/transaction-management" component={TransactiontManagement} />
             </>
           }
           <Route path="*" component={NotFound} />

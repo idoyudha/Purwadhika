@@ -77,3 +77,36 @@ export const updateCart = (data, index) => {
         payload: data
     }
 }
+
+// export const getDataTransaction = () => {
+//     return async (dispatch) => {
+//         try {
+//             let idToken = localStorage.getItem("tkn_id")
+//             let response = axios.get(URL_API + `/transaction/payment/${idToken}`)
+//             console.log('Response Transaction', response)
+//             dispatch({
+//                 type: "UPDATE_CHECKOUT",
+//                 payload: response.data
+//             })
+//         } 
+//         catch (error) {
+//             console.log(error)
+//         }
+//     }
+// }
+
+export const getDataTransaction = () => {
+    return (dispatch) => {
+        let idToken = localStorage.getItem("tkn_id")
+        axios.get(URL_API + `/transaction/payment/${idToken}`)
+        .then(response => {
+            // mengarahkan data ke reducer
+            dispatch({
+                type: "UPDATE_CHECKOUT",
+                payload: response.data
+            })
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+}

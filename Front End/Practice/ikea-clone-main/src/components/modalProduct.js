@@ -7,20 +7,27 @@ class ModalProduct extends React.Component {
         super(props);
         this.state = {
             stock: [],
-            images: []
+            images: [],
+            category: []
         }
+    }
+
+    componentDidMount() {
+        this.getCategory()
     }
 
     onBtAdd = () => {
         // console.log('STOCK STATE', this.state.stock)
         // console.log('IMAGE STATE', this.state.images)
+        // console.log('SELECTED CATEGORY', this.inCategory.value)
         axios.post(URL_API + '/products/add', {
             name: this.inNama.value,
             description: this.inDeskripsi.value,
             brand: this.inBrand.value,
             price: parseInt(this.inHarga.value),
             stock: this.state.stock,
-            images: this.state.images
+            images: this.state.images,
+            idcategory: this.inCategory.value
         }).then(response => {
             console.log(response.data)
             this.props.getData()
@@ -96,8 +103,28 @@ class ModalProduct extends React.Component {
         this.props.btClose()
     }
 
+    getCategory = () => {
+        axios.get(URL_API + `/products/category`)
+        .then(response => {
+            // console.log(response.data)
+            let data = response.data
+            this.setState({ category: data })
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
+
+    printCategory = () => {
+        // console.log('Category', this.state.category)
+        if (this.state.category.length > 0) {
+            return this.state.category.map((item) => {
+                return <option value={item.idcategory}>{item.category}</option>
+            })
+        }
+    }
+
     render() {
-        console.log('ModalOpen', this.props.modalOpen)
         return (
             <Modal isOpen={this.props.modalOpen} toggle={this.props.btClose} >
                 <ModalHeader toggle={this.props.btClose}>Add Product</ModalHeader>
@@ -109,6 +136,12 @@ class ModalProduct extends React.Component {
                     <FormGroup>
                         <Label for="textDes">Deskripsi</Label>
                         <Input type="text" id="textDes" innerRef={elemen => this.inDeskripsi = elemen} />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="category">Select Category</Label>
+                        <Input type="select" name="select" id="category" innerRef={elemen => this.inCategory = elemen}>
+                            {this.printCategory()}
+                        </Input>
                     </FormGroup>
                     <Row>
                         <Col>

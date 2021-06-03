@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Collapse, Input } from 'reactstrap';
-import { getCart } from '../actions'
+import { getCart, updateCart } from '../actions'
 import { URL_API } from '../helper';
 
 class ProductDetail extends React.Component {
@@ -41,14 +41,25 @@ class ProductDetail extends React.Component {
                 idstock: this.state.selectedType.idproduct_stock, 
                 quantity: this.state.quantity
             })
-            // console.log('PROPS CART AFTER add', this.props.cart)
-            axios.post(URL_API + `/transaction/add-cart`, this.state.cart )
-            .then(response => {
-                alert('Add to cart success ✔')
-                this.props.getCart(this.props.iduser)
-            }).catch(error => {
-                console.log(error)
-            })
+            console.log('PROPS CART', this.props.cart)
+            console.log('selected', this.state.selectedType)
+            let { idproduct, idproduct_stock } = this.state.selectedType
+            let index = this.props.cart.findIndex((element) => element.idproduct == idproduct && element.idstock == idproduct_stock)
+            console.log(index,this.state.cart[0].quantity)
+            if (index > -1) {
+                this.props.cart[index].quantity += this.state.cart[0].quantity
+                this.props.updateCart([...this.props.cart], index)
+            }
+            else {
+                console.log('PROPS CART AFTER add', this.props.cart)
+                axios.post(URL_API + `/transaction/add-cart`, this.state.cart )
+                .then(response => {
+                    alert('Add to cart success ✔')
+                    this.props.getCart(this.props.iduser)
+                }).catch(error => {
+                    console.log(error)
+                })
+            }
         } else {
             alert('Choose product type first')
         }
@@ -150,4 +161,4 @@ const mapToProps = ({ authReducer }) => {
     }
 }
 
-export default connect(mapToProps, { getCart })(ProductDetail);
+export default connect(mapToProps, { updateCart, getCart })(ProductDetail);

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Input } from 'reactstrap';
-import { updateCart, getCart } from '../actions'
+import { updateCart, getCart, getDataTransaction } from '../actions'
 import { URL_API } from '../helper';
 import { Link } from 'react-router-dom';
 class CartPage extends React.Component {
@@ -86,6 +86,7 @@ class CartPage extends React.Component {
         .then(response => {
             console.log(response.data)
             this.props.getCart(iduser)
+            this.props.getDataTransaction()    
         })
         .catch(error => {
             console.log(error)
@@ -115,4 +116,4 @@ const mapToProps = ({ authReducer, productReducers }) => {
     }
 }
 
-export default connect(mapToProps, { updateCart, getCart })(CartPage);
+export default connect(mapToProps, { updateCart, getCart, getDataTransaction })(CartPage);

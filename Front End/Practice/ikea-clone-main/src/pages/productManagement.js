@@ -59,7 +59,7 @@ class ProductManagement extends React.Component {
                     <div>
                         {   
                             item.images.map((value, idx) => {
-                                console.log('thumbnail after click', this.state.thumbnail)
+                                // console.log('thumbnail after click', this.state.thumbnail)
                                 return <img src={value.images} style={kursor} width="20%" alt={item.name + idx}
                                     onClick={() => this.setState({ thumbnail: [index, idx] })} />
                             })
@@ -94,7 +94,7 @@ class ProductManagement extends React.Component {
     }
 
     render() {
-        console.log(this.state.detailProduk)
+        // console.log(this.state.detailProduk)
         return (
             <div className="p-2">
                 <h3 className="text-center">Produk Management</h3>

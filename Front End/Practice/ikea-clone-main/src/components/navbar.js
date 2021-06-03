@@ -129,7 +129,9 @@ class NavbarComp extends React.Component {
                                                     </Link>
                                                 </DropdownItem>
                                                 <DropdownItem>
-                                                    Transaction Management
+                                                    <Link to="/transaction-management" style={{ textDecoration: 'none', color: 'gray' }}>
+                                                        Transcation Management
+                                                    </Link>
                                                 </DropdownItem>
                                             </>
                                     }

@@ -110,7 +110,7 @@ class ModalEditProduct extends React.Component {
     }
 
     render() {
-        console.log("detailProduk", this.props.detailProduk)
+        // console.log("detailProduk", this.props.detailProduk)
         let { name, description, brand, price, idproduct } = this.props.detailProduk
         return (
             <Modal isOpen={this.props.modalOpen} toggle={this.props.btClose} >

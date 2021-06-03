@@ -30,10 +30,10 @@ class App extends React.Component {
 
   reLogin = () => {
     let idToken = localStorage.getItem("tkn_id")
-    console.log('idToken', idToken)
+    // console.log('idToken', idToken)
     axios.get(URL_API + `/users?iduser=${idToken}`)
       .then(res => {
-        console.log('Response keeplogin', res)
+        // console.log('Response keeplogin', res)
         this.props.keepLogin(res.data[0])
       })
       .catch(err => {

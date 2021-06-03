@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Collapse, Input } from 'reactstrap';
+import { getCart } from '../actions'
 import { URL_API } from '../helper';
 
 class ProductDetail extends React.Component {
@@ -22,29 +23,17 @@ class ProductDetail extends React.Component {
     }
 
     getProductDetail = () => {
-        console.log('props location', this.props.location)
-        // axios.get(URL_API + `/products${this.props.location.search}`)
+        // console.log('props location', this.props.location)
         axios.get(URL_API + `/products${this.props.location.search}`)
-            .then(response => {
-                console.log("data detail product", response.data)
-                this.setState({ detail: response.data[0] })
-            }).catch(error => {
-                console.log(error)
-            })
+        .then(response => {
+            // console.log("data detail product", response.data)
+            this.setState({ detail: response.data[0] })
+        }).catch(error => {
+            console.log(error)
+        })
     }
 
     onBtAddToCart = () => {
-        // mengambil data cart user dari reducer
-        // data produk di push kedalam array.cart reducer
-        // console.log(this.props.cart)
-        // let cartData = this.props.cart
-        // console.log('cartdata', cartData)
-        // for (let data in cartData) {
-        //     for (let x in data) {
-        //         console.log(x)
-        //     }
-        // }
-        // console.log('FINDINDEX', index)
         if (this.state.selectedType.type) {
             this.state.cart.push({
                 iduser: this.props.iduser,
@@ -52,24 +41,14 @@ class ProductDetail extends React.Component {
                 idstock: this.state.selectedType.idproduct_stock, 
                 quantity: this.state.quantity
             })
-            this.props.cart.push({
-                iduser: this.props.iduser,
-                idproduct: this.state.selectedType.idproduct,
-                idstock: this.state.selectedType.idproduct_stock, 
-                quantity: this.state.quantity,
-                price: this.state.detail.price,
-                images: this.state.detail.images[0].images,
-                name: this.state.detail.name,
-                type: this.state.selectedType.type
-            })
-            // simpan lewat axios.patch
-            console.log('PROPS CART AFTER add', this.props.cart)
+            // console.log('PROPS CART AFTER add', this.props.cart)
             axios.post(URL_API + `/transaction/add-cart`, this.state.cart )
-                .then(response => {
-                    alert('Add to cart success ✔')
-                }).catch(error => {
-                    console.log(error)
-                })
+            .then(response => {
+                alert('Add to cart success ✔')
+                this.props.getCart(this.props.iduser)
+            }).catch(error => {
+                console.log(error)
+            })
         } else {
             alert('Choose product type first')
         }
@@ -90,7 +69,7 @@ class ProductDetail extends React.Component {
     }
 
     onBtInc = () => {
-        console.log('qty', this.state.quantity)
+        // console.log('qty', this.state.quantity)
         if (this.state.quantity < this.state.selectedType.quantity) {
             this.setState({ quantity: this.state.quantity += 1 })
         } else {
@@ -105,8 +84,8 @@ class ProductDetail extends React.Component {
     }
 
     render() {
-        console.log('State detail all', this.state)
-        console.log('Props', this.props)
+        // console.log('State detail all', this.state)
+        // console.log('Props', this.props)
         return (
             <div className="row p-5">
                 {
@@ -171,4 +150,4 @@ const mapToProps = ({ authReducer }) => {
     }
 }
 
-export default connect(mapToProps)(ProductDetail);
+export default connect(mapToProps, { getCart })(ProductDetail);

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Input } from 'reactstrap';
-import { updateCart } from '../actions'
+import { updateCart, getCart } from '../actions'
 import { URL_API } from '../helper';
 import { Link } from 'react-router-dom';
 class CartPage extends React.Component {
@@ -11,25 +11,8 @@ class CartPage extends React.Component {
         this.state = {}
     }
 
-    componentDidMount() {
-        this.reLogin()
-    }
-    
-    reLogin = () => {
-        let idToken = localStorage.getItem("tkn_id")
-        console.log('idToken', idToken)
-        axios.get(URL_API + `/users?iduser=${idToken}`)
-        .then(res => {
-          console.log('Response keeplogin', res)
-          this.props.keepLogin(res.data[0])
-        })
-        .catch(err => {
-          console.log("Keeplogin error :", err)
-        })
-    }
-
     printCart = () => {
-        console.log("Props CART", this.props.cart)
+        // console.log("Props CART", this.props.cart)
         return this.props.cart.map((item, index) => {
             return <div className="row">
                 <div className="col-md-2">
@@ -63,6 +46,7 @@ class CartPage extends React.Component {
 
     onBtRemove = (index) => {
         let idcart = this.props.cart[index].idcart 
+        console.log('props', this.props)
         console.log('index delete idcart', idcart)
         axios.delete(URL_API + `/transaction/delete-cart/${idcart}`)
         .then(response => {
@@ -74,6 +58,7 @@ class CartPage extends React.Component {
     }
 
     onBtInc = (index) => {
+        console.log('props', this.props)
         console.log(index)
         this.props.cart[index].quantity += 1
         this.props.updateCart([...this.props.cart], index)
@@ -84,21 +69,35 @@ class CartPage extends React.Component {
         console.log(index)
         this.props.cart[index].quantity -= 1
         this.props.updateCart([...this.props.cart], index)
-        if (this.props.cart[index].quantity == 1) {
+        if (this.props.cart[index].quantity == 0) {
+            this.props.cart.splice(index, 1)
             this.onBtRemove(index)
         }
     }
 
     onBtCheckOut = () => {
-        console.log(this.props.cart)
-        console.log(this.props.products)
-    }
+        let iduser = localStorage.getItem("tkn_id")
+        let cart = [] 
+        this.props.cart.forEach(element => {
+            cart.push(element)
+        });
+        console.log('CHECKOUT CART', cart)
+        axios.post(URL_API + `/transaction/payment/${iduser}`, this.props.cart)
+        .then(response => {
+            console.log(response.data)
+            this.props.getCart(iduser)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }   
 
     render() {
-        console.log('PROPS', this.props)
+        // console.log('PROPS', this.props)
         return (
             <div>
                 <h1 className="text-center mt-5">CART</h1>
+                <p className="text-center">delete function bug, need to refresh</p>
                 <div className="mt-5">
                     {this.printCart()}
                 </div>
@@ -116,4 +115,4 @@ const mapToProps = ({ authReducer, productReducers }) => {
     }
 }
 
-export default connect(mapToProps, { updateCart })(CartPage);
+export default connect(mapToProps, { updateCart, getCart })(CartPage);

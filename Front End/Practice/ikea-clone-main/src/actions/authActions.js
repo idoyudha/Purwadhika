@@ -3,55 +3,36 @@ import { URL_API } from "../helper"
 
 export const authLogin = (email, password) => {
     return async (dispatch) => {
-        // try {
-        //     let res = await axios.post(URL_API + `users/login`, {
-        //         email, password
-        //     })
-        //     console.log('Response data', res.data)
-        //     localStorage.setItem("tkn_id", res.data[0].iduser)
-        //     // menyimpan data ke reducer
-        //     dispatch(getCart(res.data[0].iduser))
-        //     dispatch({
-        //         type: "LOGIN_SUCCESS",
-        //         payload: res.data[0]
-        //     })
-        // } catch (error) {
-        //     console.log(err)
-        // }
-        // fungsi untuk get data ke API
-        axios.post(URL_API + `/users/login`, {
-            email, password
-        })
-        .then(res => {
-            console.log('Response data', res.data)
-            localStorage.setItem("tkn_id", res.data[0].iduser)
-            // menyimpan data ke reducer
-            // dispatch(getCart(res.data[0].iduser))
-            axios.get(URL_API + `/users?iduser=${res.data[0].iduser}`)
-            .then(res => {
-                console.log("RESPONSE DATA DOUBLE", res.data)
-                dispatch({
-                    type: "LOGIN_SUCCESS",
-                    payload: res.data[0]
-                })
+        try {
+            let response = await axios.post(URL_API + `/users/login`, {
+                email, password
             })
-            .catch(err => {
-                console.log(err)
+            localStorage.setItem("tkn_id", response.data[0].iduser)
+            await dispatch(getCart(response.data[0].iduser))
+            dispatch({
+                type: "LOGIN_SUCCESS",
+                payload: { ...response.data[0]}
             })
-        }).catch(err => {
-            console.log(err)
-        })
+        } 
+        catch (error) {
+            console.log(error)
+        }
     }
 }
 
 export const getCart = (id) => {
-    axios.get(URL_API + `/transaction/get-cart/${id}`)
-    .then(response => {
-        console.log("cart user", response.data)
-    })
-    .catch(error => {
-        console.log(error)
-    })
+    return async (dispatch) => {
+        try {
+            let response = await axios.get(URL_API + `/transaction/cart/${id}`)
+            dispatch({
+                type: "UPDATE_CART",
+                payload: response.data
+            })
+        } 
+        catch (error) {
+            console.log(error)
+        }
+    }
 }
 
 export const authLogout = () => {
@@ -62,22 +43,31 @@ export const authLogout = () => {
 }
 
 export const keepLogin = (data) => {
-    return {
-        type: "LOGIN_SUCCESS",
-        payload: data
+    return async (dispatch) => {
+        try {
+            await dispatch(getCart(data.iduser))
+            // console.log("cart2", cart)
+            dispatch({
+                type: "LOGIN_SUCCESS",
+                payload: { ...data }
+            })
+        } 
+        catch (error) {
+            console.log(error)
+        }
     }
 }
 
 // export const updateCart = (data) => {
 export const updateCart = (data, index) => {
-    console.log("Update cart", data, index)
+    // console.log("Update cart", data, index)
     let idcart = data[index].idcart
     let quantity = data[index].quantity
     axios.patch(URL_API + `/transaction/update-cart`, {
         idcart, quantity
     })
     .then(res => {
-        console.log("Update cart database", res.data)
+        // console.log("Update cart database", res.data)
     })
     .catch(err => {
         console.log(err)

@@ -100,6 +100,7 @@ class CheckoutPage extends React.Component {
         return (  
             <>
                 <h1 className="text-center mt-5">Checkout</h1>
+                <p className="text-center">Need to refresh (bug)</p>
                 <Table>
                     <thead>
                         <tr>

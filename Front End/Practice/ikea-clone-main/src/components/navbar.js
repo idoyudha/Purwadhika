@@ -38,7 +38,7 @@ class NavbarComp extends React.Component {
         })
     }
     render() {
-        console.log(this.state.dataSearch, this.state.openSearch)
+        // console.log(this.state.dataSearch, this.state.openSearch)
         return (
             <div>
                 <div>

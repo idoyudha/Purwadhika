@@ -5,7 +5,7 @@ module.exports = {
     getCart: async (request, response, next) => {
         try {
             // iduser, idproduct, name, image, price, type, quantity, idstock, quantity
-            let cart = `SELECT cart.iduser, cart.idproduct, cart.idcart, product.name, pi.images, product.price, ps.type, ps.quantity, 
+            let cart = `SELECT cart.iduser, cart.idproduct, cart.idstock, cart.idcart, product.name, pi.images, product.price, ps.type, ps.quantity, 
             cart.quantity FROM cart JOIN product ON cart.idproduct = product.idproduct JOIN product_stock ps ON 
             ps.idproduct_stock = cart.idstock JOIN product_image pi ON pi.idproduct_image = cart.idstock 
             WHERE cart.iduser=${request.params.iduser}`
@@ -71,12 +71,15 @@ module.exports = {
             let deleteCart = `DELETE FROM cart WHERE iduser = ${request.params.iduser};`
             let queryDetail = `INSERT INTO transaction_detail (idtransaction, idproduct, idstock, quantity) VALUES ?`
             
+            // Insert to transaction
+            queryTransaction = await dbQuery(queryTransaction) // Insert to transaction
+
+            console.log('query transaction', queryTransaction)
+            // console.log("REquest body", request.body)
             // Insert to transaction detail
-            let dataDetail = request.body.map(item => [item.idproduct, item.idcart, item.idstock, item.quantity])
+            let dataDetail = request.body.map(item => [queryTransaction.insertId, item.idproduct, item.idstock, item.quantity])
             queryDetail = await dbQuery(queryDetail, [dataDetail])
             
-            
-            queryTransaction = await dbQuery(queryTransaction) // Insert to transaction
             deleteCart = await dbQuery(deleteCart) // Delete cart with iduser
 
             response.status(200).send({ success: true, message: "Checkout Done!"})      
@@ -89,13 +92,22 @@ module.exports = {
     getTransaction: async (request, response, next) => {
         try {
             let getDataTransaction = `SELECT * FROM transaction JOIN status ON transaction.idstatus = status.idstatus WHERE iduser = ${request.params.iduser};`
-            let getDataDetail = `SELECT name, type, transaction_detail.quantity, price, (transaction_detail.quantity * price) subtotal FROM transaction_detail JOIN product ON transaction_detail.idproduct = product.idproduct JOIN transaction on transaction.idtransaction = transaction_detail.idtransaction JOIN product_stock ON product_stock.idproduct_stock = transaction_detail.idstock WHERE iduser = ${request.params.iduser} AND transaction.idtransaction = transaction_detail.idtransaction; `
+            let getDataDetail = `SELECT transaction.idtransaction, name, type, transaction_detail.quantity, price, (transaction_detail.quantity * price) subtotal FROM transaction_detail JOIN product ON transaction_detail.idproduct = product.idproduct JOIN transaction on transaction.idtransaction = transaction_detail.idtransaction JOIN product_stock ON product_stock.idproduct_stock = transaction_detail.idstock WHERE iduser = ${request.params.iduser} AND transaction.idtransaction = transaction_detail.idtransaction; `
 
             dataTransaction = await dbQuery(getDataTransaction)
             // console.log(dataTransaction)
 
             dataDetail = await dbQuery(getDataDetail)
-            dataTransaction[0].detail = dataDetail
+            // console.log(dataTransaction)
+            // console.log(dataDetail)
+            dataTransaction.forEach(elementT => {
+                elementT.detail = []
+                dataDetail.forEach(elementD => {
+                    if (elementT.idtransaction == elementD.idtransaction) {
+                        elementT.detail.push(elementD)
+                    }
+                });
+            });
 
             response.status(200).send(dataTransaction)
         } 
@@ -117,7 +129,7 @@ module.exports = {
 }
 
 /* Sample data for query detail 
-{
+[
     {
         "idproduct": 1,
         "idcart": 1,
@@ -130,5 +142,5 @@ module.exports = {
         "idstock": 2,
         "quantity": 2
     }
-}
+]
 */ 

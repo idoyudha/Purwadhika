@@ -62,7 +62,28 @@ module.exports = {
             let multipleInsertImage = []
             let multipleInsertStock = []
             
+            // Get all idcategory from child -> parent 
+            let getCategory = `WITH RECURSIVE category_path (id, title, parent_id) AS 
+            (
+                SELECT idcategory, category, parent_id
+                    FROM category 
+                    WHERE idcategory = ${request.body.idcategory}
+                UNION ALL
+                SELECT c.idcategory, c.category, c.parent_id
+                    FROM category_path AS cp JOIN category AS c 
+                    ON cp.parent_id = c.idcategory
+            )
+            SELECT * FROM category_path;`
+            
+            getCategory = await dbQuery(getCategory)
+            // console.log('getCategory', getCategory)
+            // response.status(200).send(getCategory)
             if (productSQL.insertId) {
+                getCategory = getCategory.map(item => [productSQL.insertId, item.id])
+                console.log(getCategory)
+                let insertCategory = `INSERT INTO product_category (idproduct, idcategory) VALUES ?`
+                await dbQuery(insertCategory, [getCategory])
+
                 images.forEach(element => {
                     multipleInsertImage.push(`(${productSQL.insertId}, ${db.escape(element.images)})`)
                 });
@@ -100,7 +121,7 @@ module.exports = {
             let updateSQLProduct = `UPDATE PRODUCT SET ${updateProduct} WHERE (idproduct = '${request.body.idproduct}');
             ${updateImages.join('\n')}
             ${updateStock.join('\n')}`
-            console.log(updateSQLProduct)
+            // console.log(updateSQLProduct)
             
             await dbQuery(updateSQLProduct)
             response.status(200).send('Update success!')
@@ -110,7 +131,7 @@ module.exports = {
     },
 
     deleteProduct: async (request, response) => {
-        console.log('id', request.params.id)
+        // console.log('id', request.params.id)
         try {
             let deleteSQL = `UPDATE product SET idstatus = 2 WHERE (idproduct = ${request.params.id})`
             let deletequery = await dbQuery(deleteSQL)
@@ -118,5 +139,36 @@ module.exports = {
         } catch (error) {
             response.status(500).send({ status: 'Error get MySQL', messages: error})
         }
+    },
+
+    printCategory: async (request, response) => {
+        try {
+            let getCategory = `SELECT c1.idcategory, c1.category 
+            FROM category c1 LEFT JOIN category c2 ON c2.parent_id = c1.idcategory
+            WHERE c2.idcategory IS NULL;` 
+            let categoryQuery = await dbQuery(getCategory)
+            response.status(200).send(categoryQuery)
+        } 
+        catch (error) {
+            response.status(500).send({ status: 'Error get category', messages: error})
+        }
     }
 }
+
+// Add product data
+// {
+//     "name": "SOALLIS",
+//     "description": "Memberikan pencahayaan menyebar, baik untuk menerangi bagian besar di kamar mandi.",
+//     "brand": "IKEA",
+//     "price": 649000,
+//     "stock": [{
+//         "idproduct": 46,
+//         "type": "bath lamp",
+//         "quantity": 5
+//     }],
+//     "images": [{
+//         "images": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/306/0730612_PE737651_S5.jpg",
+//         "idproduct": 46
+//     }],
+//     "idcategory": 5
+// }

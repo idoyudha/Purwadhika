@@ -15,12 +15,15 @@ import ProductsPage from './pages/productsPage';
 import ProductDetail from './pages/productDetail';
 import CartPage from './pages/cartPage';
 import CheckoutPage from './pages/checkoutPage';
+import VerificationPage from './pages/verificationPage';
+// import AlertVerification from './components/alertVerif';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isOpen: false
+      // status: null
     }
   }
 
@@ -34,8 +37,8 @@ class App extends React.Component {
     // console.log('idToken', idToken)
     axios.get(URL_API + `/users?iduser=${idToken}`)
       .then(res => {
-        // console.log('Response keeplogin', res)
         this.props.keepLogin(res.data[0])
+        console.log('Response keeplogin', res.data[0].idstatus)
       })
       .catch(err => {
         console.log("Keeplogin error :", err)
@@ -53,6 +56,7 @@ class App extends React.Component {
           <Route path="/product-detail" component={ProductDetail}/>
           <Route path="/cart" component={CartPage}/>
           <Route path="/checkout" component={CheckoutPage}/>
+          <Route path="/verification" component={VerificationPage}/>
           {
             this.props.role == "admin" &&
             <>

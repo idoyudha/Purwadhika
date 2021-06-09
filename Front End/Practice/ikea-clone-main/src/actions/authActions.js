@@ -7,7 +7,9 @@ export const authLogin = (email, password) => {
             let response = await axios.post(URL_API + `/users/login`, {
                 email, password
             })
+            // console.log('Response data', response.data[0])
             localStorage.setItem("tkn_id", response.data[0].iduser)
+            console.log('token id in action', localStorage.getItem("tkn_id"))
             await dispatch(getCart(response.data[0].iduser))
             dispatch({
                 type: "LOGIN_SUCCESS",

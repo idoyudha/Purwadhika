@@ -5,6 +5,7 @@ import { URL_API } from '../helper';
 import { connect } from 'react-redux'
 import { authLogin } from '../actions'
 import { Redirect } from 'react-router-dom';
+import AlertVerification from '../components/alertVerif';
 
 class AuthPage extends React.Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class AuthPage extends React.Component {
             alert: false,
             message: '',
             alertType: '',
+            status: null
         }
     }
 
@@ -23,7 +25,7 @@ class AuthPage extends React.Component {
         let password = this.inRegisPassword.value
         let confPassword = this.inConfPassword.value
         let role = 'user'
-        let status = 'active'
+        let idstatus = 12
         if (username == '' || email == '' || password == '' || confPassword == '') {
             // setState untuk membuka alert, dengan mengatur message serta type alert
             this.setState({ alert: !this.state.alert, message: "Isi semua form !", alertType: 'danger' })
@@ -31,8 +33,9 @@ class AuthPage extends React.Component {
             setTimeout(() => this.setState({ alert: !this.state.alert, message: '', alertType: '' }), 3000)
         } else {
             if (email.includes('@')) {
+                console.log(username, email, password, role, idstatus)
                 axios.post(URL_API + `/users/register`, {
-                    username, email, password, role, status
+                    username, email, password, role, idstatus
                 })
                     .then(res => {
                         console.log('Response', res.data)
@@ -45,7 +48,7 @@ class AuthPage extends React.Component {
                                 email,
                                 password,
                                 role: 'user',
-                                status: 'active'
+                                idstatus: 12
                             })
                                 .then(res => {
                                     this.setState({ alert: !this.state.alert, message: "Registrasi akun sukses ✔", alertType: 'success' })
@@ -70,11 +73,26 @@ class AuthPage extends React.Component {
         }
     }
 
-    onBtLogin = () => {
-        // console.log('Login value', this.inEmail.value, this.inPassword.value)
-        this.props.authLogin(this.inEmail.value, this.inPassword.value)
-        let idToken = localStorage.getItem("tkn_id")
-        console.log('idToken', idToken)
+    onBtLogin = async () => { 
+        try {
+            // console.log(this.inEmail.value, this.inPassword.value)
+            let email = this.inEmail.value
+            let password = this.inPassword.value
+            let response = await axios.post(URL_API + `/users/login`, {
+                email, password
+            })
+            // console.log(response.data[0].idstatus)
+            if (response.data[0].idstatus == 11) {
+                this.props.authLogin(this.inEmail.value, this.inPassword.value)
+            }
+            else if (response.data[0].idstatus == 12) {
+                this.setState({status: 12})
+            }
+
+        } 
+        catch (error) {
+            console.log(error)
+        }
     }
 
     reLogin = () => {
@@ -119,6 +137,9 @@ class AuthPage extends React.Component {
                     <div className="col-6 p-5">
                         <h3>Silakan masuk ke akun Anda</h3>
                         <p>Silakan masuk ke akun Anda untuk menyelesaikan pembayaran dengan data pribadi Anda.</p>
+                        {this.state.status == 12 ? (
+                            <AlertVerification email={this.inEmail.value}/>
+                        ) : null}
                         <FormGroup>
                             <Label for="textEmail">Email</Label>
                             <Input type="email" id="textEmail" innerRef={elemen => this.inEmail = elemen} />

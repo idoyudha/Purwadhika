@@ -1,6 +1,8 @@
+const { request } = require('express')
 const fs = require('fs')
 const url = require('url')
 const { db, dbQuery } = require('../config/database')
+const transporter = require('../config/nodemailer')
 
 module.exports = {
     getUser: async (request, response) => {
@@ -63,9 +65,17 @@ module.exports = {
             let password = request.body.password
             let role = request.body.role
             let idstatus = request.body.idstatus
+
+            let char = '0123456789qwertyuiopasdfghjklzxcvbnm'
+            let OTP = ''
+
+            for (let i = 0; i < 6; i++) {
+                OTP += char.charAt(Math.floor(Math.random() * char.length))
+            }
+
             // console.log(username, email, password, role, idstatus)
             let getSQL = `SELECT * FROM USER WHERE email='${email}'`
-            let postSQL = `INSERT INTO user (username, email, password, role, idstatus) VALUES ('${username}', '${email}', '${password}', '${role}', '${idstatus}');`
+            let postSQL = `INSERT INTO user (username, email, password, role, idstatus, otp) VALUES ('${username}', '${email}', '${password}', '${role}', '${idstatus}', ${db.escape(OTP)});`
             let get = await dbQuery(getSQL)
             let data = JSON.parse(JSON.stringify(get))
             console.log(data.length)
@@ -73,12 +83,95 @@ module.exports = {
                 response.status(200).send('Email already registered!')
             }
             else {
-                await dbQuery(postSQL)
-                response.status(200).send('Register Success!')
+                let data = await dbQuery(postSQL)
+                let getUser = await dbQuery(`SELECT * FROM USER WHERE iduser=${data.insertId}`)
+
+                let {iduser, username, email, role, idstatus, otp} = getUser[0]
+
+                // config email 
+
+                // 1. email content
+                let mail = {
+                    from: 'Admin IKEA <yudhatama1123@gmail.com>',
+                    to: email,
+                    subject: '[IKEA] - Verification Email',
+                    html: ` <div><p>Your OTP is <b>${otp}</b></p>
+                            <a href='http://localhost:3000/verification'> Verification your email </a></div>`
+                }
+
+                // 2. config transporter
+                await transporter.sendMail(mail)
+
+                response.status(200).send({ success: true, messages: "Register Suceess!"})
             }
         } 
         catch (error) {
+            console.log(error)
             response.status(400).send({ status: 'Error post to MySQL', messages: error})
+        }
+    },
+
+    verification: async (request, response) => {
+        try {
+            let getUserID = `SELECT iduser FROM user WHERE otp = ${db.escape(request.body.otp)}`
+            let userID = await dbQuery(getUserID)
+            let {iduser} = userID[0]
+            let getOTP = `SELECT otp FROM user WHERE iduser = ${db.escape(iduser)};`
+            let data = await dbQuery(getOTP)
+            // console.log('data otp', data[0].otp)
+            // console.log('request body', request.body.otp)
+            if (request.body.otp == data[0].otp) {
+                console.log('Found')
+                let updateStatus = `UPDATE user SET idstatus = 11 WHERE iduser = ${db.escape(iduser)};`
+                // console.log(updateStatus)
+
+                await dbQuery(updateStatus)
+                response.status(200).send({ success: true, messages: "Email is verified!"})
+            }
+            else {
+                console.log('Wrong OTP')
+            }
+        } 
+        catch (error) {
+            console.log(error)
+            response.status(400).send({ status: 'Error MySQL', messages: error})
+        }
+    },
+
+    reverification: async (request, response) => {
+        try {
+            let getUserData = `SELECT iduser, email FROM user WHERE email = ${db.escape(request.body.email)}`
+            let userID = await dbQuery(getUserData)
+            let {iduser, email} = userID[0]
+            // console.log(userID[0].iduser)
+            let char = '0123456789qwertyuiopasdfghjklzxcvbnm'
+            let OTP = ''
+
+            for (let i = 0; i < 6; i++) {
+                OTP += char.charAt(Math.floor(Math.random() * char.length))
+            }
+
+            let updateOTP = `UPDATE user SET otp = ${db.escape(OTP)} WHERE iduser = ${iduser};`
+            console.log(updateOTP)
+            await dbQuery(updateOTP)
+
+            // config email 
+
+            // 1. email content
+            let mail = {
+                from: 'Admin IKEA <yudhatama1123@gmail.com>',
+                to: email,
+                subject: '[IKEA] - Verification Email',
+                html: ` <div><p>Your new OTP is <b>${OTP}</b></p>
+                        <a href='http://localhost:3000/verification'> Verification your email </a></div>`
+            }
+            // 2. config transporter
+            await transporter.sendMail(mail)
+
+            response.status(200).send({ success: true, messages: "OTP has been sent to your email"})
+        } catch (error) {
+            console.log(error)
+            response.status(400).send({ status: 'Error MySQL', messages: error})
         }
     }
 }

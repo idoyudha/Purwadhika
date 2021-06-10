@@ -1,8 +1,6 @@
-const { request } = require('express')
-const fs = require('fs')
-const url = require('url')
-const { db, dbQuery } = require('../config/database')
-const transporter = require('../config/nodemailer')
+const { db, dbQuery, transporter, createToken } = require('../config')
+const Crypto = require('crypto') // module for hashing password
+
 
 module.exports = {
     getUser: async (request, response) => {
@@ -34,13 +32,14 @@ module.exports = {
     login: async (request, response) => {
         try {
             if (request.body.email && request.body.password) {
+                let hashPassword = Crypto.createHmac("sha256", "ikea$$$").update(request.body.password).digest("hex")
+                
                 let getSQL = `SELECT * FROM USER WHERE 
                 email=${db.escape(request.body.email)} AND
-                password=${db.escape(request.body.password)}`
+                password=${db.escape(hashPassword)}`
 
                 let iduser = `SELECT iduser FROM db_ikea.user WHERE email = ${db.escape(request.body.email)}`
                 // console.log('iduser', iduser)
-
                 let data = await dbQuery(getSQL)
                 if (data.length > 0) {
                     response.status(200).send(data) 
@@ -73,12 +72,15 @@ module.exports = {
                 OTP += char.charAt(Math.floor(Math.random() * char.length))
             }
 
+            // hashing password
+            let hashPassword = Crypto.createHmac("sha256", "ikea$$$").update(password).digest("hex")
+
             // console.log(username, email, password, role, idstatus)
             let getSQL = `SELECT * FROM USER WHERE email='${email}'`
-            let postSQL = `INSERT INTO user (username, email, password, role, idstatus, otp) VALUES ('${username}', '${email}', '${password}', '${role}', '${idstatus}', ${db.escape(OTP)});`
+            let postSQL = `INSERT INTO user (username, email, password, role, idstatus, otp) VALUES ('${username}', '${email}', '${hashPassword}', '${role}', '${idstatus}', ${db.escape(OTP)});`
             let get = await dbQuery(getSQL)
             let data = JSON.parse(JSON.stringify(get))
-            console.log(data.length)
+            // console.log(data.length)
             if (data.length > 0) {
                 response.status(200).send('Email already registered!')
             }
@@ -88,6 +90,9 @@ module.exports = {
 
                 let {iduser, username, email, role, idstatus, otp} = getUser[0]
 
+                // Create token
+                let token = createToken({iduser, username, email, role, idstatus})
+
                 // config email 
 
                 // 1. email content
@@ -96,7 +101,7 @@ module.exports = {
                     to: email,
                     subject: '[IKEA] - Verification Email',
                     html: ` <div><p>Your OTP is <b>${otp}</b></p>
-                            <a href='http://localhost:3000/verification'> Verification your email </a></div>`
+                            <a href='http://localhost:3000/verification/${token}'> Verification your email </a></div>`
                 }
 
                 // 2. config transporter
@@ -113,6 +118,7 @@ module.exports = {
 
     verification: async (request, response) => {
         try {
+            console.log("Read token: ", request.user)
             let getUserID = `SELECT iduser FROM user WHERE otp = ${db.escape(request.body.otp)}`
             let userID = await dbQuery(getUserID)
             let {iduser} = userID[0]
@@ -121,7 +127,7 @@ module.exports = {
             // console.log('data otp', data[0].otp)
             // console.log('request body', request.body.otp)
             if (request.body.otp == data[0].otp) {
-                console.log('Found')
+                // console.log('Found')
                 let updateStatus = `UPDATE user SET idstatus = 11 WHERE iduser = ${db.escape(iduser)};`
                 // console.log(updateStatus)
 
@@ -140,9 +146,11 @@ module.exports = {
 
     reverification: async (request, response) => {
         try {
-            let getUserData = `SELECT iduser, email FROM user WHERE email = ${db.escape(request.body.email)}`
+            console.log('Goto reverification')
+            let hashPassword = Crypto.createHmac("sha256", "ikea$$$").update(request.body.password).digest("hex")
+            let getUserData = `SELECT * FROM user WHERE email = ${db.escape(request.body.email)} AND password = ${db.escape(hashPassword)};`
             let userID = await dbQuery(getUserData)
-            let {iduser, email} = userID[0]
+            let {iduser, username, email, role, idstatus} = userID[0]
             // console.log(userID[0].iduser)
             let char = '0123456789qwertyuiopasdfghjklzxcvbnm'
             let OTP = ''
@@ -152,18 +160,20 @@ module.exports = {
             }
 
             let updateOTP = `UPDATE user SET otp = ${db.escape(OTP)} WHERE iduser = ${iduser};`
-            console.log(updateOTP)
+            // console.log(updateOTP)
             await dbQuery(updateOTP)
+            
+            // Create token
+            let token = createToken({iduser, username, email, role, idstatus})
 
             // config email 
-
             // 1. email content
             let mail = {
                 from: 'Admin IKEA <yudhatama1123@gmail.com>',
                 to: email,
                 subject: '[IKEA] - Verification Email',
                 html: ` <div><p>Your new OTP is <b>${OTP}</b></p>
-                        <a href='http://localhost:3000/verification'> Verification your email </a></div>`
+                        <a href='http://localhost:3000/verification/${token}'> Verification your email </a></div>`
             }
             // 2. config transporter
             await transporter.sendMail(mail)

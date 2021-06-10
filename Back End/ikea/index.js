@@ -3,12 +3,14 @@ const express = require('express')
 const app = express()
 const port = 2025 
 const cors = require('cors')
+const bearerToken = require('express-bearer-token')
 
 const { homeRoute, userRoute, productRoute, transactionRoute } = require('./routes')
 const { db } = require('./config/database')
 
 app.use(cors())
-app.use(express.json())
+app.use(bearerToken()) // take auth/token from request header which sent by front end
+app.use(express.json()) // take data from request body url
 app.use('/', homeRoute)
 app.use('/users', userRoute)
 app.use('/products', productRoute)

@@ -78,6 +78,7 @@ class AuthPage extends React.Component {
             // console.log(this.inEmail.value, this.inPassword.value)
             let email = this.inEmail.value
             let password = this.inPassword.value
+            // console.log(email, password)
             let response = await axios.post(URL_API + `/users/login`, {
                 email, password
             })
@@ -138,7 +139,7 @@ class AuthPage extends React.Component {
                         <h3>Silakan masuk ke akun Anda</h3>
                         <p>Silakan masuk ke akun Anda untuk menyelesaikan pembayaran dengan data pribadi Anda.</p>
                         {this.state.status == 12 ? (
-                            <AlertVerification email={this.inEmail.value}/>
+                            <AlertVerification email={this.inEmail.value} password={this.inPassword.value}/>
                         ) : null}
                         <FormGroup>
                             <Label for="textEmail">Email</Label>

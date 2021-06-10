@@ -1,15 +1,15 @@
 import React from 'react'
-import { Alert } from 'reactstrap';
+import { Alert, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { URL_API } from '../helper';
 import axios from 'axios';
 
-const AlertVerification = ({email}) => {
+const AlertVerification = ({email, password}) => {
     const getVerif = async () => {
         try {
-            console.log('getverif', email)
-            await axios.post(URL_API + `/users/reverification`, {
-                email
+            console.log('getverif', email, password)
+            await axios.patch(URL_API + `/users/reverification`, {
+                email, password
             })
         } catch (error) {
             console.log(error)
@@ -19,7 +19,7 @@ const AlertVerification = ({email}) => {
     return (
         <div>
             <Alert color="warning">
-                Please verification your email first on this <Link to="/verification" onClick={getVerif} style={{ textDecoration: 'none', color: 'gray' }}>link</Link>
+                Please verification your email, by click <Button onClick={getVerif}>this link</Button>
             </Alert>
         </div>
     )

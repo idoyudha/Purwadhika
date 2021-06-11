@@ -84,8 +84,8 @@ class CheckoutPage extends React.Component {
     payButton = (id) => {
         axios.patch(URL_API + `/transaction/pay/${id}`)
         .then(response => {
-            // console.log('Response data transaction', response.data)
-            this.getDataTransaction()
+            console.log('Response data transaction', response.data)
+            this.props.getDataTransaction()  
         })
         .catch(error => {
           console.log(error)

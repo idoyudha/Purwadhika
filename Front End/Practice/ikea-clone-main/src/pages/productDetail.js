@@ -41,21 +41,26 @@ class ProductDetail extends React.Component {
                 idstock: this.state.selectedType.idproduct_stock, 
                 quantity: this.state.quantity
             })
-            console.log('PROPS CART', this.props.cart)
-            console.log('selected', this.state.selectedType)
+            // console.log('PROPS CART', this.props.cart)
+            // console.log('selected', this.state.selectedType)
             let { idproduct, idproduct_stock } = this.state.selectedType
+            // console.log('props', this.props)
+            let token = localStorage.getItem("tkn_id")
+            console.log("Token and ID user", token, this.props.iduser)
             let index = this.props.cart.findIndex((element) => element.idproduct == idproduct && element.idstock == idproduct_stock)
-            console.log(index,this.state.cart[0].quantity)
+            // console.log(index,this.state.cart[0].quantity)
             if (index > -1) {
                 this.props.cart[index].quantity += this.state.cart[0].quantity
                 this.props.updateCart([...this.props.cart], index)
             }
             else {
                 console.log('PROPS CART AFTER add', this.props.cart)
+                console.log('STATE CART', this.state.cart)
                 axios.post(URL_API + `/transaction/add-cart`, this.state.cart )
                 .then(response => {
                     alert('Add to cart success ✔')
-                    this.props.getCart(this.props.iduser)
+                    console.log("Add to cart", response.data)
+                    this.props.getCart(token)
                 }).catch(error => {
                     console.log(error)
                 })

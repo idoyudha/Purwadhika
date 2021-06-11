@@ -76,16 +76,24 @@ class CartPage extends React.Component {
     }
 
     onBtCheckOut = () => {
-        let iduser = localStorage.getItem("tkn_id")
+        let token = localStorage.getItem("tkn_id")
         let cart = [] 
         this.props.cart.forEach(element => {
             cart.push(element)
         });
         console.log('CHECKOUT CART', cart)
-        axios.post(URL_API + `/transaction/payment/${iduser}`, this.props.cart)
+        let config = {
+            method: 'post',
+            url: URL_API + `/transaction/payment/${token}`,
+            data: this.props.cart,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+        axios(config)
         .then(response => {
-            console.log(response.data)
-            this.props.getCart(iduser)
+            console.log("Checkout response data", response.data)
+            this.props.getCart(token)
             this.props.getDataTransaction()    
         })
         .catch(error => {

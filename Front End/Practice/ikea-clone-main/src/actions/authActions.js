@@ -8,12 +8,12 @@ export const authLogin = (email, password) => {
                 email, password
             })
             // console.log('Response data', response.data[0])
-            localStorage.setItem("tkn_id", response.data[0].iduser)
+            localStorage.setItem("tkn_id", response.data.token)
             console.log('token id in action', localStorage.getItem("tkn_id"))
-            await dispatch(getCart(response.data[0].iduser))
+            await dispatch(getCart(response.data.token))
             dispatch({
                 type: "LOGIN_SUCCESS",
-                payload: { ...response.data[0]}
+                payload: { ...response.data}
             })
         } 
         catch (error) {
@@ -22,10 +22,19 @@ export const authLogin = (email, password) => {
     }
 }
 
-export const getCart = (id) => {
+export const getCart = (token) => {
     return async (dispatch) => {
         try {
-            let response = await axios.get(URL_API + `/transaction/cart/${id}`)
+            console.log("Response data before add cart", token)
+            let config = {
+                method: 'get',
+                url: URL_API + `/transaction/cart/${token}`,
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            let response = await axios(config)
+            console.log("Response data after add cart", response)
             dispatch({
                 type: "UPDATE_CART",
                 payload: response.data
@@ -47,7 +56,9 @@ export const authLogout = () => {
 export const keepLogin = (data) => {
     return async (dispatch) => {
         try {
-            await dispatch(getCart(data.iduser))
+            localStorage.setItem("tkn_id", data.token)
+            await dispatch(getCart(data.token))
+            await dispatch(getDataTransaction(data.token))
             // console.log("cart2", cart)
             dispatch({
                 type: "LOGIN_SUCCESS",
@@ -80,27 +91,18 @@ export const updateCart = (data, index) => {
     }
 }
 
-// export const getDataTransaction = () => {
-//     return async (dispatch) => {
-//         try {
-//             let idToken = localStorage.getItem("tkn_id")
-//             let response = axios.get(URL_API + `/transaction/payment/${idToken}`)
-//             console.log('Response Transaction', response)
-//             dispatch({
-//                 type: "UPDATE_CHECKOUT",
-//                 payload: response.data
-//             })
-//         } 
-//         catch (error) {
-//             console.log(error)
-//         }
-//     }
-// }
-
 export const getDataTransaction = () => {
     return (dispatch) => {
-        let idToken = localStorage.getItem("tkn_id")
-        axios.get(URL_API + `/transaction/payment/${idToken}`)
+        let token = localStorage.getItem("tkn_id")
+        // console.log('token', token)
+        let config = {
+            method: 'get',
+            url: URL_API + `/transaction/payment/${token}`,
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+        }
+        axios(config)
         .then(response => {
             // mengarahkan data ke reducer
             dispatch({

@@ -83,10 +83,10 @@ class AuthPage extends React.Component {
                 email, password
             })
             // console.log(response.data[0].idstatus)
-            if (response.data[0].idstatus == 11) {
+            if (response.data.idstatus == 11) {
                 this.props.authLogin(this.inEmail.value, this.inPassword.value)
             }
-            else if (response.data[0].idstatus == 12) {
+            else if (response.data.idstatus == 12) {
                 this.setState({status: 12})
             }
 

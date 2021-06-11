@@ -34,15 +34,17 @@ module.exports = {
             if (request.body.email && request.body.password) {
                 let hashPassword = Crypto.createHmac("sha256", "ikea$$$").update(request.body.password).digest("hex")
                 
-                let getSQL = `SELECT * FROM USER WHERE 
-                email=${db.escape(request.body.email)} AND
-                password=${db.escape(hashPassword)}`
+                let getSQL = `SELECT * FROM USER WHERE email=${db.escape(request.body.email)} AND password=${db.escape(hashPassword)}`
 
                 let iduser = `SELECT iduser FROM db_ikea.user WHERE email = ${db.escape(request.body.email)}`
                 // console.log('iduser', iduser)
                 let data = await dbQuery(getSQL)
                 if (data.length > 0) {
-                    response.status(200).send(data) 
+                    // Create token
+                    let {iduser, username, email, role, idstatus} = data[0]
+
+                    let token = createToken({iduser, username, email, role, idstatus})
+                    response.status(200).send({iduser, username, email, role, idstatus, token}) 
                 }
                 else {
                     response.status(200).send('Account or password not match!')
@@ -54,6 +56,33 @@ module.exports = {
         } 
         catch (error) {
             response.status(400).send({ status: 'Error MySQL', messages: error})
+        }
+    },
+
+    keepLogin: (request, response) => {
+        if (request.user.iduser) {
+            // console.log("KEEPLOGIN", request.user)
+            let getSQL = `SELECT * FROM user WHERE iduser=${db.escape(request.user.iduser)};`
+
+            db.query(getSQL, (error, results) => {
+                // console.log("Result Query", results)
+                if (error) {
+                    response.status(500).send({ status: "Error Login", messages: error})
+                }
+                if (results) {
+                    // Create token
+                    let {iduser, username, email, role, idstatus} = results[0]
+
+                    let token = createToken({iduser, username, email, role, idstatus})
+                    response.status(200).send({iduser, username, email, role, idstatus, token}) 
+                }
+                else {
+                    response.status(404).send({ error: true, messages: "Account not found" })
+                }
+            })
+        }
+        else {
+            response.status(500).send({ error: true, messages: "Your parameters not complete"})
         }
     },
 
@@ -118,7 +147,7 @@ module.exports = {
 
     verification: async (request, response) => {
         try {
-            console.log("Read token: ", request.user)
+            // console.log("Read token: ", request.user)
             let getUserID = `SELECT iduser FROM user WHERE otp = ${db.escape(request.body.otp)}`
             let userID = await dbQuery(getUserID)
             let {iduser} = userID[0]
@@ -146,7 +175,7 @@ module.exports = {
 
     reverification: async (request, response) => {
         try {
-            console.log('Goto reverification')
+            // console.log('Goto reverification')
             let hashPassword = Crypto.createHmac("sha256", "ikea$$$").update(request.body.password).digest("hex")
             let getUserData = `SELECT * FROM user WHERE email = ${db.escape(request.body.email)} AND password = ${db.escape(hashPassword)};`
             let userID = await dbQuery(getUserData)

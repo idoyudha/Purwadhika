@@ -47,20 +47,23 @@ class ProductManagement extends React.Component {
 
     printProduk = () => {
         return this.props.products.map((item, index) => {
+            console.log(item.images[0].images.slice(0,1))
             return <tr>
                 <td>{index + 1}</td>
                 <td style={{ width: '20vw', textAlign: 'center' }}>
                     {
-                        this.state.thumbnail[0] == index ?
-                            <img src={item.images[this.state.thumbnail[1]].images} width="80%" alt={item.name + index} />
+                        this.state.thumbnail[0] === index ?
+                            <img src={
+                                item.images[this.state.thumbnail[1]].images
+                            } width="80%" alt={item.name + index} />
                             :
-                            <img src={item.images[0].images} width="80%" alt={item.name + index} />
+                            <img src={item.images[0].images.slice(0,1) === 'h' ? item.images[0].images : URL_API + item.images[0].images} width="80%" alt={item.name + index} />
                     }
                     <div>
                         {   
                             item.images.map((value, idx) => {
                                 // console.log('thumbnail after click', this.state.thumbnail)
-                                return <img src={value.images} style={kursor} width="20%" alt={item.name + idx}
+                                return <img src={value.images.slice(0,1) === 'h' ? value.images : URL_API + value.images} style={kursor} width="20%" alt={item.name + idx}
                                     onClick={() => this.setState({ thumbnail: [index, idx] })} />
                             })
                         }
@@ -94,7 +97,7 @@ class ProductManagement extends React.Component {
     }
 
     render() {
-        // console.log(this.state.detailProduk)
+        console.log(URL_API)
         return (
             <div className="p-2">
                 <h3 className="text-center">Produk Management</h3>

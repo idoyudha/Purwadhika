@@ -25,7 +25,7 @@ export const authLogin = (email, password) => {
 export const getCart = (token) => {
     return async (dispatch) => {
         try {
-            console.log("Response data before add cart", token)
+            // console.log("Response data before add cart", token)
             let config = {
                 method: 'get',
                 url: URL_API + `/transaction/cart/${token}`,

@@ -54,8 +54,8 @@ class ProductDetail extends React.Component {
                 this.props.updateCart([...this.props.cart], index)
             }
             else {
-                console.log('PROPS CART AFTER add', this.props.cart)
-                console.log('STATE CART', this.state.cart)
+                // console.log('PROPS CART AFTER add', this.props.cart)
+                // console.log('STATE CART', this.state.cart)
                 axios.post(URL_API + `/transaction/add-cart`, this.state.cart )
                 .then(response => {
                     alert('Add to cart success ✔')

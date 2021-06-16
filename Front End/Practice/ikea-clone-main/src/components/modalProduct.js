@@ -8,7 +8,9 @@ class ModalProduct extends React.Component {
         this.state = {
             stock: [],
             images: [],
-            category: []
+            category: [],
+            fileName: "Select file",
+            fileUpload: null
         }
     }
 
@@ -16,19 +18,38 @@ class ModalProduct extends React.Component {
         this.getCategory()
     }
 
+    onBtnFile = (event) => {
+        if (event.target.files[0]) {
+            this.setState({
+                fileName: event.target.files[0].name, 
+                fileUpload: event.target.files[0]
+            })
+        }
+        else {
+            this.setState({fileName: "Select file", fileUpload: "https://blackmantkd.com/wp-content/uploads/2017/04/default-image-620x600.jpg"})
+        }
+    }
+
     onBtAdd = () => {
         // console.log('STOCK STATE', this.state.stock)
         // console.log('IMAGE STATE', this.state.images)
         // console.log('SELECTED CATEGORY', this.inCategory.value)
-        axios.post(URL_API + '/products/add', {
+        let formData = new FormData()
+        let data = {
             name: this.inNama.value,
             description: this.inDeskripsi.value,
             brand: this.inBrand.value,
             price: parseInt(this.inHarga.value),
             stock: this.state.stock,
-            images: this.state.images,
             idcategory: this.inCategory.value
-        }).then(response => {
+        }
+        formData.append('data', JSON.stringify(data))
+        console.log("Fileupload", this.state.fileUpload)
+        formData.append('images', this.state.fileUpload)
+        axios.post(URL_API + '/products/add', formData)
+            // images: this.state.images,
+            // idcategory: this.inCategory.value
+        .then(response => {
             console.log(response.data)
             this.props.getData()
             this.props.btClose()
@@ -161,9 +182,17 @@ class ModalProduct extends React.Component {
                         {this.printStock()}
                     </FormGroup>
                     <FormGroup>
-                        <Label>Images</Label>
-                        <Button outline color="success" type="button" size="sm" style={{ float: 'right' }} onClick={this.onBtAddImages} >Add Image</Button>
-                        {this.printImages()}
+                    <Row form>
+                        <Col md={6}>
+                            <img src={this.state.fileUpload ? URL.createObjectURL(this.state.fileUpload) : "https://blackmantkd.com/wp-content/uploads/2017/04/default-image-620x600.jpg"} alt="" width="100" height="100"/>
+                        </Col>
+                        <Col md={6}>
+                            <Label>Images</Label>
+                            <Input type="file" onChange={this.onBtnFile} label={this.state.fileName}/>
+                        </Col>
+                    </Row>
+                        {/* <Button outline color="success" type="button" size="sm" style={{ float: 'right' }} onClick={this.onBtAddImages} >Add Image</Button> */}
+                        {/* {this.printImages()} */}
                     </FormGroup>
                 </ModalBody>
                 <ModalFooter>

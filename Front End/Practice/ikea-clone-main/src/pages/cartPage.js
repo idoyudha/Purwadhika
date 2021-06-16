@@ -69,7 +69,7 @@ class CartPage extends React.Component {
         console.log(index)
         this.props.cart[index].quantity -= 1
         this.props.updateCart([...this.props.cart], index)
-        if (this.props.cart[index].quantity == 0) {
+        if (this.props.cart[index].quantity === 0) {
             this.props.cart.splice(index, 1)
             this.onBtRemove(index)
         }

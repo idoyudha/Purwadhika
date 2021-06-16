@@ -75,18 +75,18 @@ class AuthPage extends React.Component {
 
     onBtLogin = async () => { 
         try {
-            // console.log(this.inEmail.value, this.inPassword.value)
+            console.log(this.inEmail.value, this.inPassword.value)
             let email = this.inEmail.value
             let password = this.inPassword.value
             // console.log(email, password)
             let response = await axios.post(URL_API + `/users/login`, {
                 email, password
             })
-            // console.log(response.data[0].idstatus)
-            if (response.data.idstatus == 11) {
+            console.log(response.data[0])
+            if (response.data.idstatus === 11) {
                 this.props.authLogin(this.inEmail.value, this.inPassword.value)
             }
-            else if (response.data.idstatus == 12) {
+            else if (response.data.idstatus === 12) {
                 this.setState({status: 12})
             }
 

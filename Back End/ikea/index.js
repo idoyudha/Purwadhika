@@ -1,4 +1,3 @@
-const { response } = require('express')
 const express = require('express')
 const app = express()
 const port = 2025 
@@ -9,6 +8,7 @@ const { homeRoute, userRoute, productRoute, transactionRoute } = require('./rout
 const { db } = require('./config/database')
 
 app.use(cors())
+app.use(express.static('public')) // access static files in public folder
 app.use(bearerToken()) // take auth/token from request header which sent by front end
 app.use(express.json()) // take data from request body url
 app.use('/', homeRoute)

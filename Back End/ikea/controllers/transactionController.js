@@ -24,6 +24,7 @@ module.exports = {
             let queryInsert = 'INSERT INTO cart SET ?'
             // console.log('INSERT ADD CART', request.body)
             queryInsert = await dbQuery(queryInsert, request.body)
+            // queryInsert = await dbQuery(queryInsert, { request.user.iduser, ...request.body })
             // console.log(queryCheck)
             response.status(200).send({status: "Add Success!", results: queryInsert})
         } 
@@ -101,11 +102,15 @@ module.exports = {
             let getDataDetail = null
             if (request.params.iduser == 1) {
                 getDataTransaction = `SELECT * FROM transaction JOIN status ON transaction.idstatus = status.idstatus JOIN user ON transaction.iduser = user.iduser;`
-                getDataDetail = `SELECT transaction.idtransaction, name, type, transaction_detail.quantity, price, (transaction_detail.quantity * price) subtotal FROM transaction_detail JOIN product ON transaction_detail.idproduct = product.idproduct JOIN transaction on transaction.idtransaction = transaction_detail.idtransaction JOIN product_stock ON product_stock.idproduct_stock = transaction_detail.idstock WHERE transaction.idtransaction = transaction_detail.idtransaction; `
+                getDataDetail = `SELECT transaction.idtransaction, name, type, transaction_detail.quantity, price, (transaction_detail.quantity * price) subtotal 
+                FROM transaction_detail JOIN product ON transaction_detail.idproduct = product.idproduct JOIN transaction on transaction.idtransaction = transaction_detail.idtransaction 
+                JOIN product_stock ON product_stock.idproduct_stock = transaction_detail.idstock WHERE transaction.idtransaction = transaction_detail.idtransaction; `
             }
             else {
                 getDataTransaction = `SELECT * FROM transaction JOIN status ON transaction.idstatus = status.idstatus WHERE iduser = ${request.user.iduser};`
-                getDataDetail = `SELECT transaction.idtransaction, name, type, transaction_detail.quantity, price, (transaction_detail.quantity * price) subtotal FROM transaction_detail JOIN product ON transaction_detail.idproduct = product.idproduct JOIN transaction on transaction.idtransaction = transaction_detail.idtransaction JOIN product_stock ON product_stock.idproduct_stock = transaction_detail.idstock WHERE iduser = ${request.user.iduser} AND transaction.idtransaction = transaction_detail.idtransaction; `
+                getDataDetail = `SELECT transaction.idtransaction, name, type, transaction_detail.quantity, price, (transaction_detail.quantity * price) subtotal 
+                FROM transaction_detail JOIN product ON transaction_detail.idproduct = product.idproduct JOIN transaction on transaction.idtransaction = transaction_detail.idtransaction 
+                JOIN product_stock ON product_stock.idproduct_stock = transaction_detail.idstock WHERE iduser = ${request.user.iduser} AND transaction.idtransaction = transaction_detail.idtransaction; `
             }
 
             dataTransaction = await dbQuery(getDataTransaction)

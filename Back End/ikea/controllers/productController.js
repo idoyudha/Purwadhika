@@ -1,7 +1,5 @@
-const { response, request } = require('express')
+const { db, dbQuery, uploader } = require('../config')
 const fs = require('fs')
-const url = require('url')
-const { db, dbQuery } = require('../config/database')
 
 module.exports = {
     getProduct: async (request, response) => {
@@ -46,53 +44,127 @@ module.exports = {
         }
     },
 
-    addProduct: async (request, response) => {
+    addProduct: async (request, response, next) => {
         try {
-            // console.log(request.body)
-            let name = request.body.name
-            let brand = request.body.brand
-            let description = request.body.description
-            let price = request.body.price
-            let images = request.body.images
-            let stock = request.body.stock
-            let postProduct =  `INSERT INTO PRODUCT (name, brand, description, price) VALUES ('${name}', '${brand}', '${description}', ${price});`
-            let postImage = `INSERT INTO PRODUCT_IMAGE (idproduct, images) VALUES `
-            let postStock = `INSERT INTO PRODUCT_STOCK (idproduct, type, quantity) VALUES `
-            let productSQL = await dbQuery(postProduct)
-            let multipleInsertImage = []
-            let multipleInsertStock = []
+            // // console.log(request.body)
+            // let name = request.body.name
+            // let brand = request.body.brand
+            // let description = request.body.description
+            // let price = request.body.price
+            // let images = request.body.images
+            // let stock = request.body.stock
+            // let postProduct =  `INSERT INTO PRODUCT (name, brand, description, price) VALUES ('${name}', '${brand}', '${description}', ${price});`
+            // let postImage = `INSERT INTO PRODUCT_IMAGE (idproduct, images) VALUES `
+            // let postStock = `INSERT INTO PRODUCT_STOCK (idproduct, type, quantity) VALUES `
+            // let productSQL = await dbQuery(postProduct)
+            // let multipleInsertImage = []
+            // let multipleInsertStock = []
             
-            // Get all idcategory from child -> parent 
-            let getCategory = `WITH RECURSIVE category_path (id, title, parent_id) AS 
-            (
-                SELECT idcategory, category, parent_id
-                    FROM category 
-                    WHERE idcategory = ${request.body.idcategory}
-                UNION ALL
-                SELECT c.idcategory, c.category, c.parent_id
-                    FROM category_path AS cp JOIN category AS c 
-                    ON cp.parent_id = c.idcategory
-            )
-            SELECT * FROM category_path;`
+            // // Get all idcategory from child -> parent 
+            // let getCategory = `WITH RECURSIVE category_path (id, title, parent_id) AS 
+            // (
+            //     SELECT idcategory, category, parent_id
+            //         FROM category 
+            //         WHERE idcategory = ${request.body.idcategory}
+            //     UNION ALL
+            //     SELECT c.idcategory, c.category, c.parent_id
+            //         FROM category_path AS cp JOIN category AS c 
+            //         ON cp.parent_id = c.idcategory
+            // )
+            // SELECT * FROM category_path;`
             
-            getCategory = await dbQuery(getCategory)
-            // console.log('getCategory', getCategory)
-            // response.status(200).send(getCategory)
-            if (productSQL.insertId) {
-                getCategory = getCategory.map(item => [productSQL.insertId, item.id])
-                console.log(getCategory)
-                let insertCategory = `INSERT INTO product_category (idproduct, idcategory) VALUES ?`
-                await dbQuery(insertCategory, [getCategory])
+            // getCategory = await dbQuery(getCategory)
+            // // console.log('getCategory', getCategory)
+            // // response.status(200).send(getCategory)
+            // if (productSQL.insertId) {
+            //     getCategory = getCategory.map(item => [productSQL.insertId, item.id])
+            //     console.log(getCategory)
+            //     let insertCategory = `INSERT INTO product_category (idproduct, idcategory) VALUES ?`
+            //     await dbQuery(insertCategory, [getCategory])
 
-                images.forEach(element => {
-                    multipleInsertImage.push(`(${productSQL.insertId}, ${db.escape(element.images)})`)
-                });
-                stock.forEach(element => {
-                    multipleInsertStock.push(`(${productSQL.insertId}, ${db.escape(element.type)}, ${db.escape(element.quantity)})`)
-                });
-            }
-            await dbQuery(postImage + multipleInsertImage)
-            await dbQuery(postStock + multipleInsertStock)
+            //     stock.forEach(element => {
+            //         multipleInsertStock.push(`(${productSQL.insertId}, ${db.escape(element.type)}, ${db.escape(element.quantity)})`)
+            //     });
+            // }
+            // images.forEach(element => {
+            //     multipleInsertImage.push(`(${productSQL.insertId}, ${db.escape(element.images)})`)
+            // });
+
+            // console.log('Goto backend', request)
+            const upload = uploader('/images', 'IMG').fields([{ name: 'images' }])
+
+            upload(request, response, async (err) => {
+                // error upload
+                // if (error) {
+                //     next(error)
+                // }
+
+                try {
+                    // console.log(JSON.parse(request.body.data))
+                    let data = JSON.parse(request.body.data)
+                    console.log("JSON data", data)
+                    let name = db.escape(data.name)
+                    let brand = db.escape(data.brand)
+                    let description = db.escape(data.description)
+                    let price = db.escape(data.price)
+                    let stock = data.stock
+                    let postProduct =  `INSERT INTO PRODUCT (name, brand, description, price) VALUES (${name}, ${brand}, ${description}, ${price});`
+                    let productSQL = await dbQuery(postProduct)
+                    let multipleInsertStock = []
+
+                    // Get all idcategory from child -> parent 
+                    let getCategory = `WITH RECURSIVE category_path (id, title, parent_id) AS 
+                    (
+                        SELECT idcategory, category, parent_id
+                            FROM category 
+                            WHERE idcategory = ${data.idcategory}
+                        UNION ALL
+                        SELECT c.idcategory, c.category, c.parent_id
+                            FROM category_path AS cp JOIN category AS c 
+                            ON cp.parent_id = c.idcategory
+                    )
+                    SELECT * FROM category_path;`
+                    // console.log("get Category", getCategory)
+                    const { images } = request.files 
+                    console.log("cek file upload :", images)
+
+                    let image = request.files.images[0].filename
+                    getCategory = await dbQuery(getCategory)
+
+                    if (productSQL.insertId) {
+                        getCategory = getCategory.map(item => [productSQL.insertId, item.id])
+                        console.log(getCategory)
+                        let insertCategory = `INSERT INTO product_category (idproduct, idcategory) VALUES ?`
+                        await dbQuery(insertCategory, [getCategory])
+
+                        // stock.forEach(element => {
+                        //     multipleInsertStock.push(`(${productSQL.insertId}, ${db.escape(element.type)}, ${db.escape(element.quantity)})`)
+                        // });
+
+                        // image.forEach(element => {
+                        //     multipleInsertImage.push(`(${productSQL.insertId}, ${db.escape(element.images)})`)
+                        // });
+
+                        let postImage = `INSERT INTO PRODUCT_IMAGE (idproduct, images) VALUES (${productSQL.insertId}, ${db.escape('/images/' + image)})`
+                        let postStock = `INSERT INTO PRODUCT_STOCK (idproduct, type, quantity) VALUES (${productSQL.insertId}, ${db.escape(stock[0].type)}, ${db.escape(stock[0].quantity)})`
+
+                        await dbQuery(postImage)
+                        await dbQuery(postStock)
+                    }
+
+                } catch (error) {
+                    // delete image when upload process error
+                    fs.unlinkSync(`./public/images/${request.files.images[0].filename}`)
+                    // error catch from query
+                    console.log(error)
+                    // error from upload function
+                    next(err)
+                }
+
+            })
+ 
+            // await dbQuery(postImage + multipleInsertImage)
+            // await dbQuery(postStock + multipleInsertStock)
             response.status(200).send('All done for Add')
         } catch (error) {
             response.status(500).send({ status: 'Error add to database MySQL', messages: error})

@@ -32,9 +32,9 @@ module.exports = {
     login: async (request, response) => {
         try {
             if (request.body.email && request.body.password) {
-                let hashPassword = Crypto.createHmac("sha256", "ikea$$$").update(request.body.password).digest("hex")
+                // let hashPassword = Crypto.createHmac("sha256", "ikea$$$").update(request.body.password).digest("hex")
                 
-                let getSQL = `SELECT * FROM USER WHERE email=${db.escape(request.body.email)} AND password=${db.escape(hashPassword)}`
+                let getSQL = `SELECT * FROM USER WHERE email=${db.escape(request.body.email)} AND password=${db.escape(request.body.password)}`
 
                 let iduser = `SELECT iduser FROM db_ikea.user WHERE email = ${db.escape(request.body.email)}`
                 // console.log('iduser', iduser)

@@ -15,6 +15,7 @@ export const getProductAction = (field="idproduct",sortType="asc") => {
         axios.get(URL_API + `/products`)
             .then(res => {
                 // mengarahkan data ke reducer
+                console.log("Response", res)
                 dispatch({
                     type: "GET_PRODUCTS",
                     payload: res.data

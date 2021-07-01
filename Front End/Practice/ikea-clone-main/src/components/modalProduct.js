@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input, Row, Col } from 'reactstrap';
 import { URL_API } from '../helper'
+
 class ModalProduct extends React.Component {
     constructor(props) {
         super(props);

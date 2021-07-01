@@ -4,24 +4,27 @@ const fs = require('fs')
 module.exports = {
     getProduct: async (request, response) => {
         try {
+            console.log("Get products")
             let getSQL, dataSearch = []
-            let getImage = `SELECT * FROM PRODUCT_IMAGE`
-            let getStock = `SELECT * FROM PRODUCT_STOCK JOIN STATUS ON PRODUCT_STOCK.idstatus = STATUS.idstatus`
+            let getImage = `SELECT * FROM product_image`
+            let getStock = `SELECT * FROM product_stock JOIN status ON product_stock.idstatus = status.idstatus`
             for (let prop in request.query) {
                 dataSearch.push(`${prop} = ${db.escape(request.query[prop])}`)
                 console.log(prop)
             }
             if (dataSearch.length > 0) {
-                getSQL = `SELECT * FROM PRODUCT JOIN STATUS ON PRODUCT.idstatus = STATUS.idstatus WHERE ${dataSearch.join(' AND ')};`
+                getSQL = `SELECT * FROM product JOIN status ON product.idstatus = status.idstatus WHERE ${dataSearch.join(' AND ')};`
             }
             else {
-                getSQL = `SELECT * FROM PRODUCT JOIN STATUS ON PRODUCT.idstatus = STATUS.idstatus WHERE PRODUCT.idstatus=1`
+                getSQL = `SELECT * FROM product JOIN status ON product.idstatus = status.idstatus WHERE product.idstatus=1`
             }
+            // console.log(getSQL)
+            // console.log(getImage)
 
             let get = await dbQuery(getSQL)
             let getImg = await dbQuery(getImage)
             let getStck = await dbQuery(getStock)
-
+            
             get.forEach(item => {
                 item.images = []
                 getImg.forEach(element => {
@@ -40,6 +43,7 @@ module.exports = {
             response.status(200).send(get)
         }
         catch (error) {
+            console.log(error)
             response.status(500).send({ status: 'Error MySQL', message: error})
         }
     },

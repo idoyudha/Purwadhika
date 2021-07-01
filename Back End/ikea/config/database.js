@@ -2,11 +2,11 @@ const mysql = require('mysql')
 const util = require('util')
 
 const db = mysql.createPool ({
-    host: 'localhost',
-    user: 'ido',
-    password: 'mysql75@',
-    database: 'db_ikea',
-    port: 3306,
+    host: process.env.HOSTSQL,
+    user: process.env.USERSQL,
+    password: process.env.PASSWORD,
+    database: process.env.DBSQL,
+    port: process.env.PORTSQL,
     multipleStatements: true
 })
 

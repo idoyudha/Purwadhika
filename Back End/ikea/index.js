@@ -3,6 +3,11 @@ const app = express()
 const port = 2025 
 const cors = require('cors')
 const bearerToken = require('express-bearer-token')
+const https = require('https')
+const fs = require('fs')
+const dotenv = require('dotenv')
+
+dotenv.config()
 
 const { homeRoute, userRoute, productRoute, transactionRoute } = require('./routes')
 const { db } = require('./config/database')
@@ -28,6 +33,13 @@ app.use((error, request, response, next) => {
     console.log("Error", error)
     response.status(500).send({status: "Error MySQL!", messages: error})
 })
+
+// https.createServer({
+//     key: fs.readFileSync('./ssl/server.key'),
+//     cert: fs.readFileSync('./ssl/server.cert')
+// }, app).listen(port, () => {
+//     console.log(`App listening at http://localhost:${port}`)
+// })
 
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`)
